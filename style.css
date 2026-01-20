@@ -1,134 +1,143 @@
 /* Reset & Base Styles */
 * { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
     font-family: 'Montserrat', sans-serif;
-    /* High-Res Dark Pool Background */
-    background: url('https://images.unsplash.com/photo-1572331165267-854da2b00dc1?q=80&w=2070&auto=format&fit=crop') no-repeat center center fixed;
-    background-size: cover;
+    /* Deep Navy Gradient matching the card background */
+    background: radial-gradient(circle at center, #0a2342 0%, #020b16 100%);
     color: #ffffff;
     line-height: 1.6;
+    min-height: 100vh;
 }
 
 /* Typography */
 h1 { 
-    font-family: 'Playfair Display', serif; /* Elegant Serif for Luxury */
-    font-size: 3rem; 
-    margin-bottom: 15px; 
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-.subtitle { 
-    font-weight: 300; 
-    color: #e0e0e0; 
-    font-size: 1.2rem; 
-    margin-bottom: 20px; 
+    font-weight: 900; /* Extra Bold like the card */
+    font-size: 2.8rem; 
+    margin-bottom: 10px; 
     letter-spacing: 1px;
+    text-transform: uppercase;
 }
-.credentials { 
-    font-size: 0.85rem; 
-    color: #b0c4de; /* Steel Blue text */
-    margin-bottom: 35px; 
-    text-transform: uppercase; 
+
+h2 {
+    color: #00e5ff; /* Cyan from the logo Crosshair */
+    letter-spacing: 3px;
+    margin-bottom: 40px;
+}
+
+.subtitle { 
+    font-family: 'Roboto Mono', monospace; /* Tech font */
+    color: #a0aab5; /* Silver */
+    font-size: 1.1rem; 
+    margin-bottom: 30px; 
     letter-spacing: 2px;
 }
 
-/* Glass Navigation */
+/* Navigation */
 nav {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 20px 5%; 
-    background: rgba(10, 25, 47, 0.85); /* Semi-transparent Navy */
-    backdrop-filter: blur(10px); /* The Frost Effect */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 25px 5%; 
+    background: rgba(2, 11, 22, 0.9);
+    border-bottom: 1px solid rgba(0, 229, 255, 0.2); /* Subtle Cyan Line */
     position: sticky; top: 0; z-index: 100;
 }
-.logo-img { 
-    height: 60px; /* Adjust this size based on your logo */
-    width: auto;
+
+.logo-text {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 0 0 15px rgba(0, 229, 255, 0.3); /* Subtle glow */
 }
+
+.silver-text {
+    color: #a0aab5; /* Matches "POOLS" on the card */
+}
+
 .nav-btn { 
     color: #ffffff; 
-    border: 1px solid rgba(255,255,255,0.3);
+    background: transparent;
+    border: 1px solid #e91e63; /* Pink Border */
     text-decoration: none; 
-    font-weight: 600; 
+    font-weight: 700; 
     padding: 10px 20px; 
     font-size: 0.8rem;
     letter-spacing: 1px;
     transition: 0.3s;
 }
-.nav-btn:hover { background: rgba(255,255,255,0.1); border-color: #ffffff; }
+.nav-btn:hover { background: #e91e63; box-shadow: 0 0 15px #e91e63; }
 
 /* Hero Section */
 .hero {
-    min-height: 80vh;
+    min-height: 70vh;
     display: flex; align-items: center; justify-content: center;
     text-align: center;
     padding: 20px;
-    background: rgba(0,0,0,0.4); /* Darkens the pool image slightly for readability */
 }
 
-/* The Glass Card Effect */
 .glass-panel {
-    background: rgba(10, 25, 47, 0.7); /* See-through Navy */
-    backdrop-filter: blur(15px); /* Strong Frost */
+    background: rgba(255, 255, 255, 0.03); 
+    backdrop-filter: blur(10px);
     padding: 60px 40px;
-    border-radius: 4px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    max-width: 800px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    max-width: 900px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.credentials-box {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 15px 0;
+    margin: 20px 0;
+    color: #00e5ff; /* Cyan Text */
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.9rem;
 }
 
 .btn {
-    display: inline-block; padding: 15px 35px; 
-    text-decoration: none; font-weight: 600; 
+    display: inline-block; padding: 15px 40px; 
+    text-decoration: none; font-weight: 700; 
     letter-spacing: 2px;
+    border-radius: 4px;
     transition: 0.3s;
+    margin-top: 20px;
 }
+
+/* The Magenta/Pink Button (Matches the Drop) */
 .primary-btn { 
-    background-color: #ffffff; 
-    color: #0a192f; 
+    background: linear-gradient(135deg, #d81b60, #ff4081); 
+    color: #ffffff; 
+    box-shadow: 0 5px 15px rgba(233, 30, 99, 0.4);
 }
 .primary-btn:hover { 
-    background-color: #e0e0e0; 
     transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(233, 30, 99, 0.6);
 }
 
-/* Services Grid */
-.services { 
-    padding: 80px 20px; 
-    background: #0a192f; /* Solid Navy for contrast */
-}
-.services h2 { 
-    text-align: center; margin-bottom: 50px; 
-    font-family: 'Playfair Display', serif;
-    letter-spacing: 2px;
-    color: #ffffff; 
-}
-.container { max-width: 1000px; margin: 0 auto; text-align: center; }
+/* Chemistry Grid */
+.chemistry-grid { padding: 80px 20px; text-align: center; background: rgba(0,0,0,0.2); }
+.container { max-width: 1000px; margin: 0 auto; }
 
-.grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
+.element-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 20px;
 }
-.card {
-    background: rgba(255,255,255,0.03); 
-    padding: 40px; 
-    border: 1px solid rgba(255,255,255,0.05);
-    transition: transform 0.3s ease;
+
+.element {
+    background: rgba(10, 35, 66, 0.6);
+    border: 1px solid #00e5ff;
+    padding: 20px;
+    border-radius: 5px;
+    color: #ffffff;
+    font-weight: 700;
+    font-family: 'Roboto Mono', monospace;
 }
-.card:hover { 
-    transform: translateY(-5px); 
-    background: rgba(255,255,255,0.05); 
-    border-color: rgba(255,255,255,0.2);
+.element:hover {
+    background: #00e5ff;
+    color: #020b16;
+    box-shadow: 0 0 20px #00e5ff;
 }
-.card h3 { 
-    color: #b0c4de; 
-    margin-bottom: 15px; 
-    letter-spacing: 2px;
-    font-size: 1rem;
-}
-.card p { color: #aaaaaa; font-weight: 300; }
 
 /* Footer */
-footer { padding: 50px 20px; text-align: center; background-color: #050d1a; border-top: 1px solid #112240; }
-.contact-info a { color: #ffffff; text-decoration: none; font-size: 1.2rem; opacity: 0.8; transition: 0.3s;}
-.contact-info a:hover { opacity: 1; }
+footer { padding: 50px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+.contact-info a { color: #ffffff; text-decoration: none; font-size: 1.2rem; transition: 0.3s;}
 .small-text { font-size: 0.7rem; color: #555; margin-top: 30px; letter-spacing: 1px; text-transform: uppercase;}
