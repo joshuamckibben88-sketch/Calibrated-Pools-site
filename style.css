@@ -3,10 +3,19 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
-    /* FIXED: Using the reliable luxury pool image with the Day Mode lighting */
-    background: linear-gradient(rgba(0, 50, 100, 0.3), rgba(0, 20, 40, 0.4)), 
-                url('https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&q=80') no-repeat center center fixed;
+    
+    /* LAYER 1: Safety Color (Deep Blue) - Shows if image fails */
+    background-color: #0a192f;
+    
+    /* LAYER 2: The New Image */
+    background-image: linear-gradient(rgba(0, 50, 100, 0.4), rgba(0, 20, 40, 0.5)), 
+                      url('https://images.unsplash.com/photo-1532323544230-ac8d11e29135?auto=format&fit=crop&q=80');
+    
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
     background-size: cover;
+    
     color: #ffffff;
     line-height: 1.6;
     min-height: 100vh;
@@ -17,7 +26,7 @@ h1 {
     font-family: 'Playfair Display', serif; 
     font-weight: 700; font-size: 2.8rem; margin-bottom: 15px; 
     letter-spacing: 2px; text-transform: uppercase;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.3); /* Softer shadow */
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
 h2 {
@@ -29,7 +38,7 @@ h2 {
 
 .subtitle { 
     font-family: 'Montserrat', sans-serif; font-weight: 600;
-    color: #e0f7fa; /* Brighter White-Blue */
+    color: #e0f7fa; 
     font-size: 1rem; margin-bottom: 30px; letter-spacing: 2px;
     text-transform: uppercase;
     text-shadow: 0 1px 3px rgba(0,0,0,0.6);
@@ -39,22 +48,22 @@ h2 {
     font-size: 0.7rem; color: #d1d1d1; margin-bottom: 40px; letter-spacing: 1px; font-weight: 600;
 }
 
-/* Navigation - Lighter Glass */
+/* Navigation */
 nav {
     display: flex; justify-content: space-between; align-items: center;
     padding: 20px 5%; 
-    background: rgba(255, 255, 255, 0.1); /* White Glass */
-    backdrop-filter: blur(8px); /* Less Frost */
+    background: rgba(255, 255, 255, 0.1); 
+    backdrop-filter: blur(8px); 
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     position: sticky; top: 0; z-index: 100;
 }
 
-/* --- LOGO GRAPHIC --- */
+/* Logo Graphic */
 .logo-container { display: flex; align-items: center; gap: 15px; }
 .water-drop {
     width: 40px; height: 40px;
     background: radial-gradient(circle at 30% 30%, #00e5ff, #0a2342); 
-    border: 2px solid #ffffff; /* White border looks cleaner */
+    border: 2px solid #ffffff; 
     border-radius: 0 50% 50% 50%; 
     transform: rotate(45deg); position: relative;
     box-shadow: 0 0 15px rgba(0, 229, 255, 0.6); 
@@ -78,9 +87,8 @@ nav {
 /* Hero Section */
 .hero { min-height: 85vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px; }
 .glass-panel {
-    /* BRIGHTER GLASS PANEL */
-    background: rgba(20, 40, 60, 0.4); /* Much more see-through */
-    backdrop-filter: blur(10px); /* Less blur so you see the water */
+    background: rgba(20, 40, 60, 0.4); 
+    backdrop-filter: blur(10px); 
     -webkit-backdrop-filter: blur(10px);
     padding: 70px 50px; border-radius: 2px; border: 1px solid rgba(255, 255, 255, 0.2);
     max-width: 900px; box-shadow: 0 20px 50px rgba(0,0,0,0.4); position: relative;
@@ -98,20 +106,18 @@ nav {
 }
 .primary-btn:hover { background: #c2185b; box-shadow: 0 15px 40px rgba(233, 30, 99, 0.5); transform: translateY(-3px); }
 
-/* --- 3D FLIP CARDS (The New Code) --- */
-.chemistry-grid { padding: 100px 20px; text-align: center; background: rgba(0, 10, 20, 0.6); } /* Semi-transparent section bg */
+/* Chemistry Grid */
+.chemistry-grid { padding: 100px 20px; text-align: center; background: rgba(0, 10, 20, 0.6); }
 .container { max-width: 1100px; margin: 0 auto; }
 .element-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 30px; }
 
-/* The Container for the flip */
+/* Flip Cards */
 .flip-card {
     background-color: transparent;
     width: 100%;
     height: 160px;
-    perspective: 1000px; /* Essential for 3D effect */
+    perspective: 1000px; 
 }
-
-/* The Inner Container that spins */
 .flip-card-inner {
     position: relative;
     width: 100%;
@@ -120,36 +126,18 @@ nav {
     transition: transform 0.6s;
     transform-style: preserve-3d;
 }
-
-/* The Hover Trigger */
-.flip-card:hover .flip-card-inner {
-    transform: rotateY(180deg);
-}
-
-/* Front and Back Common Styles */
+.flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
 .flip-card-front, .flip-card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+    position: absolute; width: 100%; height: 100%;
+    -webkit-backface-visibility: hidden; backface-visibility: hidden;
     border: 1px solid rgba(255,255,255,0.2);
     display: flex; flex-direction: column; justify-content: center; align-items: center;
 }
-
-/* Front Side */
-.flip-card-front {
-    background: rgba(255, 255, 255, 0.1); /* Very clear glass */
-    color: white;
-}
+.flip-card-front { background: rgba(255, 255, 255, 0.1); color: white; }
 .symbol { display: block; font-size: 2.2rem; font-weight: 700; color: #ffffff; font-family: 'Playfair Display', serif; text-shadow: 0 2px 4px rgba(0,0,0,0.5);}
 .name { display: block; font-size: 0.7rem; color: #e0e0e0; margin-top: 10px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
-
-/* Back Side (Rotated 180deg) */
 .flip-card-back {
-    background: #00e5ff; /* Cyan pop */
-    color: #020b16;
-    transform: rotateY(180deg);
+    background: #00e5ff; color: #020b16; transform: rotateY(180deg);
     box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
 }
 .range-label { color: #020b16; font-size: 0.65rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 5px; }
