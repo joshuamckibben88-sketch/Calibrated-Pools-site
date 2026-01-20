@@ -3,7 +3,6 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
-    /* Deep Navy Gradient matching the card background */
     background: radial-gradient(circle at center, #0a2342 0%, #020b16 100%);
     color: #ffffff;
     line-height: 1.6;
@@ -11,131 +10,90 @@ body {
 }
 
 /* Typography */
-h1 { 
-    font-weight: 900; /* Extra Bold like the card */
-    font-size: 2.8rem; 
-    margin-bottom: 10px; 
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-h2 {
-    color: #00e5ff; /* Cyan from the logo Crosshair */
-    letter-spacing: 3px;
-    margin-bottom: 40px;
-}
-
-.subtitle { 
-    font-family: 'Roboto Mono', monospace; /* Tech font */
-    color: #a0aab5; /* Silver */
-    font-size: 1.1rem; 
-    margin-bottom: 30px; 
-    letter-spacing: 2px;
-}
+h1 { font-weight: 900; font-size: 2.8rem; margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase; }
+h2 { color: #00e5ff; letter-spacing: 3px; margin-bottom: 40px; }
+.subtitle { font-family: 'Roboto Mono', monospace; color: #a0aab5; font-size: 1.1rem; margin-bottom: 30px; letter-spacing: 2px; }
 
 /* Navigation */
 nav {
     display: flex; justify-content: space-between; align-items: center;
     padding: 25px 5%; 
     background: rgba(2, 11, 22, 0.9);
-    border-bottom: 1px solid rgba(0, 229, 255, 0.2); /* Subtle Cyan Line */
+    border-bottom: 1px solid rgba(0, 229, 255, 0.2);
     position: sticky; top: 0; z-index: 100;
 }
+
+/* --- THE LOGO GRAPHIC (Pure CSS) --- */
+.logo-container {
+    display: flex; align-items: center; gap: 15px; /* Spacing between logo and text */
+}
+
+.water-drop {
+    width: 35px; height: 35px;
+    background: radial-gradient(circle at 30% 30%, #00e5ff, #0a2342); /* Cyan Glow */
+    border: 2px solid #00e5ff; /* Cyan Border */
+    border-radius: 0 50% 50% 50%; /* Makes the Teardrop Shape */
+    transform: rotate(45deg); /* Points it UP */
+    position: relative;
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.4); /* Glow Effect */
+}
+
+/* The Crosshairs inside the drop */
+.crosshair-v, .crosshair-h {
+    background: rgba(255, 255, 255, 0.7);
+    position: absolute;
+}
+.crosshair-v { /* Vertical Line */
+    width: 1px; height: 100%; left: 50%; top: 0;
+}
+.crosshair-h { /* Horizontal Line */
+    width: 100%; height: 1px; top: 50%; left: 0;
+}
+/* ----------------------------------- */
 
 .logo-text {
     font-size: 1.8rem;
     font-weight: 700;
     letter-spacing: 1px;
-    text-shadow: 0 0 15px rgba(0, 229, 255, 0.3); /* Subtle glow */
+    text-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
 }
-
-.silver-text {
-    color: #a0aab5; /* Matches "POOLS" on the card */
-}
+.silver-text { color: #a0aab5; }
 
 .nav-btn { 
-    color: #ffffff; 
-    background: transparent;
-    border: 1px solid #e91e63; /* Pink Border */
-    text-decoration: none; 
-    font-weight: 700; 
-    padding: 10px 20px; 
-    font-size: 0.8rem;
-    letter-spacing: 1px;
-    transition: 0.3s;
+    color: #ffffff; background: transparent; border: 1px solid #e91e63;
+    text-decoration: none; font-weight: 700; padding: 10px 20px; font-size: 0.8rem; letter-spacing: 1px; transition: 0.3s;
 }
 .nav-btn:hover { background: #e91e63; box-shadow: 0 0 15px #e91e63; }
 
 /* Hero Section */
 .hero {
-    min-height: 70vh;
-    display: flex; align-items: center; justify-content: center;
-    text-align: center;
-    padding: 20px;
+    min-height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px;
 }
-
 .glass-panel {
-    background: rgba(255, 255, 255, 0.03); 
-    backdrop-filter: blur(10px);
-    padding: 60px 40px;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    max-width: 900px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px);
+    padding: 60px 40px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05);
+    max-width: 900px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
 }
-
 .credentials-box {
-    border-top: 1px solid rgba(255,255,255,0.1);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding: 15px 0;
-    margin: 20px 0;
-    color: #00e5ff; /* Cyan Text */
-    font-family: 'Roboto Mono', monospace;
-    font-size: 0.9rem;
+    border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 15px 0; margin: 20px 0; color: #00e5ff; font-family: 'Roboto Mono', monospace; font-size: 0.9rem;
 }
-
 .btn {
-    display: inline-block; padding: 15px 40px; 
-    text-decoration: none; font-weight: 700; 
-    letter-spacing: 2px;
-    border-radius: 4px;
-    transition: 0.3s;
-    margin-top: 20px;
+    display: inline-block; padding: 15px 40px; text-decoration: none; font-weight: 700; letter-spacing: 2px; border-radius: 4px; transition: 0.3s; margin-top: 20px;
 }
-
-/* The Magenta/Pink Button (Matches the Drop) */
 .primary-btn { 
-    background: linear-gradient(135deg, #d81b60, #ff4081); 
-    color: #ffffff; 
-    box-shadow: 0 5px 15px rgba(233, 30, 99, 0.4);
+    background: linear-gradient(135deg, #d81b60, #ff4081); color: #ffffff; box-shadow: 0 5px 15px rgba(233, 30, 99, 0.4);
 }
-.primary-btn:hover { 
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(233, 30, 99, 0.6);
-}
+.primary-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(233, 30, 99, 0.6); }
 
 /* Chemistry Grid */
 .chemistry-grid { padding: 80px 20px; text-align: center; background: rgba(0,0,0,0.2); }
 .container { max-width: 1000px; margin: 0 auto; }
-
-.element-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 20px;
-}
-
+.element-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 20px; }
 .element {
-    background: rgba(10, 35, 66, 0.6);
-    border: 1px solid #00e5ff;
-    padding: 20px;
-    border-radius: 5px;
-    color: #ffffff;
-    font-weight: 700;
-    font-family: 'Roboto Mono', monospace;
+    background: rgba(10, 35, 66, 0.6); border: 1px solid #00e5ff; padding: 20px; border-radius: 5px; color: #ffffff; font-weight: 700; font-family: 'Roboto Mono', monospace;
 }
-.element:hover {
-    background: #00e5ff;
-    color: #020b16;
-    box-shadow: 0 0 20px #00e5ff;
-}
+.element:hover { background: #00e5ff; color: #020b16; box-shadow: 0 0 20px #00e5ff; }
 
 /* Footer */
 footer { padding: 50px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
