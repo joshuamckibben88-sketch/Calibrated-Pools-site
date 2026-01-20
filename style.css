@@ -3,9 +3,9 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
-    /* REAL POOL BACKGROUND with Navy Tint Overlay */
-    background: linear-gradient(rgba(2, 11, 22, 0.85), rgba(2, 11, 22, 0.9)), 
-                url('https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&q=80') no-repeat center center fixed;
+    /* BRIGHTER BACKGROUND: Light overlay lets the sun shine through */
+    background: linear-gradient(rgba(0, 50, 100, 0.3), rgba(0, 20, 40, 0.4)), 
+                url('https://images.unsplash.com/photo-1572331165267-854da2b00dc1?q=80&w=2070&auto=format&fit=crop') no-repeat center center fixed;
     background-size: cover;
     color: #ffffff;
     line-height: 1.6;
@@ -17,32 +17,35 @@ h1 {
     font-family: 'Playfair Display', serif; 
     font-weight: 700; font-size: 2.8rem; margin-bottom: 15px; 
     letter-spacing: 2px; text-transform: uppercase;
-    text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3); /* Softer shadow */
 }
 
 h2 {
     font-family: 'Playfair Display', serif;
     color: #ffffff; letter-spacing: 3px; margin-bottom: 10px;
     border-bottom: 1px solid #00e5ff; display: inline-block; padding-bottom: 10px;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
 }
 
 .subtitle { 
-    font-family: 'Montserrat', sans-serif; font-weight: 400;
-    color: #b0c4de; font-size: 1rem; margin-bottom: 30px; letter-spacing: 2px;
+    font-family: 'Montserrat', sans-serif; font-weight: 600;
+    color: #e0f7fa; /* Brighter White-Blue */
+    font-size: 1rem; margin-bottom: 30px; letter-spacing: 2px;
     text-transform: uppercase;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.6);
 }
 
 .instruction-text {
-    font-size: 0.7rem; color: #555; margin-bottom: 40px; letter-spacing: 1px;
+    font-size: 0.7rem; color: #d1d1d1; margin-bottom: 40px; letter-spacing: 1px; font-weight: 600;
 }
 
-/* Navigation */
+/* Navigation - Lighter Glass */
 nav {
     display: flex; justify-content: space-between; align-items: center;
     padding: 20px 5%; 
-    background: rgba(2, 11, 22, 0.8); 
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.1); /* White Glass */
+    backdrop-filter: blur(8px); /* Less Frost */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     position: sticky; top: 0; z-index: 100;
 }
 
@@ -51,36 +54,41 @@ nav {
 .water-drop {
     width: 40px; height: 40px;
     background: radial-gradient(circle at 30% 30%, #00e5ff, #0a2342); 
-    border: 2px solid #00e5ff; border-radius: 0 50% 50% 50%; 
+    border: 2px solid #ffffff; /* White border looks cleaner */
+    border-radius: 0 50% 50% 50%; 
     transform: rotate(45deg); position: relative;
-    box-shadow: 0 0 20px rgba(0, 229, 255, 0.5); 
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.6); 
     display: flex; align-items: center; justify-content: center;
 }
 .crosshair { width: 100%; height: 100%; position: absolute; transform: rotate(-45deg); }
 .crosshair::before { content: ''; position: absolute; width: 1px; height: 60%; background: rgba(255, 255, 255, 0.9); left: 50%; top: 20%; }
 .crosshair::after { content: ''; position: absolute; width: 60%; height: 1px; background: rgba(255, 255, 255, 0.9); top: 50%; left: 20%; }
 
-.logo-text { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; letter-spacing: 2px; }
-.silver-text { color: #a0aab5; font-weight: 300; }
+.logo-text { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; letter-spacing: 2px; text-shadow: 0 2px 5px rgba(0,0,0,0.5);}
+.silver-text { color: #f0f0f0; font-weight: 300; }
 
 .nav-btn { 
-    color: #ffffff; border: 1px solid rgba(255,255,255,0.3);
+    color: #ffffff; border: 1px solid rgba(255,255,255,0.6);
     text-decoration: none; font-weight: 600; padding: 12px 25px; 
     font-size: 0.75rem; letter-spacing: 2px; transition: 0.3s;
+    background: rgba(0,0,0,0.2);
 }
 .nav-btn:hover { background: #ffffff; color: #020b16; }
 
 /* Hero Section */
 .hero { min-height: 85vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px; }
 .glass-panel {
-    background: rgba(10, 20, 35, 0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    padding: 70px 50px; border-radius: 2px; border: 1px solid rgba(255, 255, 255, 0.08);
-    max-width: 900px; box-shadow: 0 30px 60px rgba(0,0,0,0.6); position: relative;
+    /* BRIGHTER GLASS PANEL */
+    background: rgba(20, 40, 60, 0.4); /* Much more see-through */
+    backdrop-filter: blur(10px); /* Less blur so you see the water */
+    -webkit-backdrop-filter: blur(10px);
+    padding: 70px 50px; border-radius: 2px; border: 1px solid rgba(255, 255, 255, 0.2);
+    max-width: 900px; box-shadow: 0 20px 50px rgba(0,0,0,0.4); position: relative;
 }
 .accent-line { width: 60px; height: 3px; background: #00e5ff; margin: 0 auto 30px auto; }
 .credentials-box {
-    border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding: 20px 0; margin: 30px 0; color: #00e5ff; font-family: 'Roboto Mono', monospace; font-size: 0.9rem;
+    border-top: 1px solid rgba(255,255,255,0.3); border-bottom: 1px solid rgba(255,255,255,0.3);
+    padding: 20px 0; margin: 30px 0; color: #00e5ff; font-family: 'Roboto Mono', monospace; font-size: 0.9rem; font-weight: 700;
 }
 .btn {
     display: inline-block; padding: 18px 45px; text-decoration: none; font-weight: 700; letter-spacing: 2px; border-radius: 0px; transition: 0.3s; margin-top: 10px; font-size: 0.9rem;
@@ -90,49 +98,65 @@ nav {
 }
 .primary-btn:hover { background: #c2185b; box-shadow: 0 15px 40px rgba(233, 30, 99, 0.5); transform: translateY(-3px); }
 
-/* --- INTERACTIVE CHEMISTRY GRID --- */
-.chemistry-grid { padding: 100px 20px; text-align: center; background: #020b16; }
+/* --- 3D FLIP CARDS (The New Code) --- */
+.chemistry-grid { padding: 100px 20px; text-align: center; background: rgba(0, 10, 20, 0.6); } /* Semi-transparent section bg */
 .container { max-width: 1100px; margin: 0 auto; }
-.element-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 30px; }
+.element-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 30px; }
 
-.element {
-    background: rgba(255, 255, 255, 0.03); 
-    border: 1px solid rgba(255, 255, 255, 0.05); 
-    padding: 0; /* Reset padding for positioning */
-    height: 160px; /* Fixed height for consistency */
+/* The Container for the flip */
+.flip-card {
+    background-color: transparent;
+    width: 100%;
+    height: 160px;
+    perspective: 1000px; /* Essential for 3D effect */
+}
+
+/* The Inner Container that spins */
+.flip-card-inner {
     position: relative;
-    transition: 0.3s;
-    overflow: hidden; /* Keeps contents inside */
-    cursor: default;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
 }
 
-/* The Default View (Symbol) */
-.front {
-    position: absolute; width: 100%; height: 100%;
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    transition: transform 0.4s ease;
+/* The Hover Trigger */
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
 }
-.symbol { display: block; font-size: 2.2rem; font-weight: 700; color: #ffffff; font-family: 'Playfair Display', serif; }
-.name { display: block; font-size: 0.7rem; color: #a0aab5; margin-top: 10px; text-transform: uppercase; letter-spacing: 1px; }
 
-/* The Hidden View (Hover Range) */
-.back {
-    position: absolute; width: 100%; height: 100%;
-    background: #00e5ff; /* Cyan Background */
+/* Front and Back Common Styles */
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border: 1px solid rgba(255,255,255,0.2);
     display: flex; flex-direction: column; justify-content: center; align-items: center;
-    transform: translateY(100%); /* Hides it below */
-    transition: transform 0.3s ease-in-out;
+}
+
+/* Front Side */
+.flip-card-front {
+    background: rgba(255, 255, 255, 0.1); /* Very clear glass */
+    color: white;
+}
+.symbol { display: block; font-size: 2.2rem; font-weight: 700; color: #ffffff; font-family: 'Playfair Display', serif; text-shadow: 0 2px 4px rgba(0,0,0,0.5);}
+.name { display: block; font-size: 0.7rem; color: #e0e0e0; margin-top: 10px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+
+/* Back Side (Rotated 180deg) */
+.flip-card-back {
+    background: #00e5ff; /* Cyan pop */
+    color: #020b16;
+    transform: rotateY(180deg);
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
 }
 .range-label { color: #020b16; font-size: 0.65rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 5px; }
 .range-value { color: #020b16; font-size: 1.2rem; font-weight: 700; font-family: 'Roboto Mono', monospace; }
-
-/* The Hover Effect */
-.element:hover { border-color: #00e5ff; box-shadow: 0 0 20px rgba(0, 229, 255, 0.3); }
-.element:hover .front { transform: translateY(-20%); opacity: 0.2; }
-.element:hover .back { transform: translateY(0); }
 
 /* Footer */
 footer { padding: 60px 20px; text-align: center; background: #01060c; border-top: 1px solid rgba(255,255,255,0.05); }
 .contact-info a { color: #ffffff; text-decoration: none; font-size: 1rem; opacity: 0.7; transition: 0.3s;}
 .contact-info a:hover { opacity: 1; }
-.small-text { font-size: 0.7rem; color: #444; margin-top: 40px; letter-spacing: 2px; text-transform: uppercase;}
+.small-text { font-size: 0.7rem; color: #999; margin-top: 40px; letter-spacing: 2px; text-transform: uppercase;}
