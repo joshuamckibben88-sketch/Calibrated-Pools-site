@@ -3,99 +3,180 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background: radial-gradient(circle at center, #0a2342 0%, #020b16 100%);
+    /* REAL POOL BACKGROUND with Navy Tint Overlay */
+    background: linear-gradient(rgba(2, 11, 22, 0.85), rgba(2, 11, 22, 0.9)), 
+                url('https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&q=80') no-repeat center center fixed;
+    background-size: cover;
     color: #ffffff;
     line-height: 1.6;
     min-height: 100vh;
 }
 
 /* Typography */
-h1 { font-weight: 900; font-size: 2.8rem; margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase; }
-h2 { color: #00e5ff; letter-spacing: 3px; margin-bottom: 40px; }
-.subtitle { font-family: 'Roboto Mono', monospace; color: #a0aab5; font-size: 1.1rem; margin-bottom: 30px; letter-spacing: 2px; }
+h1 { 
+    font-family: 'Playfair Display', serif; /* Luxury Font */
+    font-weight: 700; 
+    font-size: 3rem; 
+    margin-bottom: 15px; 
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+h2 {
+    font-family: 'Playfair Display', serif;
+    color: #ffffff;
+    letter-spacing: 3px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #00e5ff;
+    display: inline-block;
+    padding-bottom: 10px;
+}
+
+.subtitle { 
+    font-family: 'Montserrat', sans-serif; 
+    font-weight: 300;
+    color: #b0c4de; 
+    font-size: 1.1rem; 
+    margin-bottom: 30px; 
+    letter-spacing: 3px;
+}
 
 /* Navigation */
 nav {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 25px 5%; 
-    background: rgba(2, 11, 22, 0.9);
-    border-bottom: 1px solid rgba(0, 229, 255, 0.2);
+    padding: 20px 5%; 
+    background: rgba(2, 11, 22, 0.8); /* Semi-transparent */
+    backdrop-filter: blur(10px); /* Frosted Glass Header */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     position: sticky; top: 0; z-index: 100;
 }
 
-/* --- THE LOGO GRAPHIC (Pure CSS) --- */
+/* --- FIXED LOGO GRAPHIC --- */
 .logo-container {
-    display: flex; align-items: center; gap: 15px; /* Spacing between logo and text */
+    display: flex; align-items: center; gap: 15px; 
 }
 
 .water-drop {
-    width: 35px; height: 35px;
-    background: radial-gradient(circle at 30% 30%, #00e5ff, #0a2342); /* Cyan Glow */
-    border: 2px solid #00e5ff; /* Cyan Border */
-    border-radius: 0 50% 50% 50%; /* Makes the Teardrop Shape */
-    transform: rotate(45deg); /* Points it UP */
+    width: 40px; height: 40px;
+    background: radial-gradient(circle at 30% 30%, #00e5ff, #0a2342); 
+    border: 2px solid #00e5ff; 
+    border-radius: 0 50% 50% 50%; /* Teardrop Shape */
+    transform: rotate(45deg); /* Points UP */
     position: relative;
-    box-shadow: 0 0 15px rgba(0, 229, 255, 0.4); /* Glow Effect */
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.5); 
+    display: flex; align-items: center; justify-content: center;
 }
 
-/* The Crosshairs inside the drop */
-.crosshair-v, .crosshair-h {
-    background: rgba(255, 255, 255, 0.7);
+/* The Crosshair (Using Pseudo Elements) */
+.crosshair {
+    width: 100%; height: 100%;
     position: absolute;
+    transform: rotate(-45deg); /* Counter-rotates so lines are straight + */
 }
-.crosshair-v { /* Vertical Line */
-    width: 1px; height: 100%; left: 50%; top: 0;
+
+.crosshair::before { /* Vertical Line */
+    content: ''; position: absolute;
+    width: 1px; height: 60%; 
+    background: rgba(255, 255, 255, 0.9);
+    left: 50%; top: 20%;
 }
-.crosshair-h { /* Horizontal Line */
-    width: 100%; height: 1px; top: 50%; left: 0;
+.crosshair::after { /* Horizontal Line */
+    content: ''; position: absolute;
+    width: 60%; height: 1px; 
+    background: rgba(255, 255, 255, 0.9);
+    top: 50%; left: 20%;
 }
-/* ----------------------------------- */
 
 .logo-text {
-    font-size: 1.8rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
     font-weight: 700;
-    letter-spacing: 1px;
-    text-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+    letter-spacing: 2px;
 }
-.silver-text { color: #a0aab5; }
+.silver-text { color: #a0aab5; font-weight: 300; }
 
 .nav-btn { 
-    color: #ffffff; background: transparent; border: 1px solid #e91e63;
-    text-decoration: none; font-weight: 700; padding: 10px 20px; font-size: 0.8rem; letter-spacing: 1px; transition: 0.3s;
+    color: #ffffff; border: 1px solid rgba(255,255,255,0.3);
+    text-decoration: none; font-weight: 600; padding: 12px 25px; 
+    font-size: 0.75rem; letter-spacing: 2px; transition: 0.3s;
 }
-.nav-btn:hover { background: #e91e63; box-shadow: 0 0 15px #e91e63; }
+.nav-btn:hover { background: #ffffff; color: #020b16; }
 
 /* Hero Section */
 .hero {
-    min-height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px;
+    min-height: 85vh; display: flex; align-items: center; justify-content: center; 
+    text-align: center; padding: 20px;
 }
+
 .glass-panel {
-    background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px);
-    padding: 60px 40px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05);
-    max-width: 900px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    background: rgba(10, 20, 35, 0.6); 
+    backdrop-filter: blur(20px); /* Heavy Blur for Luxury Feel */
+    -webkit-backdrop-filter: blur(20px);
+    padding: 70px 50px;
+    border-radius: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    max-width: 900px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+    position: relative;
 }
+
+.accent-line {
+    width: 60px; height: 3px; background: #00e5ff; margin: 0 auto 30px auto;
+}
+
 .credentials-box {
-    border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding: 15px 0; margin: 20px 0; color: #00e5ff; font-family: 'Roboto Mono', monospace; font-size: 0.9rem;
+    border-top: 1px solid rgba(255,255,255,0.1); 
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 20px 0; margin: 30px 0; 
+    color: #00e5ff; font-family: 'Roboto Mono', monospace; font-size: 0.9rem;
 }
+
 .btn {
-    display: inline-block; padding: 15px 40px; text-decoration: none; font-weight: 700; letter-spacing: 2px; border-radius: 4px; transition: 0.3s; margin-top: 20px;
+    display: inline-block; padding: 18px 45px; 
+    text-decoration: none; font-weight: 700; letter-spacing: 2px; 
+    border-radius: 0px; /* Sharp corners = Luxury */
+    transition: 0.3s; margin-top: 10px;
+    font-size: 0.9rem;
 }
+
+/* The "Hot Pink" Accent Button */
 .primary-btn { 
-    background: linear-gradient(135deg, #d81b60, #ff4081); color: #ffffff; box-shadow: 0 5px 15px rgba(233, 30, 99, 0.4);
+    background: #e91e63; color: #ffffff; 
+    box-shadow: 0 10px 30px rgba(233, 30, 99, 0.3);
 }
-.primary-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(233, 30, 99, 0.6); }
+.primary-btn:hover { 
+    background: #c2185b; 
+    box-shadow: 0 15px 40px rgba(233, 30, 99, 0.5);
+    transform: translateY(-3px);
+}
 
 /* Chemistry Grid */
-.chemistry-grid { padding: 80px 20px; text-align: center; background: rgba(0,0,0,0.2); }
-.container { max-width: 1000px; margin: 0 auto; }
-.element-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 20px; }
+.chemistry-grid { padding: 100px 20px; text-align: center; background: #020b16; }
+.container { max-width: 1100px; margin: 0 auto; }
+.element-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 30px; }
+
 .element {
-    background: rgba(10, 35, 66, 0.6); border: 1px solid #00e5ff; padding: 20px; border-radius: 5px; color: #ffffff; font-weight: 700; font-family: 'Roboto Mono', monospace;
+    background: rgba(255, 255, 255, 0.03); 
+    border: 1px solid rgba(255, 255, 255, 0.05); 
+    padding: 30px 20px; 
+    transition: 0.3s;
 }
-.element:hover { background: #00e5ff; color: #020b16; box-shadow: 0 0 20px #00e5ff; }
+.element:hover { 
+    border-color: #00e5ff; 
+    transform: translateY(-10px); 
+    box-shadow: 0 10px 30px rgba(0, 229, 255, 0.1);
+}
+.symbol {
+    display: block; font-size: 2rem; font-weight: 700; color: #ffffff; font-family: 'Playfair Display', serif;
+}
+.name {
+    display: block; font-size: 0.75rem; color: #a0aab5; margin-top: 5px; text-transform: uppercase; letter-spacing: 1px;
+}
 
 /* Footer */
-footer { padding: 50px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
-.contact-info a { color: #ffffff; text-decoration: none; font-size: 1.2rem; transition: 0.3s;}
-.small-text { font-size: 0.7rem; color: #555; margin-top: 30px; letter-spacing: 1px; text-transform: uppercase;}
+footer { padding: 60px 20px; text-align: center; background: #01060c; border-top: 1px solid rgba(255,255,255,0.05); }
+.phone-number { font-size: 1.5rem; color: #00e5ff; margin: 10px 0; font-family: 'Playfair Display', serif;}
+.contact-info a { color: #ffffff; text-decoration: none; font-size: 1rem; opacity: 0.7; transition: 0.3s;}
+.contact-info a:hover { opacity: 1; }
+.small-text { font-size: 0.7rem; color: #444; margin-top: 40px; letter-spacing: 2px; text-transform: uppercase;}
