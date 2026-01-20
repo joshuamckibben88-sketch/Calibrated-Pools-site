@@ -14,86 +14,53 @@ body {
 
 /* Typography */
 h1 { 
-    font-family: 'Playfair Display', serif; /* Luxury Font */
-    font-weight: 700; 
-    font-size: 3rem; 
-    margin-bottom: 15px; 
-    letter-spacing: 2px;
-    text-transform: uppercase;
+    font-family: 'Playfair Display', serif; 
+    font-weight: 700; font-size: 2.8rem; margin-bottom: 15px; 
+    letter-spacing: 2px; text-transform: uppercase;
     text-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
 
 h2 {
     font-family: 'Playfair Display', serif;
-    color: #ffffff;
-    letter-spacing: 3px;
-    margin-bottom: 40px;
-    border-bottom: 1px solid #00e5ff;
-    display: inline-block;
-    padding-bottom: 10px;
+    color: #ffffff; letter-spacing: 3px; margin-bottom: 10px;
+    border-bottom: 1px solid #00e5ff; display: inline-block; padding-bottom: 10px;
 }
 
 .subtitle { 
-    font-family: 'Montserrat', sans-serif; 
-    font-weight: 300;
-    color: #b0c4de; 
-    font-size: 1.1rem; 
-    margin-bottom: 30px; 
-    letter-spacing: 3px;
+    font-family: 'Montserrat', sans-serif; font-weight: 400;
+    color: #b0c4de; font-size: 1rem; margin-bottom: 30px; letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.instruction-text {
+    font-size: 0.7rem; color: #555; margin-bottom: 40px; letter-spacing: 1px;
 }
 
 /* Navigation */
 nav {
     display: flex; justify-content: space-between; align-items: center;
     padding: 20px 5%; 
-    background: rgba(2, 11, 22, 0.8); /* Semi-transparent */
-    backdrop-filter: blur(10px); /* Frosted Glass Header */
+    background: rgba(2, 11, 22, 0.8); 
+    backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     position: sticky; top: 0; z-index: 100;
 }
 
-/* --- FIXED LOGO GRAPHIC --- */
-.logo-container {
-    display: flex; align-items: center; gap: 15px; 
-}
-
+/* --- LOGO GRAPHIC --- */
+.logo-container { display: flex; align-items: center; gap: 15px; }
 .water-drop {
     width: 40px; height: 40px;
     background: radial-gradient(circle at 30% 30%, #00e5ff, #0a2342); 
-    border: 2px solid #00e5ff; 
-    border-radius: 0 50% 50% 50%; /* Teardrop Shape */
-    transform: rotate(45deg); /* Points UP */
-    position: relative;
+    border: 2px solid #00e5ff; border-radius: 0 50% 50% 50%; 
+    transform: rotate(45deg); position: relative;
     box-shadow: 0 0 20px rgba(0, 229, 255, 0.5); 
     display: flex; align-items: center; justify-content: center;
 }
+.crosshair { width: 100%; height: 100%; position: absolute; transform: rotate(-45deg); }
+.crosshair::before { content: ''; position: absolute; width: 1px; height: 60%; background: rgba(255, 255, 255, 0.9); left: 50%; top: 20%; }
+.crosshair::after { content: ''; position: absolute; width: 60%; height: 1px; background: rgba(255, 255, 255, 0.9); top: 50%; left: 20%; }
 
-/* The Crosshair (Using Pseudo Elements) */
-.crosshair {
-    width: 100%; height: 100%;
-    position: absolute;
-    transform: rotate(-45deg); /* Counter-rotates so lines are straight + */
-}
-
-.crosshair::before { /* Vertical Line */
-    content: ''; position: absolute;
-    width: 1px; height: 60%; 
-    background: rgba(255, 255, 255, 0.9);
-    left: 50%; top: 20%;
-}
-.crosshair::after { /* Horizontal Line */
-    content: ''; position: absolute;
-    width: 60%; height: 1px; 
-    background: rgba(255, 255, 255, 0.9);
-    top: 50%; left: 20%;
-}
-
-.logo-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-}
+.logo-text { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; letter-spacing: 2px; }
 .silver-text { color: #a0aab5; font-weight: 300; }
 
 .nav-btn { 
@@ -104,79 +71,56 @@ nav {
 .nav-btn:hover { background: #ffffff; color: #020b16; }
 
 /* Hero Section */
-.hero {
-    min-height: 85vh; display: flex; align-items: center; justify-content: center; 
-    text-align: center; padding: 20px;
-}
-
+.hero { min-height: 85vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px; }
 .glass-panel {
-    background: rgba(10, 20, 35, 0.6); 
-    backdrop-filter: blur(20px); /* Heavy Blur for Luxury Feel */
-    -webkit-backdrop-filter: blur(20px);
-    padding: 70px 50px;
-    border-radius: 2px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    max-width: 900px;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-    position: relative;
+    background: rgba(10, 20, 35, 0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    padding: 70px 50px; border-radius: 2px; border: 1px solid rgba(255, 255, 255, 0.08);
+    max-width: 900px; box-shadow: 0 30px 60px rgba(0,0,0,0.6); position: relative;
 }
-
-.accent-line {
-    width: 60px; height: 3px; background: #00e5ff; margin: 0 auto 30px auto;
-}
-
+.accent-line { width: 60px; height: 3px; background: #00e5ff; margin: 0 auto 30px auto; }
 .credentials-box {
-    border-top: 1px solid rgba(255,255,255,0.1); 
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding: 20px 0; margin: 30px 0; 
-    color: #00e5ff; font-family: 'Roboto Mono', monospace; font-size: 0.9rem;
+    border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 20px 0; margin: 30px 0; color: #00e5ff; font-family: 'Roboto Mono', monospace; font-size: 0.9rem;
 }
-
 .btn {
-    display: inline-block; padding: 18px 45px; 
-    text-decoration: none; font-weight: 700; letter-spacing: 2px; 
-    border-radius: 0px; /* Sharp corners = Luxury */
-    transition: 0.3s; margin-top: 10px;
-    font-size: 0.9rem;
+    display: inline-block; padding: 18px 45px; text-decoration: none; font-weight: 700; letter-spacing: 2px; border-radius: 0px; transition: 0.3s; margin-top: 10px; font-size: 0.9rem;
 }
-
-/* The "Hot Pink" Accent Button */
 .primary-btn { 
-    background: #e91e63; color: #ffffff; 
-    box-shadow: 0 10px 30px rgba(233, 30, 99, 0.3);
+    background: #e91e63; color: #ffffff; box-shadow: 0 10px 30px rgba(233, 30, 99, 0.3);
 }
-.primary-btn:hover { 
-    background: #c2185b; 
-    box-shadow: 0 15px 40px rgba(233, 30, 99, 0.5);
-    transform: translateY(-3px);
-}
+.primary-btn:hover { background: #c2185b; box-shadow: 0 15px 40px rgba(233, 30, 99, 0.5); transform: translateY(-3px); }
 
-/* Chemistry Grid */
+/* --- INTERACTIVE CHEMISTRY GRID --- */
 .chemistry-grid { padding: 100px 20px; text-align: center; background: #020b16; }
 .container { max-width: 1100px; margin: 0 auto; }
-.element-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 30px; }
+.element-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 30px; }
 
 .element {
     background: rgba(255, 255, 255, 0.03); 
     border: 1px solid rgba(255, 255, 255, 0.05); 
-    padding: 30px 20px; 
+    padding: 0; /* Reset padding for positioning */
+    height: 160px; /* Fixed height for consistency */
+    position: relative;
     transition: 0.3s;
-}
-.element:hover { 
-    border-color: #00e5ff; 
-    transform: translateY(-10px); 
-    box-shadow: 0 10px 30px rgba(0, 229, 255, 0.1);
-}
-.symbol {
-    display: block; font-size: 2rem; font-weight: 700; color: #ffffff; font-family: 'Playfair Display', serif;
-}
-.name {
-    display: block; font-size: 0.75rem; color: #a0aab5; margin-top: 5px; text-transform: uppercase; letter-spacing: 1px;
+    overflow: hidden; /* Keeps contents inside */
+    cursor: default;
 }
 
-/* Footer */
-footer { padding: 60px 20px; text-align: center; background: #01060c; border-top: 1px solid rgba(255,255,255,0.05); }
-.phone-number { font-size: 1.5rem; color: #00e5ff; margin: 10px 0; font-family: 'Playfair Display', serif;}
-.contact-info a { color: #ffffff; text-decoration: none; font-size: 1rem; opacity: 0.7; transition: 0.3s;}
-.contact-info a:hover { opacity: 1; }
-.small-text { font-size: 0.7rem; color: #444; margin-top: 40px; letter-spacing: 2px; text-transform: uppercase;}
+/* The Default View (Symbol) */
+.front {
+    position: absolute; width: 100%; height: 100%;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    transition: transform 0.4s ease;
+}
+.symbol { display: block; font-size: 2.2rem; font-weight: 700; color: #ffffff; font-family: 'Playfair Display', serif; }
+.name { display: block; font-size: 0.7rem; color: #a0aab5; margin-top: 10px; text-transform: uppercase; letter-spacing: 1px; }
+
+/* The Hidden View (Hover Range) */
+.back {
+    position: absolute; width: 100%; height: 100%;
+    background: #00e5ff; /* Cyan Background */
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    transform: translateY(100%); /* Hides it below */
+    transition: transform 0.3s ease-in-out;
+}
+.
