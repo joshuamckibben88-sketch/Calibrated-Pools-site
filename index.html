@@ -3,149 +3,273 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calibrated Pools | Precision Management</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚙️</text></svg>">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <title>Calibrated Pools | Science-Based Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* --- THEME --- */
+        /* --- GLOBAL STYLES --- */
         :root {
-            --bg: #0a192f;
-            --light-bg: #112240;
-            --primary: #00e5ff;
-            --text: #e6f1ff;
-            --sub: #8892b0;
+            --primary: #00e5ff;       /* Cyan */
+            --dark: #0a192f;          /* Dark Navy */
+            --light: #e6f1ff;         /* Off White */
+            --card-bg: rgba(17, 34, 64, 0.95); /* Semi-transparent dark */
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text);
+            margin: 0;
+            padding: 0;
             font-family: 'Montserrat', sans-serif;
-            margin: 0; padding: 0;
-            line-height: 1.6;
+            background-color: var(--dark);
+            color: var(--light);
             overflow-x: hidden;
         }
 
-        /* NAVIGATION */
-        nav {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 20px; background: rgba(10,25,47,0.95);
-            position: sticky; top: 0; z-index: 100;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        .logo { font-family: 'Roboto Mono'; font-weight: 700; color: var(--primary); font-size: 1.2rem; text-decoration: none; }
-        .nav-links a {
-            color: var(--sub); text-decoration: none; margin-left: 20px; font-size: 0.9rem;
-            transition: color 0.3s;
-        }
-        .nav-links a:hover { color: var(--primary); }
-        .nav-btn {
-            border: 1px solid var(--primary); padding: 8px 15px; border-radius: 4px; color: var(--primary) !important;
-        }
+        a { text-decoration: none; color: inherit; }
 
-        /* HERO SECTION */
+        /* --- HERO SECTION (The "Original" Pool Look) --- */
         .hero {
-            padding: 100px 20px; text-align: center;
-            background: radial-gradient(circle at top, #112240 0%, #0a192f 100%);
+            /* This puts the pool image in the background */
+            background: linear-gradient(rgba(10, 25, 47, 0.7), rgba(10, 25, 47, 0.7)), 
+                        url('https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Creates the cool parallax scrolling effect */
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
         }
+
+        .logo-text {
+            font-family: 'Roboto Mono', monospace;
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
         h1 {
-            font-size: 2.5rem; margin-bottom: 10px; line-height: 1.2;
+            font-size: 3.5rem;
+            margin: 0;
+            line-height: 1.1;
+            text-transform: uppercase;
+            font-weight: 800;
         }
-        .highlight { color: var(--primary); }
-        p.lead {
-            color: var(--sub); max-width: 600px; margin: 0 auto 40px auto; font-size: 1.1rem;
-        }
-        .cta-button {
-            background: var(--primary); color: #0a192f; padding: 15px 30px;
-            text-decoration: none; font-weight: 700; border-radius: 4px;
-            font-family: 'Roboto Mono'; text-transform: uppercase;
-            display: inline-block; transition: transform 0.2s;
-        }
-        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 5px 20px rgba(0,229,255,0.2); }
 
-        /* VALUE PROPS */
-        .features {
-            padding: 80px 20px; max-width: 1000px; margin: 0 auto;
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;
+        .tagline {
+            font-size: 1.2rem;
+            margin: 20px 0 40px 0;
+            max-width: 600px;
+            color: #ccc;
         }
-        .feature-card {
-            background: var(--light-bg); padding: 30px; border-radius: 8px;
-            border-top: 3px solid var(--primary);
-        }
-        .f-icon { font-size: 2rem; margin-bottom: 20px; display: block; }
-        h3 { color: var(--text); margin-top: 0; }
-        p.small { color: var(--sub); font-size: 0.9rem; }
 
-        /* TECH SECTION */
-        .tech-section {
-            background: var(--light-bg); padding: 80px 20px; text-align: center;
+        .cta-btn {
+            background: var(--primary);
+            color: var(--dark);
+            padding: 15px 40px;
+            border-radius: 4px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform 0.2s;
         }
-        .tech-preview {
-            max-width: 800px; margin: 0 auto;
-            border: 1px solid var(--primary); padding: 20px; border-radius: 8px;
-            font-family: 'Roboto Mono'; color: var(--primary); font-size: 0.9rem;
-            background: rgba(0,0,0,0.3); margin-top: 30px;
+
+        .cta-btn:hover { transform: scale(1.05); }
+
+        /* --- PRICING SECTION --- */
+        .pricing-section {
+            padding: 80px 20px;
+            background: var(--dark);
         }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Roboto Mono', monospace;
+            color: var(--primary);
+            margin-bottom: 60px;
+            font-size: 2rem;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* PRICING CARD */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 30px;
+            position: relative;
+        }
+
+        .card h3 { color: var(--primary); margin-top: 0; font-family: 'Roboto Mono'; }
+        
+        .level-box {
+            background: rgba(255,255,255,0.05);
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+        }
+
+        .level-box.pro {
+            border-left: 3px solid var(--primary);
+            background: rgba(0, 229, 255, 0.05);
+        }
+
+        .price { float: right; font-weight: bold; color: var(--primary); font-family: 'Roboto Mono'; }
+        
+        .features li {
+            list-style: none;
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+            color: #aaa;
+        }
+        .features li::before { content: "▹ "; color: var(--primary); }
+
+        /* REPAIR LIST */
+        .repair-list {
+            max-width: 800px;
+            margin: 60px auto 0 auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+        }
+        .repair-item {
+            display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .repair-item:last-child { border-bottom: none; }
 
         /* FOOTER */
         footer {
-            padding: 40px 20px; text-align: center; color: var(--sub); font-size: 0.8rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+            padding: 40px;
+            color: #555;
+            font-size: 0.8rem;
+            border-top: 1px solid #222;
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <a href="#" class="logo">⚙️ CALIBRATED</a>
-        <div class="nav-links">
-            <a href="services.html">PRICING</a>
-            <a href="app.html" class="nav-btn">TECH PORTAL</a>
-        </div>
-    </nav>
-
-    <section class="hero">
-        <h1>STOP GUESSING.<br><span class="highlight">START CALIBRATING.</span></h1>
-        <p class="lead">Science-based pool management for Southeast Texas. We don't just "clean" pools—we manage water chemistry and equipment safety with CPO-certified precision.</p>
-        <a href="services.html" class="cta-button">VIEW SERVICE MENU</a>
-    </section>
-
-    <section class="features">
-        <div class="feature-card">
-            <span class="f-icon">⚗️</span>
-            <h3>LSI Balanced Chemistry</h3>
-            <p class="small">Most services just check pH and Chlorine. We calculate the Langelier Saturation Index (LSI) to prevent calcium scale and protect your heater and plaster.</p>
-        </div>
-
-        <div class="feature-card">
-            <span class="f-icon">🛡️</span>
-            <h3>Safety & Compliance</h3>
-            <p class="small">We perform a TAC-265 compliant safety audit on every visit. From gate latches to VGB drain covers, we reduce your liability.</p>
-        </div>
-
-        <div class="feature-card">
-            <span class="f-icon">🔌</span>
-            <h3>Licensed Repair</h3>
-            <p class="small">Don't risk your warranty with unlicensed labor. We specialize in variable speed pumps, heaters, and automation diagnostics.</p>
-        </div>
-    </section>
-
-    <section class="tech-section">
-        <h2>PROPRIETARY TECHNOLOGY</h2>
-        <p class="lead">We use custom-built software to track your pool's health.</p>
+    <div class="hero">
+        <div class="logo-text">⚙️ CALIBRATED POOLS</div>
+        <h1>Precision<br>Pool Management</h1>
+        <div class="tagline">LSI Balanced Chemistry. RAIL Licensed Repair.<br>Serving Southeast Texas.</div>
         
-        <div class="tech-preview">
-            > CONNECTING TO SERVER...<br>
-            > LSI CALCULATION: 0.02 (BALANCED)<br>
-            > FILTER PRESSURE: 12 PSI (OPTIMAL)<br>
-            > SAFETY AUDIT: PASSED<br>
-            > STATUS: READY FOR SERVICE
+        <div style="display: flex; gap: 20px;">
+            <a href="#pricing" class="cta-btn">View Pricing</a>
+            <a href="app.html" style="padding: 15px 30px; border: 1px solid var(--primary); color: var(--primary); border-radius: 4px; font-weight: bold;">Tech Login</a>
         </div>
-    </section>
+    </div>
+
+    <div id="pricing" class="pricing-section">
+        <h2 class="section-title">SERVICE MENU</h2>
+        
+        <div class="pricing-grid">
+            <div class="card">
+                <h3>WEEKLY CALIBRATION</h3>
+                <p style="font-size: 0.9rem; color: #ccc;">Science-based water management.</p>
+                
+                <div class="level-box">
+                    <span class="price">Quote</span>
+                    <b>Level 1: Audit</b>
+                    <ul class="features" style="padding:0; margin-top:10px;">
+                        <li>LSI Water Balancing</li>
+                        <li>Equipment Safety Check</li>
+                        <li>Basket Evacuation</li>
+                    </ul>
+                </div>
+                <div class="level-box pro">
+                    <span class="price">$225+</span>
+                    <b>Level 2: Full Service</b>
+                    <ul class="features" style="padding:0; margin-top:10px;">
+                        <li>Includes Level 1 Audit</li>
+                        <li>Netting, Brushing, Vacuuming</li>
+                        <li>Filter Pressure Monitoring</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>FILTER RESTORATION</h3>
+                <p style="font-size: 0.9rem; color: #ccc;">Deep cleaning for flow efficiency.</p>
+                
+                <div class="level-box">
+                    <span class="price">$125</span>
+                    <b>Level 1: Clean</b>
+                    <ul class="features" style="padding:0; margin-top:10px;">
+                        <li>Hydraulic Debris Flush</li>
+                        <li>Manifold Inspection</li>
+                        <li>O-Ring Lubrication</li>
+                    </ul>
+                </div>
+                <div class="level-box pro">
+                    <span class="price">$160</span>
+                    <b>Level 2: Restore</b>
+                    <ul class="features" style="padding:0; margin-top:10px;">
+                        <li>Includes Level 1 Clean</li>
+                        <li>Enzyme Degreasing Soak</li>
+                        <li>Acid Bath for Scale</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>ALGAE REMEDIATION</h3>
+                <p style="font-size: 0.9rem; color: #ccc;">Aggressive swamp recovery.</p>
+                
+                <div class="level-box">
+                    <span class="price">$600+</span>
+                    <b>Level 1: Clear</b>
+                    <ul class="features" style="padding:0; margin-top:10px;">
+                        <li>3-Day Treatment Cycle</li>
+                        <li>Shock / Floc / Vac-to-Waste</li>
+                        <li>*Chemicals billed separately</li>
+                    </ul>
+                </div>
+                <div class="level-box pro">
+                    <span class="price">$800+</span>
+                    <b>Level 2: Recovery</b>
+                    <ul class="features" style="padding:0; margin-top:10px;">
+                        <li>Includes Level 1 Clear</li>
+                        <li>Heavy Leaf Dredging</li>
+                        <li>Phosphate Removal</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="repair-list">
+            <h3 style="color:var(--primary); font-family:'Roboto Mono'; border-bottom:1px solid #333; padding-bottom:10px; margin-top:0;">REPAIRS & INSTALLS</h3>
+            
+            <div class="repair-item">
+                <div><b>Diagnostic Service Call</b><br><span style="font-size:0.8rem; color:#888;">Credited toward repair labor.</span></div>
+                <div style="font-family:'Roboto Mono'; color:var(--primary); font-weight:bold;">$125.00</div>
+            </div>
+
+            <div class="repair-item">
+                <div><b>Sand Filter Media Change</b><br><span style="font-size:0.8rem; color:#888;">Removal, Disposal, #20 Silica Refill.</span></div>
+                <div style="font-family:'Roboto Mono'; color:var(--primary); font-weight:bold;">~$1,400.00</div>
+            </div>
+
+            <div class="repair-item">
+                <div><b>Pump Installation (RAIL)</b><br><span style="font-size:0.8rem; color:#888;">Includes electrical bond check.</span></div>
+                <div style="font-family:'Roboto Mono'; color:var(--primary); font-weight:bold;">Quote</div>
+            </div>
+        </div>
+
+    </div>
 
     <footer>
-        <p>&copy; 2026 Calibrated Pools.<br>Joshua McKibben, CPO.<br>Southeast Texas.</p>
-        <br>
-        <a href="app.html" style="color:#333; text-decoration:none;">Technician Login</a>
+        © 2026 Calibrated Pools. Joshua McKibben, CPO.<br>
+        <span style="font-size: 0.7rem; color: #444;">*Chemicals for cleanups billed based on consumption.</span>
     </footer>
 
 </body>
