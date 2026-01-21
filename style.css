@@ -93,3 +93,24 @@ footer { padding: 60px 20px; text-align: center; background: #01060c; border-top
 .contact-info a { color: #ffffff; text-decoration: none; font-size: 1rem; opacity: 0.7; transition: 0.3s;}
 .contact-info a:hover { opacity: 1; }
 .small-text { font-size: 0.7rem; color: #999; margin-top: 40px; letter-spacing: 2px; text-transform: uppercase;}
+/* --- NEW TEXT STYLES --- */
+
+/* The "Serving Southeast Texas" text */
+.location-tag {
+    color: #00e5ff; /* Cyan pop */
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+/* The "Science-Backed Clarity" slogan */
+.slogan {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #d1d1d1; /* Soft Silver */
+    font-style: italic;
+    letter-spacing: 2px;
+    font-family: 'Playfair Display', serif;
+}
