@@ -15,6 +15,7 @@
             --secondary: #8892b0;
             --danger: #ff5252;
             --success: #00e676;
+            --warning: #ffab00;
             --text: #e6f1ff;
         }
 
@@ -24,7 +25,7 @@
             font-family: 'Montserrat', sans-serif;
             margin: 0;
             padding: 0;
-            padding-bottom: 80px;
+            padding-bottom: 90px;
             -webkit-font-smoothing: antialiased;
         }
 
@@ -84,8 +85,10 @@
             align-items: center;
             border: 1px solid rgba(255,255,255,0.05);
         }
-
+        
+        .label-box { display: flex; flex-direction: column; }
         label { font-size: 0.9rem; font-weight: 600; color: #ccd6f6; }
+        .ideal-range { font-size: 0.65rem; color: #8892b0; margin-top: 2px; font-family: 'Roboto Mono', monospace; }
         
         input, select {
             background: transparent;
@@ -116,45 +119,42 @@
         }
         
         .copy-btn { background: #64ffda; margin-top: 10px; }
-        .copy-btn:active { background: #00bfa5; }
 
-        /* Guide Cards */
-        .guide-card {
-            background: var(--card-bg);
-            border-left: 4px solid var(--primary);
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 4px;
-        }
-        .guide-title { font-weight: 700; color: var(--text); margin-bottom: 5px; display: block; }
-        .guide-desc { font-size: 0.85rem; color: #a8b2d1; line-height: 1.5; }
-        
-        /* Volume Calculator */
-        .vol-result {
-            text-align: center; font-family: 'Roboto Mono', monospace; 
-            font-size: 2rem; color: var(--primary); margin: 20px 0;
-        }
-
-        /* LSI Results */
+        /* Results & Dosing */
         .result-box {
             margin-top: 25px; padding: 20px; border-radius: 8px; 
             text-align: center; display: none;
         }
         .lsi-score { font-size: 3rem; font-weight: 700; font-family: 'Roboto Mono', monospace; }
         .lsi-status { font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; }
+        
+        .dose-card {
+            background: rgba(255,255,255,0.05);
+            border-left: 4px solid var(--warning);
+            padding: 10px 15px;
+            margin-top: 10px;
+            text-align: left;
+            border-radius: 4px;
+        }
+        .dose-title { color: var(--warning); font-weight: 700; font-size: 0.8rem; text-transform: uppercase; display: block; margin-bottom: 5px; }
+        .dose-text { font-size: 0.9rem; color: #fff; font-family: 'Roboto Mono', monospace; }
 
-        /* Safety Items */
+        /* Guide & Safety */
+        .guide-card {
+            background: var(--card-bg); border-left: 4px solid var(--primary);
+            padding: 15px; margin-bottom: 15px; border-radius: 4px;
+        }
+        .guide-title { font-weight: 700; color: var(--text); margin-bottom: 5px; display: block; }
         .checklist-item {
             background: var(--card-bg); margin-bottom: 10px; padding: 15px;
             border-radius: 8px; display: flex; align-items: center; cursor: pointer;
         }
-        .checklist-item.checked { border: 1px solid var(--success); }
+        .checklist-item.checked .check-circle { background: var(--success); border-color: var(--success); color: #000; }
+        .checklist-item.checked .check-circle::after { content: '✓'; font-weight: 700; }
         .check-circle {
             width: 24px; height: 24px; border: 2px solid #8892b0; border-radius: 50%;
             margin-right: 15px; display: flex; align-items: center; justify-content: center;
         }
-        .checklist-item.checked .check-circle { background: var(--success); border-color: var(--success); color: #000; }
-        .checklist-item.checked .check-circle::after { content: '✓'; font-weight: 700; }
 
     </style>
 </head>
@@ -166,21 +166,55 @@
     </header>
 
     <div id="tab-lsi" class="section active">
-        <div class="input-group"><label>pH</label><input type="number" id="ph" placeholder="7.5" step="0.1"></div>
-        <div class="input-group"><label>Water Temp (°F)</label><input type="number" id="temp" placeholder="80" value="80"></div>
-        <div class="input-group"><label>Calcium (CH)</label><input type="number" id="ch" placeholder="300" step="10"></div>
-        <div class="input-group"><label>Alkalinity (TA)</label><input type="number" id="ta" placeholder="100" step="10"></div>
-        <div class="input-group"><label>CYA (Stab)</label><input type="number" id="cya" placeholder="50" step="10"></div>
-        <div class="input-group"><label>TDS / Salt</label><input type="number" id="tds" placeholder="1000" step="100"></div>
+        
+        <div class="input-group" style="border-color: var(--primary);">
+            <div class="label-box">
+                <label style="color:var(--primary)">Pool Volume (gal)</label>
+                <span class="ideal-range">Required for dosing</span>
+            </div>
+            <input type="number" id="vol" value="15000" step="1000">
+        </div>
 
-        <button class="action-btn" onclick="calculateLSI()">CALCULATE</button>
+        <div style="height: 1px; background: rgba(255,255,255,0.1); margin: 20px 0;"></div>
+
+        <div class="input-group">
+            <div class="label-box"><label>Free Chlorine</label><span class="ideal-range">Ideal: 2.0 - 4.0</span></div>
+            <input type="number" id="fc" placeholder="3.0" step="0.5">
+        </div>
+        <div class="input-group">
+            <div class="label-box"><label>pH</label><span class="ideal-range">Ideal: 7.4 - 7.6</span></div>
+            <input type="number" id="ph" placeholder="7.5" step="0.1">
+        </div>
+        <div class="input-group">
+            <div class="label-box"><label>Water Temp (°F)</label></div>
+            <input type="number" id="temp" placeholder="80" value="80">
+        </div>
+        <div class="input-group">
+            <div class="label-box"><label>Alkalinity (TA)</label><span class="ideal-range">Ideal: 80 - 120</span></div>
+            <input type="number" id="ta" placeholder="100" step="10">
+        </div>
+        <div class="input-group">
+            <div class="label-box"><label>Calcium (CH)</label><span class="ideal-range">Ideal: 200 - 400</span></div>
+            <input type="number" id="ch" placeholder="300" step="10">
+        </div>
+        <div class="input-group">
+            <div class="label-box"><label>CYA (Stab)</label><span class="ideal-range">Ideal: 30 - 50</span></div>
+            <input type="number" id="cya" placeholder="50" step="10">
+        </div>
+        <div class="input-group">
+            <div class="label-box"><label>TDS / Salt</label><span class="ideal-range">Salt Pool: ~3000</span></div>
+            <input type="number" id="tds" placeholder="1000" step="100">
+        </div>
+
+        <button class="action-btn" onclick="calculateLSI()">CALCULATE & DOSE</button>
 
         <div id="result" class="result-box">
             <div id="lsi-val" class="lsi-score">0.00</div>
             <div id="lsi-msg" class="lsi-status">BALANCED</div>
-            <p id="lsi-desc" style="font-size:0.8rem; margin:10px 0; opacity:0.8;"></p>
             
-            <button class="action-btn copy-btn" onclick="copyReport()">📋 COPY REPORT FOR TEXT</button>
+            <div id="dosing-plan" style="margin-top:20px;"></div>
+
+            <button class="action-btn copy-btn" onclick="copyReport()">📋 COPY REPORT</button>
         </div>
     </div>
 
@@ -202,52 +236,22 @@
         <div class="input-group"><label>Length (ft)</label><input type="number" id="len"></div>
         <div class="input-group"><label>Width (ft)</label><input type="number" id="wid"></div>
         <div class="input-group"><label>Avg Depth (ft)</label><input type="number" id="depth"></div>
-        
         <button class="action-btn" onclick="calcVolume()">CALCULATE GALLONS</button>
-        <div id="vol-display" class="vol-result">0 gal</div>
+        <div id="vol-display" class="vol-result" style="text-align:center; font-size:2rem; margin-top:20px; color:var(--primary); font-family:'Roboto Mono'">0 gal</div>
     </div>
 
     <div id="tab-guide" class="section">
         <h3 style="color:var(--primary); margin-bottom:20px;">DIAGNOSTIC CHEAT SHEET</h3>
-        
-        <div class="guide-card" style="border-color: #00e676;">
-            <span class="guide-title">GREEN ALGAE</span>
-            <div class="guide-desc">Free floating, clouds water fast.<br><strong>Fix:</strong> Brush walls, double shock (chlorine), clean filter.</div>
-        </div>
-        
-        <div class="guide-card" style="border-color: #ffeb3b;">
-            <span class="guide-title">MUSTARD (YELLOW) ALGAE</span>
-            <div class="guide-desc">Clings to walls (shade side), looks like pollen.<br><strong>Fix:</strong> Very chlorine resistant. Needs "Yellow Out" (Sodium Bromide) + High Chlorine.</div>
-        </div>
-
-        <div class="guide-card" style="border-color: #212121;">
-            <span class="guide-title">BLACK ALGAE</span>
-            <div class="guide-desc">Pinhead sized spots, has roots into plaster.<br><strong>Fix:</strong> Use Stainless Steel brush to break heads. Rub with Trichlor tab. Shock heavily.</div>
-        </div>
-
-        <div class="guide-card" style="border-color: #e0f7fa;">
-            <span class="guide-title">CLOUDY WATER</span>
-            <div class="guide-desc">
-                <strong>1. Filtration:</strong> Check pressure. Backwash if >10psi over clean.<br>
-                <strong>2. Chemistry:</strong> High pH/Alk can cause calcium clouding.<br>
-                <strong>3. Early Algae:</strong> Water looks "dull" before turning green. Shock it.
-            </div>
-        </div>
+        <div class="guide-card" style="border-color: #00e676;"><span class="guide-title">GREEN ALGAE</span><div style="color:#aaa; font-size:0.9rem;">Free floating. Brush walls, double shock, clean filter.</div></div>
+        <div class="guide-card" style="border-color: #ffeb3b;"><span class="guide-title">MUSTARD ALGAE</span><div style="color:#aaa; font-size:0.9rem;">Yellow dust in shade. Resistant to Chlorine. Needs Sodium Bromide ("Yellow Out").</div></div>
+        <div class="guide-card" style="border-color: #212121;"><span class="guide-title">BLACK ALGAE</span><div style="color:#aaa; font-size:0.9rem;">Pinhead spots with roots. Use Steel brush. Rub with Trichlor tab.</div></div>
     </div>
 
     <div class="nav-bar">
-        <div class="nav-item active" onclick="switchTab('tab-lsi', this)">
-            <span class="nav-icon">⚗️</span>CHEMISTRY
-        </div>
-        <div class="nav-item" onclick="switchTab('tab-safety', this)">
-            <span class="nav-icon">🛡️</span>SAFETY
-        </div>
-        <div class="nav-item" onclick="switchTab('tab-vol', this)">
-            <span class="nav-icon">📏</span>VOLUME
-        </div>
-        <div class="nav-item" onclick="switchTab('tab-guide', this)">
-            <span class="nav-icon">📖</span>GUIDE
-        </div>
+        <div class="nav-item active" onclick="switchTab('tab-lsi', this)"><span class="nav-icon">⚗️</span>CHEMISTRY</div>
+        <div class="nav-item" onclick="switchTab('tab-safety', this)"><span class="nav-icon">🛡️</span>SAFETY</div>
+        <div class="nav-item" onclick="switchTab('tab-vol', this)"><span class="nav-icon">📏</span>VOLUME</div>
+        <div class="nav-item" onclick="switchTab('tab-guide', this)"><span class="nav-icon">📖</span>GUIDE</div>
     </div>
 
     <script>
@@ -259,8 +263,11 @@
             if(el) el.classList.add('active');
         }
 
-        // --- LSI & REPORT LOGIC ---
+        // --- LSI & DOSING LOGIC ---
         function calculateLSI() {
+            // Get Values
+            let vol = parseFloat(document.getElementById('vol').value) || 15000;
+            let fc = parseFloat(document.getElementById('fc').value) || 0;
             let ph = parseFloat(document.getElementById('ph').value);
             let temp = parseFloat(document.getElementById('temp').value);
             let ch = parseFloat(document.getElementById('ch').value);
@@ -268,81 +275,121 @@
             let cya = parseFloat(document.getElementById('cya').value) || 0;
             let tds = parseFloat(document.getElementById('tds').value) || 0;
 
-            if(!ph || !temp || !ch || !ta) { alert("Enter basic readings first."); return; }
+            if(!ph || !temp || !ch || !ta) { alert("Please enter pH, Temp, Calcium, and Alkalinity."); return; }
 
+            // LSI Calculation
             let tf = (temp * 0.01) - 0.1;
             let cf = Math.log10(ch) - 0.4;
             let carbonateAlk = ta - (cya * 0.30);
             if (carbonateAlk < 1) carbonateAlk = 1;
             let af = Math.log10(carbonateAlk);
             let tdsFactor = (tds > 1000) ? 12.2 : 12.1;
-
             let lsi = ph + tf + cf + af - tdsFactor;
-            
+
+            // Render LSI
             let resultBox = document.getElementById('result');
             let valDiv = document.getElementById('lsi-val');
             let msgDiv = document.getElementById('lsi-msg');
-            let descDiv = document.getElementById('lsi-desc');
-
+            let doseDiv = document.getElementById('dosing-plan');
+            
             resultBox.style.display = "block";
             valDiv.innerText = lsi.toFixed(2);
+            doseDiv.innerHTML = ""; // Clear old doses
+
+            let status = "BALANCED";
 
             if (lsi >= -0.3 && lsi <= 0.3) {
                 valDiv.style.color = "#00e676"; msgDiv.innerText = "BALANCED";
-                descDiv.innerText = "Water is perfect.";
             } else if (lsi < -0.3) {
-                valDiv.style.color = "#ff5252"; msgDiv.innerText = "CORROSIVE";
-                descDiv.innerText = "Risk of etching. Add Bicarb.";
+                valDiv.style.color = "#ff5252"; msgDiv.innerText = "CORROSIVE"; status = "CORROSIVE";
             } else {
-                valDiv.style.color = "#ffab00"; msgDiv.innerText = "SCALE FORMING";
-                descDiv.innerText = "Risk of scale. Lower pH.";
+                valDiv.style.color = "#ffab00"; msgDiv.innerText = "SCALE FORMING"; status = "SCALE";
             }
+
+            // --- SMART DOSING LOGIC ---
+            // Volume Factor (per 10k gallons)
+            let vFactor = vol / 10000;
+
+            // 1. Alkalinity (Target 100)
+            if (ta < 80) {
+                let diff = 100 - ta;
+                let lbs = (diff / 10) * 1.5 * vFactor; // 1.5lbs raises 10ppm per 10k
+                addDose("Low Alkalinity", `Add ${lbs.toFixed(1)} lbs Sodium Bicarb`);
+            } else if (ta > 140) {
+                 addDose("High Alkalinity", "Add Acid to lower Alk (will lower pH too). Aerate to raise pH back.");
+            }
+
+            // 2. Calcium (Target 300)
+            if (ch < 250) {
+                let diff = 300 - ch;
+                let lbs = (diff / 10) * 1.25 * vFactor; // 1.25lbs raises 10ppm per 10k
+                addDose("Low Calcium", `Add ${lbs.toFixed(1)} lbs Calcium Chloride`);
+            }
+
+            // 3. CYA (Target 50)
+            if (cya < 30) {
+                let diff = 50 - cya;
+                let lbs = (diff / 10) * 1.3 * vFactor; // 1.3lbs raises 10ppm per 10k
+                addDose("Low Stabilizer", `Add ${lbs.toFixed(1)} lbs CYA / Conditioner`);
+            }
+
+            // 4. pH (Target 7.5) - Simplified Acid Demand
+            if (ph > 7.8) {
+                // Rough estimate: 1qt (32oz) muriatic lowers pH ~0.2 per 10k gal (varies w/ Alk)
+                let diff = ph - 7.5;
+                let quarts = (diff / 0.2) * 1.0 * vFactor;
+                addDose("High pH", `Add approx ${quarts.toFixed(1)} quarts Muriatic Acid`);
+            } else if (ph < 7.2) {
+                addDose("Low pH", "Add Soda Ash (Sodium Carbonate) or Bicarb if Alk is also low.");
+            }
+        }
+
+        function addDose(title, text) {
+            let d = document.createElement('div');
+            d.className = 'dose-card';
+            d.innerHTML = `<span class="dose-title">${title}</span><span class="dose-text">${text}</span>`;
+            document.getElementById('dosing-plan').appendChild(d);
         }
 
         function copyReport() {
             let ph = document.getElementById('ph').value;
-            let ch = document.getElementById('ch').value;
+            let fc = document.getElementById('fc').value;
             let ta = document.getElementById('ta').value;
+            let ch = document.getElementById('ch').value;
             let lsi = document.getElementById('lsi-val').innerText;
             let status = document.getElementById('lsi-msg').innerText;
             let date = new Date().toLocaleDateString();
 
-            let report = `SERVICE LOG - ${date}\nStatus: ${status} (LSI: ${lsi})\n\nREADINGS:\npH: ${ph}\nAlk: ${ta}\nCalc: ${ch}\n\nWater balanced to LSI standards.\n- Calibrated Pools`;
-
-            navigator.clipboard.writeText(report).then(() => {
-                alert("Report copied! Open text messages and paste.");
-            });
+            let report = `SERVICE LOG - ${date}\nStatus: ${status} (LSI: ${lsi})\n\nREADINGS:\nCl: ${fc}\npH: ${ph}\nAlk: ${ta}\nCalc: ${ch}\n\nWater balanced to LSI standards.\n- Calibrated Pools`;
+            
+            navigator.clipboard.writeText(report).then(() => alert("Report copied! Open texts and paste."));
         }
 
-        // --- VOLUME CALCULATOR ---
+        // --- VOLUME CALC ---
         function calcVolume() {
-            let shape = document.getElementById('pool-shape').value;
-            let len = parseFloat(document.getElementById('len').value) || 0;
-            let wid = parseFloat(document.getElementById('wid').value) || 0;
-            let depth = parseFloat(document.getElementById('depth').value) || 0;
-            let vol = 0;
-
-            if (shape === 'rect') { vol = len * wid * depth * 7.5; }
-            else if (shape === 'round') { vol = 3.14 * (len/2) * (len/2) * depth * 7.5; } // Use Length as Diameter
-            else { vol = len * wid * depth * 7.0; } // Kidney avg
-
-            document.getElementById('vol-display').innerText = Math.round(vol).toLocaleString() + " gal";
+            let s = document.getElementById('pool-shape').value;
+            let l = parseFloat(document.getElementById('len').value)||0; 
+            let w = parseFloat(document.getElementById('wid').value)||0; 
+            let d = parseFloat(document.getElementById('depth').value)||0;
+            let v = 0;
+            if(s==='rect') v = l*w*d*7.5;
+            else if(s==='round') v = 3.14*(l/2)*(l/2)*d*7.5;
+            else v = l*w*d*7.0;
+            document.getElementById('vol-display').innerText = Math.round(v).toLocaleString() + " gal";
+            // Auto-update dosing vol
+            document.getElementById('vol').value = Math.round(v);
         }
 
-        // --- SAFETY INIT ---
-        const safetyItems = [
-            "Gates self-closing & self-latching", "Gate opens OUTWARD", "No gaps > 4 inches under fence",
-            "Shepherd's Hook on pole", "Ring Buoy with rope", "Emerg. Phone dial tone",
-            "Main Drain covers secure", "Skimmer baskets intact", "No Diving markers", "Handrails secure"
-        ];
-        const sContainer = document.getElementById('checklist-container');
-        safetyItems.forEach(i => {
-            let d = document.createElement('div'); d.className = 'checklist-item';
-            d.onclick = function() { this.classList.toggle('checked'); };
-            d.innerHTML = `<div class="check-circle"></div><span>${i}</span>`;
-            sContainer.appendChild(d);
+        // --- SAFETY CHECKLIST ---
+        const sItems = ["Gates self-closing/latching", "Gate opens OUTWARD", "No gaps > 4in under fence", "Shepherd's Hook present", "Ring Buoy with rope", "Emerg. Phone dial tone", "Main Drain covers secure", "Skimmer baskets intact", "No Diving markers", "Handrails secure"];
+        const sCont = document.getElementById('checklist-container');
+        sItems.forEach(i => {
+            let d=document.createElement('div'); d.className='checklist-item';
+            d.onclick=function(){this.classList.toggle('checked');};
+            d.innerHTML=`<div class="check-circle"></div><span>${i}</span>`;
+            sCont.appendChild(d);
         });
-        function resetSafety() { document.querySelectorAll('.checklist-item').forEach(el => el.classList.remove('checked')); }
+        function resetSafety(){document.querySelectorAll('.checklist-item').forEach(e=>e.classList.remove('checked'));}
 
     </script>
 </body>
