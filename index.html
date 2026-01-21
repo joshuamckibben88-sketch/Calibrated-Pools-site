@@ -3,202 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calibrated Pools | Joshua McKibben</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        /* --- GLOBAL RESET --- */
-        body, html { margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; background-color: #0a192f; color: #e6f1ff; }
-        
-        /* --- 1. HERO SECTION (The Pool Look) --- */
-        .hero {
-            /* Replace the URL below with your own photo if you have one */
-            background: linear-gradient(rgba(10, 25, 47, 0.6), rgba(10, 25, 47, 0.6)), url('https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-        }
-
-        h1 {
-            font-size: 3.5rem; margin: 0; text-transform: uppercase; letter-spacing: 2px;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.5);
-        }
-
-        .tagline {
-            font-size: 1.2rem; margin-top: 20px; color: #e6f1ff; font-weight: 400;
-            background: rgba(0,0,0,0.4); padding: 10px 20px; border-radius: 4px;
-        }
-
-        .scroll-down {
-            margin-top: 50px; font-size: 2rem; animation: bounce 2s infinite; color: #00e5ff;
-        }
-
-        /* --- 2. PRICING SECTION --- */
-        .pricing-container {
-            max-width: 1000px; margin: 0 auto; padding: 80px 20px;
-        }
-
-        .section-header {
-            text-align: center; margin-bottom: 60px;
-        }
-
-        .section-header h2 {
-            color: #00e5ff; font-family: 'Roboto Mono'; font-size: 2rem; margin-bottom: 10px;
-        }
-
-        /* GRID LAYOUT */
-        .grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
-        }
-
-        /* CARD STYLE */
-        .card {
-            background: #112240; padding: 30px; border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: transform 0.2s;
-        }
-        .card:hover { transform: translateY(-5px); border-color: #00e5ff; }
-
-        .card h3 { color: #00e5ff; margin-top: 0; font-family: 'Roboto Mono'; }
-        
-        /* LEVEL BOXES (Level 1 vs Level 2) */
-        .level {
-            background: rgba(0,0,0,0.2); padding: 15px; margin-top: 15px; border-radius: 4px;
-            border-left: 2px solid #555;
-        }
-        .level.pro {
-            background: rgba(0, 229, 255, 0.05); border-left: 2px solid #00e5ff;
-        }
-        
-        .price-tag { float: right; font-weight: bold; color: #00e5ff; font-family: 'Roboto Mono'; }
-        .service-name { font-weight: bold; display: block; margin-bottom: 5px; }
-        
-        .details { font-size: 0.85rem; color: #8892b0; margin: 0; padding-left: 20px; }
-        .details li { margin-bottom: 4px; }
-
-        /* REPAIR LIST */
-        .repair-list {
-            margin-top: 60px; background: #112240; padding: 30px; border-radius: 8px;
-        }
-        .repair-item {
-            display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1); padding: 15px 0;
-        }
-        .repair-item:last-child { border-bottom: none; }
-
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
-    </style>
+    <title>Calibrated Pools | Residential & Commercial Services</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💧</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="hero">
-        <h1>Calibrated Pools</h1>
-        <div class="tagline">Precision Chemistry. CPO Certified Management.<br>Joshua McKibben</div>
-        <div class="scroll-down">↓</div>
-    </div>
-
-    <div class="pricing-container">
-        
-        <div class="section-header">
-            <h2>SERVICE MENU</h2>
-            <p>Transparency in pricing. Excellence in execution.</p>
-        </div>
-
-        <div class="grid">
-            <div class="card">
-                <h3>WEEKLY CALIBRATION</h3>
-                <div class="level">
-                    <span class="price-tag">Quote</span>
-                    <span class="service-name">Level 1: Audit</span>
-                    <ul class="details">
-                        <li>LSI Water Balancing</li>
-                        <li>Equipment Safety Check</li>
-                        <li>Basket Evacuation</li>
-                    </ul>
-                </div>
-                <div class="level pro">
-                    <span class="price-tag">$225+</span>
-                    <span class="service-name">Level 2: Full Service</span>
-                    <ul class="details">
-                        <li>Includes Level 1 Audit</li>
-                        <li>Netting, Brushing, Vacuuming</li>
-                        <li>Filter Pressure Monitoring</li>
-                    </ul>
-                </div>
+    <nav>
+        <div class="logo-container">
+            <div class="water-drop">
+                <div class="crosshair"></div>
             </div>
-
-            <div class="card">
-                <h3>FILTER RESTORATION</h3>
-                <div class="level">
-                    <span class="price-tag">$125</span>
-                    <span class="service-name">Level 1: Clean</span>
-                    <ul class="details">
-                        <li>Hydraulic Debris Flush</li>
-                        <li>Manifold Inspection</li>
-                    </ul>
-                </div>
-                <div class="level pro">
-                    <span class="price-tag">$160</span>
-                    <span class="service-name">Level 2: Restore</span>
-                    <ul class="details">
-                        <li>Includes Level 1 Clean</li>
-                        <li>Enzyme Degreasing Soak</li>
-                        <li>Acid Bath for Scale</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="card">
-                <h3>ALGAE REMEDIATION</h3>
-                <div class="level">
-                    <span class="price-tag">$600+</span>
-                    <span class="service-name">Level 1: Clear</span>
-                    <ul class="details">
-                        <li>3-Day Treatment Cycle</li>
-                        <li>Shock / Floc / Vac-to-Waste</li>
-                    </ul>
-                </div>
-                <div class="level pro">
-                    <span class="price-tag">$800+</span>
-                    <span class="service-name">Level 2: Recovery</span>
-                    <ul class="details">
-                        <li>Includes Level 1 Clear</li>
-                        <li>Heavy Leaf Dredging</li>
-                        <li>Phosphate Remediation</li>
-                    </ul>
-                </div>
+            <div class="logo-text">
+                CALIBRATED <span class="silver-text">POOLS</span>
             </div>
         </div>
+    </nav>
 
-        <div class="repair-list">
-            <h3 style="border-bottom:1px solid #333; padding-bottom:10px; margin-top:0;">REPAIRS & MAINTENANCE</h3>
+    <header class="hero">
+        <div class="glass-panel">
+            <p class="location-tag">SERVING SOUTHEAST TEXAS</p>
+            <div class="accent-line"></div>
             
-            <div class="repair-item">
-                <div><b>Diagnostic Service Call</b><br><span style="font-size:0.8rem; color:#8892b0;">Credited toward repair labor if approved.</span></div>
-                <div style="font-family:'Roboto Mono'; color:#00e5ff; font-weight:bold;">$125.00</div>
+            <h1>PRECISION WATER CHEMISTRY</h1>
+            <p class="subtitle">RESIDENTIAL AND COMMERCIAL POOL AND SPA SERVICES</p>
+            
+            <div class="credentials-box">
+                <p>CERTIFIED POOL & SPA OPERATOR</p>
+                <p class="cert-number">LICENSE NO: C-161853</p>
             </div>
-
-            <div class="repair-item">
-                <div><b>Sand Filter Media Change</b><br><span style="font-size:0.8rem; color:#8892b0;">Removal, Disposal, and #20 Silica Refill.</span></div>
-                <div style="font-family:'Roboto Mono'; color:#00e5ff; font-weight:bold;">~$1,400.00</div>
-            </div>
-
-            <div class="repair-item">
-                <div><b>Equipment Diagnostics</b><br><span style="font-size:0.8rem; color:#8892b0;">Pumps, Heaters, and Automation troubleshooting.</span></div>
-                <div style="font-family:'Roboto Mono'; color:#00e5ff; font-weight:bold;">Quote</div>
+            
+            <div class="cta-group">
+                <a href="mailto:joshua@calibratedpools.com" class="btn primary-btn">REQUEST SERVICE</a>
+                <p class="slogan">SCIENCE-BACKED CLARITY.</p>
             </div>
         </div>
-        
-        <p style="text-align:center; color:#555; font-size:0.8rem; margin-top:40px;">
-            *Chemicals for cleanups billed based on consumption. All services performed by CPO Certified technicians.
-        </p>
+    </header>
 
-    </div>
+    <section class="services-section">
+        <div class="container">
+            <h2>SCOPE OF WORK</h2>
+            <div class="service-grid">
+                
+                <div class="service-card">
+                    <h3>COMMERCIAL TESTING</h3>
+                    <p>Professional water analysis and chemical adjustments for commercial pools and spas. We ensure your facility meets health department standards.</p>
+                </div>
+
+                <div class="service-card">
+                    <h3>ROBOTIC CLEANING</h3>
+                    <p>We utilize advanced robotic cleaners for a more consistent, superior clean compared to manual vacuuming. Your pool floor will be spotless.</p>
+                </div>
+
+                <div class="service-card">
+                    <h3>CHEMICAL BALANCING</h3>
+                    <p>We calibrate water to PHTA standards. Balanced water protects your expensive equipment from corrosion and provides a softer, more enjoyable swimming experience.</p>
+                </div>
+
+                <div class="service-card">
+                    <h3>GREEN-TO-CLEAN</h3>
+                    <p>Heavy-duty recovery for algae-ridden pools. We use professional-grade oxidation and filtration methods to completely restore water clarity and safety.</p>
+                </div>
+
+                <div class="service-card">
+                    <h3>CARTRIDGE FILTER CLEANING</h3>
+                    <p>Deep cleaning of filter elements to remove oils and debris. This reduces pump strain and ensures your water stays crystal clear.</p>
+                </div>
+
+                <div class="service-card">
+                    <h3>SAND FILTER CHANGES</h3>
+                    <p>Removal and replacement of old filter sand. If your pressure is high and water is cloudy, a fresh sand bed restores filtration efficiency.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="chemistry-grid">
+        <div class="container">
+            <h2>IDEAL RANGES</h2>
+            <p class="instruction-text">(HOVER TO REVEAL STANDARDS)</p>
+            
+            <div class="element-grid">
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><span class="symbol">pH</span><span class="name">Acidity</span></div><div class="flip-card-back"><span class="range-label">IDEAL RANGE</span><span class="range-value">7.4 – 7.6</span></div></div></div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><span class="symbol">TA</span><span class="name">Alkalinity</span></div><div class="flip-card-back"><span class="range-label">IDEAL RANGE</span><span class="range-value">80 – 120 <small>ppm</small></span></div></div></div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><span class="symbol">CH</span><span class="name">Calcium</span></div><div class="flip-card-back"><span class="range-label">IDEAL RANGE</span><span class="range-value">200 – 400 <small>ppm</small></span></div></div></div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><span class="symbol">CYA</span><span class="name">Stabilizer</span></div><div class="flip-card-back"><span class="range-label">IDEAL RANGE</span><span class="range-value">30 – 50 <small>ppm</small></span></div></div></div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><span class="symbol">FC</span><span class="name">Free Chlorine</span></div><div class="flip-card-back"><span class="range-label">IDEAL RANGE</span><span class="range-value">2.0 – 4.0 <small>ppm</small></span></div></div></div>
+                <div class="flip-card"><div class="flip-card-inner"><div class="flip-card-front"><span class="symbol">LSI</span><span class="name">Sat. Index</span></div><div class="flip-card-back"><span class="range-label">IDEAL RANGE</span><span class="range-value">-0.3 to +0.3</span></div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <h3>Calibrated Pools</h3>
+            <p class="contact-info">
+                <a href="mailto:joshua@calibratedpools.com">joshua@calibratedpools.com</a> 
+            </p>
+            <p class="small-text">&copy; 2026 Calibrated Pools. All Rights Reserved.</p>
+        </div>
+    </footer>
 
 </body>
 </html>
