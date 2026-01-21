@@ -155,6 +155,13 @@
             width: 24px; height: 24px; border: 2px solid #8892b0; border-radius: 50%;
             margin-right: 15px; display: flex; align-items: center; justify-content: center;
         }
+        
+        /* Side Effects Table */
+        .chem-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.8rem; }
+        .chem-table th { text-align: left; color: var(--primary); padding-bottom: 8px; border-bottom: 1px solid #333; }
+        .chem-table td { padding: 8px 0; color: #a8b2d1; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .chem-name { font-weight: 700; color: #fff; }
+        .chem-effect { color: var(--warning); }
 
     </style>
 </head>
@@ -213,7 +220,6 @@
             <div id="lsi-msg" class="lsi-status">BALANCED</div>
             
             <div id="dosing-plan" style="margin-top:20px;"></div>
-
             <button class="action-btn copy-btn" onclick="copyReport()">📋 COPY REPORT</button>
         </div>
     </div>
@@ -241,7 +247,33 @@
     </div>
 
     <div id="tab-guide" class="section">
-        <h3 style="color:var(--primary); margin-bottom:20px;">DIAGNOSTIC CHEAT SHEET</h3>
+        
+        <h3 style="color:var(--primary); margin-bottom:15px; border-bottom:1px solid #333; padding-bottom:10px;">HIDDEN EFFECTS</h3>
+        <div class="guide-card">
+            <span class="guide-title">WHAT AM I REALLY ADDING?</span>
+            <div class="guide-desc">Every 1 ppm of Chlorine also adds:</div>
+            
+            <table class="chem-table">
+                <tr>
+                    <td><span class="chem-name">Trichlor (Tabs)</span></td>
+                    <td>Adds <span class="chem-effect">0.6 ppm CYA</span><br>Lowers pH drastically</td>
+                </tr>
+                <tr>
+                    <td><span class="chem-name">Dichlor (Shock)</span></td>
+                    <td>Adds <span class="chem-effect">0.9 ppm CYA</span><br>Lowers pH slightly</td>
+                </tr>
+                <tr>
+                    <td><span class="chem-name">Cal Hypo</span></td>
+                    <td>Adds <span class="chem-effect">0.7 ppm Calcium</span><br>Raises pH slightly</td>
+                </tr>
+                <tr>
+                    <td><span class="chem-name">Liquid / Bleach</span></td>
+                    <td>Adds <span class="chem-effect">1.6 ppm Salt</span><br>Raises pH temporarily</td>
+                </tr>
+            </table>
+        </div>
+
+        <h3 style="color:var(--primary); margin:30px 0 15px 0; border-bottom:1px solid #333; padding-bottom:10px;">DIAGNOSTICS</h3>
         <div class="guide-card" style="border-color: #00e676;"><span class="guide-title">GREEN ALGAE</span><div style="color:#aaa; font-size:0.9rem;">Free floating. Brush walls, double shock, clean filter.</div></div>
         <div class="guide-card" style="border-color: #ffeb3b;"><span class="guide-title">MUSTARD ALGAE</span><div style="color:#aaa; font-size:0.9rem;">Yellow dust in shade. Resistant to Chlorine. Needs Sodium Bromide ("Yellow Out").</div></div>
         <div class="guide-card" style="border-color: #212121;"><span class="guide-title">BLACK ALGAE</span><div style="color:#aaa; font-size:0.9rem;">Pinhead spots with roots. Use Steel brush. Rub with Trichlor tab.</div></div>
@@ -265,7 +297,6 @@
 
         // --- LSI & DOSING LOGIC ---
         function calculateLSI() {
-            // Get Values
             let vol = parseFloat(document.getElementById('vol').value) || 15000;
             let fc = parseFloat(document.getElementById('fc').value) || 0;
             let ph = parseFloat(document.getElementById('ph').value);
@@ -277,7 +308,6 @@
 
             if(!ph || !temp || !ch || !ta) { alert("Please enter pH, Temp, Calcium, and Alkalinity."); return; }
 
-            // LSI Calculation
             let tf = (temp * 0.01) - 0.1;
             let cf = Math.log10(ch) - 0.4;
             let carbonateAlk = ta - (cya * 0.30);
@@ -286,7 +316,6 @@
             let tdsFactor = (tds > 1000) ? 12.2 : 12.1;
             let lsi = ph + tf + cf + af - tdsFactor;
 
-            // Render LSI
             let resultBox = document.getElementById('result');
             let valDiv = document.getElementById('lsi-val');
             let msgDiv = document.getElementById('lsi-msg');
@@ -294,53 +323,45 @@
             
             resultBox.style.display = "block";
             valDiv.innerText = lsi.toFixed(2);
-            doseDiv.innerHTML = ""; // Clear old doses
-
-            let status = "BALANCED";
+            doseDiv.innerHTML = ""; 
 
             if (lsi >= -0.3 && lsi <= 0.3) {
                 valDiv.style.color = "#00e676"; msgDiv.innerText = "BALANCED";
             } else if (lsi < -0.3) {
-                valDiv.style.color = "#ff5252"; msgDiv.innerText = "CORROSIVE"; status = "CORROSIVE";
+                valDiv.style.color = "#ff5252"; msgDiv.innerText = "CORROSIVE";
             } else {
-                valDiv.style.color = "#ffab00"; msgDiv.innerText = "SCALE FORMING"; status = "SCALE";
+                valDiv.style.color = "#ffab00"; msgDiv.innerText = "SCALE FORMING";
             }
 
-            // --- SMART DOSING LOGIC ---
-            // Volume Factor (per 10k gallons)
+            // Dosing Logic
             let vFactor = vol / 10000;
 
-            // 1. Alkalinity (Target 100)
             if (ta < 80) {
                 let diff = 100 - ta;
-                let lbs = (diff / 10) * 1.5 * vFactor; // 1.5lbs raises 10ppm per 10k
+                let lbs = (diff / 10) * 1.5 * vFactor;
                 addDose("Low Alkalinity", `Add ${lbs.toFixed(1)} lbs Sodium Bicarb`);
             } else if (ta > 140) {
-                 addDose("High Alkalinity", "Add Acid to lower Alk (will lower pH too). Aerate to raise pH back.");
+                 addDose("High Alkalinity", "Add Acid to lower Alk.");
             }
 
-            // 2. Calcium (Target 300)
             if (ch < 250) {
                 let diff = 300 - ch;
-                let lbs = (diff / 10) * 1.25 * vFactor; // 1.25lbs raises 10ppm per 10k
+                let lbs = (diff / 10) * 1.25 * vFactor;
                 addDose("Low Calcium", `Add ${lbs.toFixed(1)} lbs Calcium Chloride`);
             }
 
-            // 3. CYA (Target 50)
             if (cya < 30) {
                 let diff = 50 - cya;
-                let lbs = (diff / 10) * 1.3 * vFactor; // 1.3lbs raises 10ppm per 10k
+                let lbs = (diff / 10) * 1.3 * vFactor;
                 addDose("Low Stabilizer", `Add ${lbs.toFixed(1)} lbs CYA / Conditioner`);
             }
 
-            // 4. pH (Target 7.5) - Simplified Acid Demand
             if (ph > 7.8) {
-                // Rough estimate: 1qt (32oz) muriatic lowers pH ~0.2 per 10k gal (varies w/ Alk)
                 let diff = ph - 7.5;
                 let quarts = (diff / 0.2) * 1.0 * vFactor;
                 addDose("High pH", `Add approx ${quarts.toFixed(1)} quarts Muriatic Acid`);
             } else if (ph < 7.2) {
-                addDose("Low pH", "Add Soda Ash (Sodium Carbonate) or Bicarb if Alk is also low.");
+                addDose("Low pH", "Add Soda Ash or Bicarb if Alk is low.");
             }
         }
 
@@ -365,7 +386,6 @@
             navigator.clipboard.writeText(report).then(() => alert("Report copied! Open texts and paste."));
         }
 
-        // --- VOLUME CALC ---
         function calcVolume() {
             let s = document.getElementById('pool-shape').value;
             let l = parseFloat(document.getElementById('len').value)||0; 
@@ -376,11 +396,9 @@
             else if(s==='round') v = 3.14*(l/2)*(l/2)*d*7.5;
             else v = l*w*d*7.0;
             document.getElementById('vol-display').innerText = Math.round(v).toLocaleString() + " gal";
-            // Auto-update dosing vol
             document.getElementById('vol').value = Math.round(v);
         }
 
-        // --- SAFETY CHECKLIST ---
         const sItems = ["Gates self-closing/latching", "Gate opens OUTWARD", "No gaps > 4in under fence", "Shepherd's Hook present", "Ring Buoy with rope", "Emerg. Phone dial tone", "Main Drain covers secure", "Skimmer baskets intact", "No Diving markers", "Handrails secure"];
         const sCont = document.getElementById('checklist-container');
         sItems.forEach(i => {
