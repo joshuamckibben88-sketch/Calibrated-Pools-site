@@ -118,7 +118,15 @@
             box-shadow: 0 4px 15px rgba(0, 229, 255, 0.2);
         }
         
-        .copy-btn { background: #64ffda; margin-top: 10px; }
+        .copy-btn { 
+            background: #112240; 
+            border: 1px solid var(--primary); 
+            color: var(--primary);
+            margin-top: 10px;
+            padding: 12px;
+            font-size: 0.9rem;
+        }
+        .copy-btn:active { background: rgba(0, 229, 255, 0.1); }
 
         /* Results & Dosing */
         .result-box {
@@ -215,19 +223,25 @@
 
         <button class="action-btn" onclick="calculateLSI()">CALCULATE & DOSE</button>
 
+        <button class="action-btn copy-btn" onclick="copyReadings()">📄 COPY TEST RESULTS</button>
+
         <div id="result" class="result-box">
             <div id="lsi-val" class="lsi-score">0.00</div>
             <div id="lsi-msg" class="lsi-status">BALANCED</div>
             
             <div id="dosing-plan" style="margin-top:20px;"></div>
-            <button class="action-btn copy-btn" onclick="copyReport()">📋 COPY REPORT</button>
+            
+            <button class="action-btn copy-btn" onclick="copyDosing()">💊 COPY DOSING PLAN</button>
         </div>
     </div>
 
     <div id="tab-safety" class="section">
         <p style="text-align: center; color: #8892b0; font-size: 0.8rem; margin-bottom: 20px;">SITE SAFETY AUDIT</p>
         <div id="checklist-container"></div>
-        <button class="action-btn" style="background:transparent; border:1px solid var(--danger); color:var(--danger)" onclick="resetSafety()">RESET FORM</button>
+        
+        <button class="action-btn copy-btn" onclick="copySafety()">🛡️ COPY SAFETY REPORT</button>
+        
+        <button class="action-btn" style="background:transparent; border:1px solid var(--danger); color:var(--danger); margin-top:20px;" onclick="resetSafety()">RESET FORM</button>
     </div>
 
     <div id="tab-vol" class="section">
@@ -249,54 +263,24 @@
     <div id="tab-guide" class="section">
         
         <h3 style="color:var(--primary); margin-bottom:15px; border-bottom:1px solid #333; padding-bottom:10px;">SENSORY CHECKS</h3>
-        
         <div class="guide-card" style="border-color: #ff5252;">
             <span class="guide-title">STRONG "CHLORINE" SMELL</span>
-            <div class="guide-desc">
-                <strong>Diagnosis:</strong> High Combined Chlorine (Chloramines).<br>
-                <strong>Reality:</strong> You have <em>too little</em> free chlorine.<br>
-                <strong>Fix:</strong> Shock to "Break Point" (10x the CC level).
-            </div>
+            <div class="guide-desc"><strong>Diagnosis:</strong> High Combined Chlorine.<br><strong>Fix:</strong> Shock to "Break Point".</div>
         </div>
-
         <div class="guide-card" style="border-color: #ffab00;">
-            <span class="guide-title">BURNING EYES / SKIN</span>
-            <div class="guide-desc">
-                <strong>Diagnosis:</strong> Usually pH imbalance.<br>
-                <strong>Reality:</strong> Human eyes are pH 7.5. <br>
-                <strong>Fix:</strong> Check pH first. If pH is 7.4-7.6, check for High Chloramines.
-            </div>
+            <span class="guide-title">BURNING EYES</span>
+            <div class="guide-desc"><strong>Diagnosis:</strong> pH Imbalance (not chlorine).<br><strong>Fix:</strong> Check pH (Ideal: 7.5).</div>
         </div>
         
         <h3 style="color:var(--primary); margin:30px 0 15px 0; border-bottom:1px solid #333; padding-bottom:10px;">HIDDEN EFFECTS</h3>
         <div class="guide-card">
-            <span class="guide-title">WHAT AM I REALLY ADDING?</span>
-            <div class="guide-desc">Every 1 ppm of Chlorine also adds:</div>
-            
             <table class="chem-table">
-                <tr>
-                    <td><span class="chem-name">Trichlor (Tabs)</span></td>
-                    <td>Adds <span class="chem-effect">0.6 ppm CYA</span><br>Lowers pH drastically</td>
-                </tr>
-                <tr>
-                    <td><span class="chem-name">Dichlor (Shock)</span></td>
-                    <td>Adds <span class="chem-effect">0.9 ppm CYA</span><br>Lowers pH slightly</td>
-                </tr>
-                <tr>
-                    <td><span class="chem-name">Cal Hypo</span></td>
-                    <td>Adds <span class="chem-effect">0.7 ppm Calcium</span><br>Raises pH slightly</td>
-                </tr>
-                <tr>
-                    <td><span class="chem-name">Liquid / Bleach</span></td>
-                    <td>Adds <span class="chem-effect">1.6 ppm Salt</span><br>Raises pH temporarily</td>
-                </tr>
+                <tr><td><span class="chem-name">Trichlor</span></td><td>+ <span class="chem-effect">0.6 ppm CYA</span> / 1ppm Cl</td></tr>
+                <tr><td><span class="chem-name">Dichlor</span></td><td>+ <span class="chem-effect">0.9 ppm CYA</span> / 1ppm Cl</td></tr>
+                <tr><td><span class="chem-name">Cal Hypo</span></td><td>+ <span class="chem-effect">0.7 ppm Calc</span> / 1ppm Cl</td></tr>
+                <tr><td><span class="chem-name">Liquid</span></td><td>+ <span class="chem-effect">1.6 ppm Salt</span> / 1ppm Cl</td></tr>
             </table>
         </div>
-
-        <h3 style="color:var(--primary); margin:30px 0 15px 0; border-bottom:1px solid #333; padding-bottom:10px;">ALGAE ID</h3>
-        <div class="guide-card" style="border-color: #00e676;"><span class="guide-title">GREEN ALGAE</span><div style="color:#aaa; font-size:0.9rem;">Free floating. Brush walls, double shock, clean filter.</div></div>
-        <div class="guide-card" style="border-color: #ffeb3b;"><span class="guide-title">MUSTARD ALGAE</span><div style="color:#aaa; font-size:0.9rem;">Yellow dust in shade. Resistant to Chlorine. Needs Sodium Bromide.</div></div>
-        <div class="guide-card" style="border-color: #212121;"><span class="guide-title">BLACK ALGAE</span><div style="color:#aaa; font-size:0.9rem;">Pinhead spots with roots. Use Steel brush. Rub with Trichlor tab.</div></div>
     </div>
 
     <div class="nav-bar">
@@ -316,6 +300,8 @@
         }
 
         // --- LSI & DOSING LOGIC ---
+        let currentDosingPlan = "Water Balanced."; // Global var to store dosing text
+
         function calculateLSI() {
             let vol = parseFloat(document.getElementById('vol').value) || 15000;
             let fc = parseFloat(document.getElementById('fc').value) || 0;
@@ -344,9 +330,11 @@
             resultBox.style.display = "block";
             valDiv.innerText = lsi.toFixed(2);
             doseDiv.innerHTML = ""; 
+            currentDosingPlan = ""; // Reset
 
             if (lsi >= -0.3 && lsi <= 0.3) {
                 valDiv.style.color = "#00e676"; msgDiv.innerText = "BALANCED";
+                addDose("Status", "Water is balanced.");
             } else if (lsi < -0.3) {
                 valDiv.style.color = "#ff5252"; msgDiv.innerText = "CORROSIVE";
             } else {
@@ -390,21 +378,63 @@
             d.className = 'dose-card';
             d.innerHTML = `<span class="dose-title">${title}</span><span class="dose-text">${text}</span>`;
             document.getElementById('dosing-plan').appendChild(d);
+            
+            // Append to global text for copy
+            currentDosingPlan += `• ${title}: ${text}\n`;
         }
 
-        function copyReport() {
-            let ph = document.getElementById('ph').value;
-            let fc = document.getElementById('fc').value;
-            let ta = document.getElementById('ta').value;
-            let ch = document.getElementById('ch').value;
+        // --- COPY FUNCTIONS ---
+        
+        // 1. Copy Initial Readings
+        function copyReadings() {
+            let d = new Date().toLocaleDateString();
+            let r = `POOL REPORT - ${d}\n\nINITIAL READINGS:\n`;
+            r += `• Free Chlorine: ${document.getElementById('fc').value}\n`;
+            r += `• pH: ${document.getElementById('ph').value}\n`;
+            r += `• Alkalinity: ${document.getElementById('ta').value}\n`;
+            r += `• Calcium: ${document.getElementById('ch').value}\n`;
+            r += `• CYA: ${document.getElementById('cya').value}\n`;
+            r += `• TDS/Salt: ${document.getElementById('tds').value}\n`;
+            
+            navigator.clipboard.writeText(r).then(() => alert("Readings Copied!"));
+        }
+
+        // 2. Copy Dosing Plan
+        function copyDosing() {
             let lsi = document.getElementById('lsi-val').innerText;
             let status = document.getElementById('lsi-msg').innerText;
-            let date = new Date().toLocaleDateString();
-
-            let report = `SERVICE LOG - ${date}\nStatus: ${status} (LSI: ${lsi})\n\nREADINGS:\nCl: ${fc}\npH: ${ph}\nAlk: ${ta}\nCalc: ${ch}\n\nWater balanced to LSI standards.\n- Calibrated Pools`;
+            let r = `TREATMENT LOG\nLSI Status: ${status} (${lsi})\n\nACTIONS TAKEN:\n`;
             
-            navigator.clipboard.writeText(report).then(() => alert("Report copied! Open texts and paste."));
+            if(currentDosingPlan === "") r += "• Water Balanced. No chemicals added.\n";
+            else r += currentDosingPlan;
+            
+            r += `\n- Calibrated Pools`;
+            navigator.clipboard.writeText(r).then(() => alert("Dosing Plan Copied!"));
         }
+
+        // 3. Copy Safety Audit
+        function copySafety() {
+            let items = document.querySelectorAll('.checklist-item');
+            let passed = [];
+            let failed = [];
+            
+            items.forEach(item => {
+                let text = item.innerText;
+                if (item.classList.contains('checked')) passed.push(text);
+                else failed.push(text);
+            });
+
+            let r = `SAFETY AUDIT REPORT\n\n✅ PASSED:\n`;
+            if(passed.length === 0) r += "(None)\n";
+            else passed.forEach(p => r += `• ${p}\n`);
+
+            r += `\n⚠️ NEEDS ATTENTION:\n`;
+            if(failed.length === 0) r += "(All Clear)\n";
+            else failed.forEach(f => r += `• ${f}\n`);
+            
+            navigator.clipboard.writeText(r).then(() => alert("Safety Report Copied!"));
+        }
+
 
         function calcVolume() {
             let s = document.getElementById('pool-shape').value;
