@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Calibrated Ops | Tech Tool</title>
+    <title>Calibrated Ops | Pro</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚙️</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <style>
@@ -12,6 +12,7 @@
             --bg-color: #0a192f;
             --card-bg: #112240;
             --primary: #00e5ff;
+            --secondary: #8892b0;
             --danger: #ff5252;
             --success: #00e676;
             --text: #e6f1ff;
@@ -23,6 +24,7 @@
             font-family: 'Montserrat', sans-serif;
             margin: 0;
             padding: 0;
+            padding-bottom: 80px;
             -webkit-font-smoothing: antialiased;
         }
 
@@ -40,177 +42,119 @@
             align-items: center;
         }
 
-        h1 {
-            margin: 0;
-            font-size: 1.2rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            font-family: 'Roboto Mono', monospace;
-        }
+        h1 { margin: 0; font-size: 1.1rem; font-weight: 700; font-family: 'Roboto Mono', monospace; }
+        .home-link { text-decoration: none; color: var(--primary); font-size: 1.5rem; }
 
-        .home-link {
-            text-decoration: none;
-            color: var(--primary);
-            font-size: 1.5rem;
-        }
-
-        /* Tabs */
-        .tab-container {
-            display: flex;
+        /* Navigation Bar (Bottom) */
+        .nav-bar {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
             background: #020c1b;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            z-index: 100;
         }
 
-        .tab {
-            flex: 1;
-            padding: 15px;
-            text-align: center;
-            background: transparent;
+        .nav-item {
             color: #8892b0;
-            border: none;
-            font-family: 'Roboto Mono', monospace;
-            font-weight: 700;
+            text-align: center;
+            font-size: 0.7rem;
             cursor: pointer;
-            border-bottom: 3px solid transparent;
+            flex: 1;
         }
 
-        .tab.active {
-            color: var(--primary);
-            border-bottom: 3px solid var(--primary);
-            background: rgba(0, 229, 255, 0.05);
-        }
+        .nav-item.active { color: var(--primary); }
+        .nav-icon { font-size: 1.2rem; display: block; margin-bottom: 4px; }
 
-        /* Content Sections */
-        .section {
-            display: none;
-            padding: 20px;
-            max-width: 600px;
-            margin: 0 auto;
-            padding-bottom: 80px; /* Space for scroll */
-        }
-
+        /* Sections */
+        .section { display: none; padding: 20px; max-width: 600px; margin: 0 auto; }
         .section.active { display: block; }
 
-        /* Inputs */
+        /* Inputs & Cards */
         .input-group {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             background: var(--card-bg);
-            padding: 10px 15px;
+            padding: 12px 15px;
             border-radius: 8px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
-        label {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #ccd6f6;
-        }
-
-        input[type="number"] {
+        label { font-size: 0.9rem; font-weight: 600; color: #ccd6f6; }
+        
+        input, select {
             background: transparent;
             border: none;
             color: var(--primary);
             font-family: 'Roboto Mono', monospace;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             text-align: right;
-            width: 100px;
             outline: none;
+            width: 120px;
         }
-        
-        input[type="number"]::placeholder { color: #445; }
 
-        /* Calc Button */
+        /* Buttons */
         .action-btn {
             width: 100%;
-            padding: 18px;
-            margin-top: 20px;
+            padding: 16px;
+            margin-top: 15px;
             background: var(--primary);
             color: #0a192f;
             border: none;
             border-radius: 8px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 700;
             font-family: 'Roboto Mono', monospace;
             text-transform: uppercase;
-            letter-spacing: 1px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 229, 255, 0.2);
         }
+        
+        .copy-btn { background: #64ffda; margin-top: 10px; }
+        .copy-btn:active { background: #00bfa5; }
 
-        .action-btn:active { transform: scale(0.98); }
-
-        /* Results Box */
-        .result-box {
-            margin-top: 25px;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            display: none; /* Hidden by default */
-        }
-
-        .lsi-score {
-            font-size: 3rem;
-            font-weight: 700;
-            font-family: 'Roboto Mono', monospace;
-            margin: 10px 0;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .lsi-status {
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.9rem;
-        }
-
-        /* Safety Checklist Styling */
-        .checklist-item {
+        /* Guide Cards */
+        .guide-card {
             background: var(--card-bg);
-            margin-bottom: 10px;
+            border-left: 4px solid var(--primary);
             padding: 15px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            transition: 0.2s;
-            border: 1px solid rgba(255,255,255,0.05);
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+        .guide-title { font-weight: 700; color: var(--text); margin-bottom: 5px; display: block; }
+        .guide-desc { font-size: 0.85rem; color: #a8b2d1; line-height: 1.5; }
+        
+        /* Volume Calculator */
+        .vol-result {
+            text-align: center; font-family: 'Roboto Mono', monospace; 
+            font-size: 2rem; color: var(--primary); margin: 20px 0;
         }
 
-        .checklist-item.checked {
-            background: rgba(0, 230, 118, 0.1);
-            border-color: var(--success);
+        /* LSI Results */
+        .result-box {
+            margin-top: 25px; padding: 20px; border-radius: 8px; 
+            text-align: center; display: none;
         }
+        .lsi-score { font-size: 3rem; font-weight: 700; font-family: 'Roboto Mono', monospace; }
+        .lsi-status { font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; }
 
+        /* Safety Items */
+        .checklist-item {
+            background: var(--card-bg); margin-bottom: 10px; padding: 15px;
+            border-radius: 8px; display: flex; align-items: center; cursor: pointer;
+        }
+        .checklist-item.checked { border: 1px solid var(--success); }
         .check-circle {
-            width: 24px;
-            height: 24px;
-            border: 2px solid #8892b0;
-            border-radius: 50%;
-            margin-right: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 24px; height: 24px; border: 2px solid #8892b0; border-radius: 50%;
+            margin-right: 15px; display: flex; align-items: center; justify-content: center;
         }
-
-        .checklist-item.checked .check-circle {
-            background: var(--success);
-            border-color: var(--success);
-            color: #0a192f;
-        }
-
-        .checklist-item.checked .check-circle::after {
-            content: '✓';
-            font-weight: 700;
-        }
-
-        .reset-btn {
-            background: transparent;
-            border: 1px solid var(--danger);
-            color: var(--danger);
-            margin-top: 30px;
-        }
+        .checklist-item.checked .check-circle { background: var(--success); border-color: var(--success); color: #000; }
+        .checklist-item.checked .check-circle::after { content: '✓'; font-weight: 700; }
 
     </style>
 </head>
@@ -221,70 +165,102 @@
         <a href="index.html" class="home-link">✕</a>
     </header>
 
-    <div class="tab-container">
-        <button class="tab active" onclick="switchTab('calc')">LSI CALC</button>
-        <button class="tab" onclick="switchTab('safety')">SAFETY</button>
-    </div>
+    <div id="tab-lsi" class="section active">
+        <div class="input-group"><label>pH</label><input type="number" id="ph" placeholder="7.5" step="0.1"></div>
+        <div class="input-group"><label>Water Temp (°F)</label><input type="number" id="temp" placeholder="80" value="80"></div>
+        <div class="input-group"><label>Calcium (CH)</label><input type="number" id="ch" placeholder="300" step="10"></div>
+        <div class="input-group"><label>Alkalinity (TA)</label><input type="number" id="ta" placeholder="100" step="10"></div>
+        <div class="input-group"><label>CYA (Stab)</label><input type="number" id="cya" placeholder="50" step="10"></div>
+        <div class="input-group"><label>TDS / Salt</label><input type="number" id="tds" placeholder="1000" step="100"></div>
 
-    <div id="calc" class="section active">
-        
-        <div class="input-group">
-            <label>pH</label>
-            <input type="number" id="ph" placeholder="7.5" step="0.1">
-        </div>
-        <div class="input-group">
-            <label>Water Temp (°F)</label>
-            <input type="number" id="temp" placeholder="80" value="80">
-        </div>
-        <div class="input-group">
-            <label>Calcium (CH)</label>
-            <input type="number" id="ch" placeholder="300" step="10">
-        </div>
-        <div class="input-group">
-            <label>Alkalinity (TA)</label>
-            <input type="number" id="ta" placeholder="100" step="10">
-        </div>
-        <div class="input-group">
-            <label>CYA (Stabilizer)</label>
-            <input type="number" id="cya" placeholder="50" step="10">
-        </div>
-        <div class="input-group">
-            <label>TDS / Salt</label>
-            <input type="number" id="tds" placeholder="1000" step="100">
-        </div>
-
-        <button class="action-btn" onclick="calculateLSI()">CALCULATE LSI</button>
+        <button class="action-btn" onclick="calculateLSI()">CALCULATE</button>
 
         <div id="result" class="result-box">
             <div id="lsi-val" class="lsi-score">0.00</div>
             <div id="lsi-msg" class="lsi-status">BALANCED</div>
-            <p id="lsi-desc" style="font-size:0.8rem; margin-top:10px; opacity:0.8;"></p>
+            <p id="lsi-desc" style="font-size:0.8rem; margin:10px 0; opacity:0.8;"></p>
+            
+            <button class="action-btn copy-btn" onclick="copyReport()">📋 COPY REPORT FOR TEXT</button>
         </div>
-
     </div>
 
-    <div id="safety" class="section">
+    <div id="tab-safety" class="section">
         <p style="text-align: center; color: #8892b0; font-size: 0.8rem; margin-bottom: 20px;">SITE SAFETY AUDIT</p>
-        
-        <div id="checklist-container">
-            </div>
+        <div id="checklist-container"></div>
+        <button class="action-btn" style="background:transparent; border:1px solid var(--danger); color:var(--danger)" onclick="resetSafety()">RESET FORM</button>
+    </div>
 
-        <button class="action-btn reset-btn" onclick="resetSafety()">RESET FORM</button>
+    <div id="tab-vol" class="section">
+        <div class="input-group">
+            <label>Shape</label>
+            <select id="pool-shape" style="text-align:right;">
+                <option value="rect">Rectangle</option>
+                <option value="round">Round</option>
+                <option value="kidney">Kidney/Oval</option>
+            </select>
+        </div>
+        <div class="input-group"><label>Length (ft)</label><input type="number" id="len"></div>
+        <div class="input-group"><label>Width (ft)</label><input type="number" id="wid"></div>
+        <div class="input-group"><label>Avg Depth (ft)</label><input type="number" id="depth"></div>
+        
+        <button class="action-btn" onclick="calcVolume()">CALCULATE GALLONS</button>
+        <div id="vol-display" class="vol-result">0 gal</div>
+    </div>
+
+    <div id="tab-guide" class="section">
+        <h3 style="color:var(--primary); margin-bottom:20px;">DIAGNOSTIC CHEAT SHEET</h3>
+        
+        <div class="guide-card" style="border-color: #00e676;">
+            <span class="guide-title">GREEN ALGAE</span>
+            <div class="guide-desc">Free floating, clouds water fast.<br><strong>Fix:</strong> Brush walls, double shock (chlorine), clean filter.</div>
+        </div>
+        
+        <div class="guide-card" style="border-color: #ffeb3b;">
+            <span class="guide-title">MUSTARD (YELLOW) ALGAE</span>
+            <div class="guide-desc">Clings to walls (shade side), looks like pollen.<br><strong>Fix:</strong> Very chlorine resistant. Needs "Yellow Out" (Sodium Bromide) + High Chlorine.</div>
+        </div>
+
+        <div class="guide-card" style="border-color: #212121;">
+            <span class="guide-title">BLACK ALGAE</span>
+            <div class="guide-desc">Pinhead sized spots, has roots into plaster.<br><strong>Fix:</strong> Use Stainless Steel brush to break heads. Rub with Trichlor tab. Shock heavily.</div>
+        </div>
+
+        <div class="guide-card" style="border-color: #e0f7fa;">
+            <span class="guide-title">CLOUDY WATER</span>
+            <div class="guide-desc">
+                <strong>1. Filtration:</strong> Check pressure. Backwash if >10psi over clean.<br>
+                <strong>2. Chemistry:</strong> High pH/Alk can cause calcium clouding.<br>
+                <strong>3. Early Algae:</strong> Water looks "dull" before turning green. Shock it.
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-bar">
+        <div class="nav-item active" onclick="switchTab('tab-lsi', this)">
+            <span class="nav-icon">⚗️</span>CHEMISTRY
+        </div>
+        <div class="nav-item" onclick="switchTab('tab-safety', this)">
+            <span class="nav-icon">🛡️</span>SAFETY
+        </div>
+        <div class="nav-item" onclick="switchTab('tab-vol', this)">
+            <span class="nav-icon">📏</span>VOLUME
+        </div>
+        <div class="nav-item" onclick="switchTab('tab-guide', this)">
+            <span class="nav-icon">📖</span>GUIDE
+        </div>
     </div>
 
     <script>
-        // --- TABS LOGIC ---
-        function switchTab(tabId) {
-            document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
-            
+        // --- NAVIGATION ---
+        function switchTab(tabId, el) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
-            event.target.classList.add('active');
+            if(el) el.classList.add('active');
         }
 
-        // --- LSI CALCULATOR LOGIC ---
+        // --- LSI & REPORT LOGIC ---
         function calculateLSI() {
-            // 1. Get Values
             let ph = parseFloat(document.getElementById('ph').value);
             let temp = parseFloat(document.getElementById('temp').value);
             let ch = parseFloat(document.getElementById('ch').value);
@@ -292,32 +268,17 @@
             let cya = parseFloat(document.getElementById('cya').value) || 0;
             let tds = parseFloat(document.getElementById('tds').value) || 0;
 
-            if(!ph || !temp || !ch || !ta) {
-                alert("Please fill in pH, Temp, Calcium, and Alkalinity.");
-                return;
-            }
+            if(!ph || !temp || !ch || !ta) { alert("Enter basic readings first."); return; }
 
-            // 2. Calculate Factors (Standard Pool Industry Approximation)
-            
-            // Temperature Factor: (TempF * 0.01) - 0.1 is a very close linear approx for pool ranges (60-100F)
-            let tf = (temp * 0.01) - 0.1; 
-            
-            // Calcium Factor: log10(CH) - 0.4 (Approx fit for 200-400 range)
+            let tf = (temp * 0.01) - 0.1;
             let cf = Math.log10(ch) - 0.4;
-            
-            // Alkalinity Factor: log10(Corrected Alk)
-            // CYA Correction: Subtract roughly 1/3 of CYA from TA (at standard pH)
             let carbonateAlk = ta - (cya * 0.30);
-            if (carbonateAlk < 1) carbonateAlk = 1; // Prevent log errors
+            if (carbonateAlk < 1) carbonateAlk = 1;
             let af = Math.log10(carbonateAlk);
-            
-            // TDS Penalty: 12.1 is constant, adjust to 12.2 if Salt > 1000
             let tdsFactor = (tds > 1000) ? 12.2 : 12.1;
 
-            // 3. The Formula
             let lsi = ph + tf + cf + af - tdsFactor;
             
-            // 4. Display Results
             let resultBox = document.getElementById('result');
             let valDiv = document.getElementById('lsi-val');
             let msgDiv = document.getElementById('lsi-msg');
@@ -326,63 +287,62 @@
             resultBox.style.display = "block";
             valDiv.innerText = lsi.toFixed(2);
 
-            // Color Coding
             if (lsi >= -0.3 && lsi <= 0.3) {
-                resultBox.style.backgroundColor = "rgba(0, 230, 118, 0.15)";
-                resultBox.style.border = "1px solid #00e676";
-                valDiv.style.color = "#00e676";
-                msgDiv.innerText = "PERFECTLY BALANCED";
-                descDiv.innerText = "Water is neutral. Safe for plaster and equipment.";
+                valDiv.style.color = "#00e676"; msgDiv.innerText = "BALANCED";
+                descDiv.innerText = "Water is perfect.";
             } else if (lsi < -0.3) {
-                resultBox.style.backgroundColor = "rgba(255, 82, 82, 0.15)";
-                resultBox.style.border = "1px solid #ff5252";
-                valDiv.style.color = "#ff5252";
-                msgDiv.innerText = "CORROSIVE (ETCHING)";
-                descDiv.innerText = "Water is aggressive. It will eat plaster and corrode heater coils. Add Bicarb or Calcium.";
+                valDiv.style.color = "#ff5252"; msgDiv.innerText = "CORROSIVE";
+                descDiv.innerText = "Risk of etching. Add Bicarb.";
             } else {
-                resultBox.style.backgroundColor = "rgba(255, 171, 0, 0.15)";
-                resultBox.style.border = "1px solid #ffab00";
-                valDiv.style.color = "#ffab00";
-                msgDiv.innerText = "SCALE FORMING";
-                descDiv.innerText = "Water is depositing calcium. Risk of clogged pipes and rough surfaces. Lower pH.";
+                valDiv.style.color = "#ffab00"; msgDiv.innerText = "SCALE FORMING";
+                descDiv.innerText = "Risk of scale. Lower pH.";
             }
         }
 
-        // --- SAFETY CHECKLIST LOGIC ---
-        const safetyItems = [
-            "Gates are self-closing & self-latching",
-            "Gate opens OUTWARD (away from pool)",
-            "No gaps > 4 inches under fence",
-            "Shepherd's Hook attached to pole",
-            "Ring Buoy with throw rope present",
-            "Emergency Phone has dial tone",
-            "Main Drain covers secure (VGB)",
-            "Skimmer baskets intact",
-            "No Diving markers visible",
-            "Handrails secure (no wobble)"
-        ];
+        function copyReport() {
+            let ph = document.getElementById('ph').value;
+            let ch = document.getElementById('ch').value;
+            let ta = document.getElementById('ta').value;
+            let lsi = document.getElementById('lsi-val').innerText;
+            let status = document.getElementById('lsi-msg').innerText;
+            let date = new Date().toLocaleDateString();
 
-        function renderSafety() {
-            const container = document.getElementById('checklist-container');
-            container.innerHTML = '';
-            safetyItems.forEach((item, index) => {
-                let div = document.createElement('div');
-                div.className = 'checklist-item';
-                div.onclick = function() { this.classList.toggle('checked'); };
-                div.innerHTML = `
-                    <div class="check-circle"></div>
-                    <span>${item}</span>
-                `;
-                container.appendChild(div);
+            let report = `SERVICE LOG - ${date}\nStatus: ${status} (LSI: ${lsi})\n\nREADINGS:\npH: ${ph}\nAlk: ${ta}\nCalc: ${ch}\n\nWater balanced to LSI standards.\n- Calibrated Pools`;
+
+            navigator.clipboard.writeText(report).then(() => {
+                alert("Report copied! Open text messages and paste.");
             });
         }
 
-        function resetSafety() {
-            document.querySelectorAll('.checklist-item').forEach(el => el.classList.remove('checked'));
+        // --- VOLUME CALCULATOR ---
+        function calcVolume() {
+            let shape = document.getElementById('pool-shape').value;
+            let len = parseFloat(document.getElementById('len').value) || 0;
+            let wid = parseFloat(document.getElementById('wid').value) || 0;
+            let depth = parseFloat(document.getElementById('depth').value) || 0;
+            let vol = 0;
+
+            if (shape === 'rect') { vol = len * wid * depth * 7.5; }
+            else if (shape === 'round') { vol = 3.14 * (len/2) * (len/2) * depth * 7.5; } // Use Length as Diameter
+            else { vol = len * wid * depth * 7.0; } // Kidney avg
+
+            document.getElementById('vol-display').innerText = Math.round(vol).toLocaleString() + " gal";
         }
 
-        // Initialize
-        renderSafety();
+        // --- SAFETY INIT ---
+        const safetyItems = [
+            "Gates self-closing & self-latching", "Gate opens OUTWARD", "No gaps > 4 inches under fence",
+            "Shepherd's Hook on pole", "Ring Buoy with rope", "Emerg. Phone dial tone",
+            "Main Drain covers secure", "Skimmer baskets intact", "No Diving markers", "Handrails secure"
+        ];
+        const sContainer = document.getElementById('checklist-container');
+        safetyItems.forEach(i => {
+            let d = document.createElement('div'); d.className = 'checklist-item';
+            d.onclick = function() { this.classList.toggle('checked'); };
+            d.innerHTML = `<div class="check-circle"></div><span>${i}</span>`;
+            sContainer.appendChild(d);
+        });
+        function resetSafety() { document.querySelectorAll('.checklist-item').forEach(el => el.classList.remove('checked')); }
 
     </script>
 </body>
