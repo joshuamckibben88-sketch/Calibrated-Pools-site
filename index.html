@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calibrated Pools | Clarity with Science</title>
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 0 C20 40 10 50 10 70 C10 92 28 110 50 110 C72 110 90 92 90 70 C90 50 80 40 50 0' fill='%2300d2ff'/><circle cx='50' cy='70' r='30' stroke='white' stroke-width='4' fill='none'/><line x1='50' y1='40' x2='50' y2='100' stroke='white' stroke-width='4'/><line x1='20' y1='70' x2='80' y2='70' stroke='white' stroke-width='4'/></svg>">
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --primary: #00d2ff; /* Cyan accent */
-            --primary-dark: #3a7bd5; /* Deep blue */
-            --glass-surface: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
+            --primary-dark: #0099cc; 
+            --glass-surface: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.15);
             --text-main: #ffffff;
             --text-muted: rgba(255, 255, 255, 0.7);
             --card-radius: 24px;
@@ -28,54 +31,66 @@
             overflow-x: hidden;
         }
 
-        /* High-End Background with Parallax Feel */
+        /* Fixed Background */
         .background-wrapper {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: 
-                linear-gradient(to bottom, rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.9)),
+                linear-gradient(to bottom, rgba(15, 23, 42, 0.5), rgba(15, 23, 42, 0.95)),
                 url('https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&q=80');
             background-size: cover;
             background-position: center;
             z-index: -1;
         }
 
-        /* Layout & Spacing */
         .main-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px 80px;
+            padding: 0 20px 80px;
         }
 
-        /* Header / Hero Section */
-        header {
+        /* --- LOGO & NAV --- */
+        nav {
+            display: flex;
+            align-items: center;
+            padding: 40px 0;
+            justify-content: space-between;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* The Custom CSS Logo */
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
             text-align: center;
-            padding: 80px 0 60px;
+            padding: 80px 0 100px;
             animation: fadeInDown 1s ease-out;
-        }
-
-        .brand-badge {
-            display: inline-block;
-            background: rgba(0, 210, 255, 0.1);
-            color: var(--primary);
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            border: 1px solid rgba(0, 210, 255, 0.2);
         }
 
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 4.5rem;
+            font-size: 5rem;
             margin: 0;
             background: linear-gradient(to right, #fff, #a5f3fc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-shadow: 0 10px 30px rgba(0,0,0,0.3);
             line-height: 1.1;
         }
 
@@ -84,18 +99,42 @@
             font-weight: 300;
             color: var(--text-muted);
             margin-top: 15px;
-            letter-spacing: 0.5px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
-        /* The Grid */
-        .services-grid {
+        /* --- METHODOLOGY SECTION --- */
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            margin-top: 80px;
+        }
+
+        .science-box {
+            background: rgba(0, 210, 255, 0.05);
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            border-radius: var(--card-radius);
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto 80px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .science-box h3 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        /* --- PRICING GRID --- */
+        .pricing-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
-            margin-top: 40px;
         }
 
-        /* Ultra-Premium Glass Cards */
         .glass-card {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(20px);
@@ -103,130 +142,156 @@
             border: 1px solid var(--glass-border);
             border-radius: var(--card-radius);
             padding: 40px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.4s ease;
             position: relative;
-            overflow: hidden;
-            opacity: 0; /* For animation */
-            animation: fadeInUp 0.8s ease-out forwards;
         }
-
-        /* Staggered animation for cards */
-        .glass-card:nth-child(1) { animation-delay: 0.2s; }
-        .glass-card:nth-child(2) { animation-delay: 0.4s; }
 
         .glass-card:hover {
-            transform: translateY(-8px) scale(1.02);
+            transform: translateY(-8px);
             background: rgba(255, 255, 255, 0.07);
-            border-color: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
-        /* Card Content */
-        .glass-card h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            margin-top: 0;
-            margin-bottom: 25px;
-            color: #fff;
+        /* Featured Card (Level 2) */
+        .glass-card.featured {
+            border: 1px solid rgba(0, 210, 255, 0.4);
+            background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(0, 210, 255, 0.05));
         }
 
-        .price-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 18px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+        .level-badge {
+            background: var(--primary);
+            color: #0f172a;
+            font-weight: bold;
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            position: absolute;
+            top: 20px;
+            right: 20px;
         }
 
-        .price-row:last-of-type {
-            border-bottom: none;
-        }
-
-        .service-label {
-            font-weight: 500;
-            font-size: 1.05rem;
-        }
-
-        .price-tag {
+        .card-price {
+            font-size: 2.5rem;
             font-weight: 700;
-            color: var(--primary);
-            text-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+            color: #fff;
+            margin: 20px 0;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .card-price span { font-size: 1rem; color: var(--text-muted); font-family: 'Inter', sans-serif;}
+
+        ul.features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
         }
 
-        .description {
-            margin-top: 20px;
-            font-size: 0.95rem;
-            line-height: 1.6;
+        ul.features li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        ul.features li::before {
+            content: "✓";
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* --- GALLERY SECTION --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .gallery-item {
+            height: 250px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* --- SERVICE AREA --- */
+        .service-area {
+            text-align: center;
+            padding: 60px 0;
             color: var(--text-muted);
         }
 
-        /* Floating Action Button / CTA */
+        /* --- CTA --- */
         .cta-container {
             text-align: center;
-            margin-top: 60px;
-            animation: fadeInUp 1s ease-out 0.6s forwards;
-            opacity: 0;
+            margin-top: 80px;
         }
 
         .btn-primary {
             display: inline-block;
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
-            padding: 18px 45px;
+            padding: 18px 50px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
             font-size: 1.1rem;
-            letter-spacing: 0.5px;
-            box-shadow: 0 10px 30px rgba(58, 123, 213, 0.3);
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 210, 255, 0.3);
+            transition: transform 0.3s;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(58, 123, 213, 0.5);
-        }
+        .btn-primary:hover { transform: scale(1.05); }
 
-        /* Footer */
+        /* --- FOOTER --- */
         footer {
-            margin-top: 80px;
-            text-align: center;
+            margin-top: 100px;
             border-top: 1px solid var(--glass-border);
             padding-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             font-size: 0.9rem;
             color: var(--text-muted);
-            animation: fadeInUp 1s ease-out 0.8s forwards;
-            opacity: 0;
         }
 
-        .cert-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(255,255,255,0.05);
+        .portal-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            border: 1px solid var(--glass-border);
             padding: 8px 16px;
             border-radius: 8px;
-            margin: 10px;
+            transition: all 0.2s;
         }
 
-        /* Animations */
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        .portal-link:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
         }
 
-        /* Mobile Adjustments */
+        /* Mobile */
         @media (max-width: 768px) {
             h1 { font-size: 3rem; }
-            .main-container { padding-top: 20px; }
-            .glass-card { padding: 25px; }
+            footer { flex-direction: column; gap: 20px; }
         }
+        
+        /* Animation Keyframes */
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
@@ -234,52 +299,104 @@
     <div class="background-wrapper"></div>
 
     <div class="main-container">
-        <header>
-            <div class="brand-badge">Premium Pool Care</div>
-            <h1>Calibrated Pools</h1>
-            <div class="subtitle">Clarity with Science</div>
-        </header>
+        
+        <nav>
+            <div class="logo-container">
+                <svg class="logo-icon" viewBox="0 0 100 100" fill="none" stroke="currentColor">
+                    <path d="M50 5 C20 40 10 55 10 70 C10 92 28 110 50 110 C72 110 90 92 90 70 C90 55 80 40 50 5" fill="#00d2ff" opacity="0.9"/>
+                    <circle cx="50" cy="70" r="25" stroke="white" stroke-width="4"/>
+                    <line x1="50" y1="40" x2="50" y2="100" stroke="white" stroke-width="4"/>
+                    <line x1="20" y1="70" x2="80" y2="70" stroke="white" stroke-width="4"/>
+                </svg>
+                <div class="logo-text">Calibrated</div>
+            </div>
+            </nav>
 
-        <div class="services-grid">
+        <div class="hero">
+            <h1>Clarity with Science</h1>
+            <div class="subtitle">Precision Pool Care for Southeastern Texas</div>
+        </div>
+
+        <div class="science-box">
+            <h3>LSI Balanced Methodology</h3>
+            <p style="line-height: 1.6; opacity: 0.9;">
+                We don't just clear the water; we calibrate it. By strictly adhering to the <strong>Langelier Saturation Index (LSI)</strong>, we ensure your water is neither corrosive to your equipment nor scale-forming to your plaster. It is not just cleaning; it is asset protection.
+            </p>
+        </div>
+
+        <h2 class="section-title">Service Calibration</h2>
+
+        <div class="pricing-grid">
+            
             <div class="glass-card">
-                <h2>Routine Calibration</h2>
-                <div class="description" style="margin-bottom: 25px;">
-                    Experience water perfection. We utilize advanced chemistry to ensure your pool is balanced, safe, and crystal clear.
-                </div>
-                
-                <div class="price-row">
-                    <span class="service-label">Weekly Calibration</span>
-                    <span class="price-tag">From $225 / mo</span>
-                </div>
-                <div class="price-row">
-                    <span class="service-label">Includes</span>
-                    <span class="service-label" style="font-size: 0.9rem; opacity: 0.8;">Chemicals, Analysis, Debris</span>
-                </div>
+                <div class="level-badge" style="background: rgba(255,255,255,0.2); color: white;">Level 1</div>
+                <h2>Essential Calibration</h2>
+                <div class="card-price">$185 <span>/ mo +</span></div>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Perfect for the hands-on homeowner.</p>
+                <ul class="features">
+                    <li>Full Chemical Analysis (LSI)</li>
+                    <li>Precision Chemical Dosing</li>
+                    <li>Pump & Skimmer Basket Cleaning</li>
+                    <li>Visual Equipment Inspection</li>
+                    <li>Digital Service Log</li>
+                </ul>
+            </div>
+
+            <div class="glass-card featured">
+                <div class="level-badge">Recommended</div>
+                <h2>Total Calibration</h2>
+                <div class="card-price">$225 <span>/ mo +</span></div>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Complete care. Zero worry.</p>
+                <ul class="features">
+                    <li><strong>Everything in Level 1</strong></li>
+                    <li>Full Wall Brushing</li>
+                    <li>Surface Skimming & Netting</li>
+                    <li>Filter Backwashing (As Needed)</li>
+                    <li>Storm Debris Removal</li>
+                    <li>Priority Scheduling</li>
+                </ul>
             </div>
 
             <div class="glass-card">
-                <h2>Restoration & Repair</h2>
-                <div class="description" style="margin-bottom: 25px;">
-                    Expert diagnostics and equipment restoration for complex aquatic systems.
-                </div>
-
-                <div class="price-row">
-                    <span class="service-label">Diagnostic Consult</span>
-                    <span class="price-tag">$125</span>
-                </div>
-                <div class="price-row">
-                    <span class="service-label">Filter Restoration</span>
-                    <span class="price-tag">$125 - $160</span>
-                </div>
-                <div class="price-row">
-                    <span class="service-label">Algae Remediation</span>
-                    <span class="price-tag">$600+</span>
-                </div>
-                <div class="price-row">
-                    <span class="service-label">Sand Filter Media Change</span>
-                    <span class="price-tag">~$1,400</span>
-                </div>
+                <div class="level-badge" style="background: transparent; border: 1px solid white; color: white;">Repairs</div>
+                <h2>Systems & Repair</h2>
+                <div class="card-price" style="font-size: 1.8rem;">Custom Quote</div>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Expert diagnostics for complex issues.</p>
+                <ul class="features">
+                    <li>Sand Filter Media Changes (TR-100/140+)</li>
+                    <li>Diagnostic Service Calls ($125)</li>
+                    <li>Filter Grid/Cartridge Restoration</li>
+                    <li>Algae Remediation Protocols</li>
+                    <li>Commercial Facility Consults</li>
+                </ul>
             </div>
+
+        </div>
+
+        <h2 class="section-title">Deployed Projects</h2>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 20px;">
+            Recent calibrations and restorations in the field.
+        </p>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1562778612-e1e0cda9915c?auto=format&fit=crop&q=80" alt="Pool Project 1">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b0?auto=format&fit=crop&q=80" alt="Pool Project 2">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1532453288672-3a27e9be9efd?auto=format&fit=crop&q=80" alt="Pool Project 3">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1517400508447-f8dd518b86db?auto=format&fit=crop&q=80" alt="Pool Project 4">
+            </div>
+        </div>
+
+        <div class="service-area">
+            <h3>Operational Territory</h3>
+            <p>Proudly deploying precision pool care across <strong>Southeastern Texas</strong>.</p>
+            <p style="font-size: 0.9rem; opacity: 0.7;">Alvin • Pearland • Friendswood • Manvel • League City</p>
         </div>
 
         <div class="cta-container">
@@ -287,12 +404,14 @@
         </div>
 
         <footer>
-            <div style="margin-bottom: 20px;">
-                <span class="cert-badge">CPO #C-161853</span>
-                <span class="cert-badge">OSHA 10 Certified</span>
+            <div>
+                <span style="opacity: 0.8; margin-right: 15px;">&copy; 2026 Calibrated Pools</span>
+                <span style="opacity: 0.6; font-size: 0.8rem;">CPO #C-161853</span>
             </div>
-            <p>&copy; 2026 Calibrated Pools. All rights reserved.</p>
+            
+            <a href="#" class="portal-link">Technician Portal Login</a>
         </footer>
+
     </div>
 
 </body>
