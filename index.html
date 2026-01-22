@@ -200,6 +200,64 @@
 
         ul.features li::before { content: "✓"; color: var(--primary); font-weight: bold; }
 
+        /* --- FAQ STYLES --- */
+        .faq-item {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        
+        details { padding: 10px 0; cursor: pointer; transition: all 0.3s; }
+        summary { font-weight: 600; color: white; list-style: none; position: relative; padding-right: 30px; }
+        summary::-webkit-details-marker { display: none; }
+        summary::after { content: '+'; position: absolute; right: 0; color: var(--primary); font-weight: bold; font-size: 1.2rem; }
+        details[open] summary::after { content: '-'; }
+        details p { color: var(--text-muted); line-height: 1.6; margin-top: 10px; font-size: 0.95rem; padding-bottom: 10px; }
+
+        /* --- COMING SOON CARD STYLES --- */
+        .coming-soon-card {
+            margin-top: 40px;
+            background: linear-gradient(45deg, rgba(15,23,42,0.8), rgba(0,0,0,0.8));
+            border: 1px dashed rgba(0, 210, 255, 0.3);
+            border-radius: 16px;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .coming-soon-card::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, transparent 50%, rgba(0, 210, 255, 0.05) 51%);
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+
+        /* --- MAP STYLES --- */
+        .map-container {
+            width: 100%;
+            height: 400px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            margin-top: 40px;
+            position: relative;
+        }
+
+        /* This is the "Night Vision" Filter */
+        .map-frame {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            filter: grayscale(100%) invert(92%) contrast(83%);
+        }
+
         /* --- GALLERY --- */
         .gallery-grid {
             display: grid;
@@ -225,13 +283,10 @@
 
         .gallery-item:hover img { transform: scale(1.1); }
         
-        /* Caption on hover */
         .gallery-item::after {
             content: attr(data-label);
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
+            bottom: 0; left: 0; width: 100%;
             background: rgba(0,0,0,0.6);
             color: white;
             padding: 10px;
@@ -239,10 +294,7 @@
             transform: translateY(100%);
             transition: transform 0.3s;
         }
-        
-        .gallery-item:hover::after {
-            transform: translateY(0);
-        }
+        .gallery-item:hover::after { transform: translateY(0); }
 
         /* --- SERVICE AREA --- */
         .service-area {
@@ -282,7 +334,6 @@
             box-shadow: 0 10px 30px rgba(0, 210, 255, 0.3);
             transition: transform 0.3s;
         }
-
         .btn-primary:hover { transform: scale(1.05); }
 
         /* --- FOOTER --- */
@@ -305,7 +356,6 @@
             border-radius: 8px;
             transition: all 0.2s;
         }
-
         .portal-link:hover { background: rgba(255,255,255,0.1); color: white; }
 
         @media (max-width: 768px) {
@@ -389,9 +439,41 @@
                     <li>Sand Filter Media Changes</li>
                     <li>Diagnostic Service Calls ($125)</li>
                     <li>Filter Grid/Cartridge Restoration</li>
-                    <li>Algae Remediation Protocols</li>
+                    <li><strong>Green-to-Clean Restoration</strong></li>
                     <li>Commercial Facility Consults</li>
                 </ul>
+            </div>
+        </div>
+
+        <div class="science-box" style="margin-top: 100px; text-align: left;">
+            <h3 style="text-align: center; margin-bottom: 30px;">Protocol Knowledge Base</h3>
+            
+            <div class="faq-item">
+                <details>
+                    <summary>Do you offer Green-to-Clean services?</summary>
+                    <p>Yes. We specialize in transforming swamp-like conditions into potable-standard clarity. Our "Green-to-Clean" process involves heavy debris removal, aggressive chemical shock, and often a filter media change to completely reset your water quality baseline.</p>
+                </details>
+            </div>
+
+            <div class="faq-item">
+                <details>
+                    <summary>Is there a long-term service contract?</summary>
+                    <p>No. We operate on a month-to-month performance basis. We believe retention should be earned through water quality, not binding paperwork.</p>
+                </details>
+            </div>
+
+            <div class="faq-item">
+                <details>
+                    <summary>Does 'Chemical Analysis' cover specialty chemicals?</summary>
+                    <p>Level 1 and Level 2 plans cover all standard maintenance chemicals. Specialty treatments for phosphate removal or severe algae remediation are quoted as separate "Correctional Protocols."</p>
+                </details>
+            </div>
+
+            <div class="faq-item">
+                <details>
+                    <summary>Do you service Salt Water Systems?</summary>
+                    <p>Yes. Salt cells require specific LSI calibration to prevent calcium scaling on the plates. We monitor salinity levels and cell output as part of the standard protocol.</p>
+                </details>
             </div>
         </div>
 
@@ -408,9 +490,32 @@
             </div>
         </div>
 
+        <div class="coming-soon-card">
+            <div>
+                <h3 style="color: var(--primary); margin: 0 0 10px 0; text-transform: uppercase; letter-spacing: 2px;">Future Protocol: Remote Telemetry</h3>
+                <p style="margin: 0; color: var(--text-muted); font-size: 0.95rem;">
+                    In Development: 24/7 Digital Monitoring integration. Real-time pH & Flow Rate data directly to our tech portal.
+                    <br><span style="font-size: 0.8rem; opacity: 0.7;">(Powered by WaterGuru & Aiper Technology)</span>
+                </p>
+            </div>
+            <div style="background: rgba(0,210,255,0.1); border: 1px solid var(--primary); padding: 8px 16px; border-radius: 4px; font-family: monospace; font-weight: bold; color: var(--primary);">
+                DEPLOYING 2026
+            </div>
+        </div>
+
         <div class="service-area">
             <h3>Operational Territory</h3>
             <p style="margin-bottom: 20px;">Proudly deploying precision pool care across <strong>Southeastern Texas</strong>.</p>
+            
+            <div class="map-container">
+                <iframe 
+                    class="map-frame"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d222212.91572076062!2d-95.3400!3d29.5070!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864098933b49e1e3%3A0xc3c545041a313620!2sWebster%2C%20TX!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+
             <div class="location-list">
                 <span class="location-pill">Clear Lake</span>
                 <span class="location-pill">Webster</span>
