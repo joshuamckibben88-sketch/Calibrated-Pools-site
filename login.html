@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technician Access | Calibrated Pools</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #00d2ff;
+            --bg: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+        }
+
+        body {
+            background-color: var(--bg);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-image: radial-gradient(circle at 50% 50%, rgba(0, 210, 255, 0.1) 0%, transparent 50%);
+        }
+
+        .login-container {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.3));
+        }
+
+        h1 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.8rem;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.8);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            border: none;
+            border-radius: 6px;
+            color: #0f172a;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.1s, opacity 0.2s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .system-status {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .status-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: #10b981; /* Green */
+            border-radius: 50%;
+            margin-right: 5px;
+            box-shadow: 0 0 5px #10b981;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.4);
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+
+        .back-link:hover { color: white; }
+
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <svg class="logo-icon" viewBox="0 0 100 100" fill="none" stroke="white">
+            <path d="M50 5 C20 40 10 55 10 70 C10 92 28 110 50 110 C72 110 90 92 90 70 C90 55 80 40 50 5" fill="#00d2ff" opacity="0.9" stroke="none"/>
+            <circle cx="50" cy="70" r="25" stroke="white" stroke-width="4"/>
+            <line x1="50" y1="40" x2="50" y2="100" stroke="white" stroke-width="4"/>
+            <line x1="20" y1="70" x2="80" y2="70" stroke="white" stroke-width="4"/>
+        </svg>
+
+        <h1>Technician Portal</h1>
+        <p>Restricted Access: Authorized Personnel Only</p>
+
+        <form onsubmit="event.preventDefault(); alert('Access Denied: Invalid Credentials');">
+            <div class="input-group">
+                <label>TECHNICIAN ID</label>
+                <input type="text" placeholder="C-XXXXXX" required>
+            </div>
+
+            <div class="input-group">
+                <label>SECURE KEY</label>
+                <input type="password" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit">AUTHENTICATE</button>
+        </form>
+
+        <a href="index.html" class="back-link">← Return to Homepage</a>
+
+        <div class="system-status">
+            <span><span class="status-dot"></span>SYSTEM ONLINE</span>
+            <span>V 2.4.0</span>
+        </div>
+    </div>
+
+</body>
+</html>
