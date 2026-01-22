@@ -11,7 +11,7 @@
     
     <style>
         :root {
-            --primary: #00d2ff; /* Cyan accent */
+            --primary: #00d2ff;
             --primary-dark: #0099cc; 
             --glass-surface: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.15);
@@ -31,7 +31,6 @@
             overflow-x: hidden;
         }
 
-        /* Fixed Background */
         .background-wrapper {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -49,12 +48,12 @@
             padding: 0 20px 80px;
         }
 
-        /* --- LOGO & NAV --- */
+        /* --- NAV --- */
         nav {
             display: flex;
             align-items: center;
             padding: 40px 0;
-            justify-content: space-between;
+            justify-content: center; /* Centered Logo */
         }
 
         .logo-container {
@@ -63,11 +62,7 @@
             gap: 15px;
         }
 
-        /* The Custom CSS Logo */
-        .logo-icon {
-            width: 50px;
-            height: 50px;
-        }
+        .logo-icon { width: 50px; height: 50px; }
 
         .logo-text {
             font-family: 'Playfair Display', serif;
@@ -76,10 +71,10 @@
             letter-spacing: -0.5px;
         }
 
-        /* --- HERO SECTION --- */
+        /* --- HERO --- */
         .hero {
             text-align: center;
-            padding: 80px 0 100px;
+            padding: 60px 0 80px;
             animation: fadeInDown 1s ease-out;
         }
 
@@ -103,7 +98,7 @@
             text-transform: uppercase;
         }
 
-        /* --- METHODOLOGY SECTION --- */
+        /* --- METHODOLOGY --- */
         .section-title {
             text-align: center;
             font-family: 'Playfair Display', serif;
@@ -123,16 +118,23 @@
             backdrop-filter: blur(10px);
         }
 
-        .science-box h3 {
-            color: var(--primary);
-            margin-top: 0;
+        .science-box h3 { color: var(--primary); margin-top: 0; }
+
+        /* --- PRICING SECTION --- */
+        /* Flex container for the top two cards */
+        .plans-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
         }
 
-        /* --- PRICING GRID --- */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
+        /* Container for the single centered repair card */
+        .repair-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
         }
 
         .glass-card {
@@ -144,6 +146,8 @@
             padding: 40px;
             transition: all 0.4s ease;
             position: relative;
+            flex: 1 1 350px; /* Responsive flex basis */
+            max-width: 500px;
         }
 
         .glass-card:hover {
@@ -152,7 +156,6 @@
             border-color: rgba(255, 255, 255, 0.3);
         }
 
-        /* Featured Card (Level 2) */
         .glass-card.featured {
             border: 1px solid rgba(0, 210, 255, 0.4);
             background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(0, 210, 255, 0.05));
@@ -197,13 +200,9 @@
             gap: 10px;
         }
 
-        ul.features li::before {
-            content: "✓";
-            color: var(--primary);
-            font-weight: bold;
-        }
+        ul.features li::before { content: "✓"; color: var(--primary); font-weight: bold; }
 
-        /* --- GALLERY SECTION --- */
+        /* --- GALLERY --- */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -226,9 +225,7 @@
             transition: transform 0.5s ease;
         }
 
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
+        .gallery-item:hover img { transform: scale(1.1); }
 
         /* --- SERVICE AREA --- */
         .service-area {
@@ -236,12 +233,25 @@
             padding: 60px 0;
             color: var(--text-muted);
         }
+        
+        .location-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .location-pill {
+            border: 1px solid var(--glass-border);
+            padding: 8px 16px;
+            border-radius: 50px;
+            background: rgba(255,255,255,0.05);
+            font-size: 0.9rem;
+        }
 
         /* --- CTA --- */
-        .cta-container {
-            text-align: center;
-            margin-top: 80px;
-        }
+        .cta-container { text-align: center; margin-top: 80px; }
 
         .btn-primary {
             display: inline-block;
@@ -279,18 +289,13 @@
             transition: all 0.2s;
         }
 
-        .portal-link:hover {
-            background: rgba(255,255,255,0.1);
-            color: white;
-        }
+        .portal-link:hover { background: rgba(255,255,255,0.1); color: white; }
 
-        /* Mobile */
         @media (max-width: 768px) {
             h1 { font-size: 3rem; }
             footer { flex-direction: column; gap: 20px; }
         }
         
-        /* Animation Keyframes */
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
@@ -310,7 +315,7 @@
                 </svg>
                 <div class="logo-text">Calibrated</div>
             </div>
-            </nav>
+        </nav>
 
         <div class="hero">
             <h1>Clarity with Science</h1>
@@ -320,14 +325,13 @@
         <div class="science-box">
             <h3>LSI Balanced Methodology</h3>
             <p style="line-height: 1.6; opacity: 0.9;">
-                We don't just clear the water; we calibrate it. By strictly adhering to the <strong>Langelier Saturation Index (LSI)</strong>, we ensure your water is neither corrosive to your equipment nor scale-forming to your plaster. It is not just cleaning; it is asset protection.
+                We don't just clear the water; we calibrate it. By strictly adhering to the <strong>Langelier Saturation Index (LSI)</strong>, we ensure your water is neither corrosive to your equipment nor scale-forming to your plaster.
             </p>
         </div>
 
         <h2 class="section-title">Service Calibration</h2>
 
-        <div class="pricing-grid">
-            
+        <div class="plans-container">
             <div class="glass-card">
                 <div class="level-badge" style="background: rgba(255,255,255,0.2); color: white;">Level 1</div>
                 <h2>Essential Calibration</h2>
@@ -356,47 +360,44 @@
                     <li>Priority Scheduling</li>
                 </ul>
             </div>
+        </div>
 
-            <div class="glass-card">
+        <div class="repair-container">
+            <div class="glass-card" style="width: 100%; max-width: 600px;">
                 <div class="level-badge" style="background: transparent; border: 1px solid white; color: white;">Repairs</div>
                 <h2>Systems & Repair</h2>
                 <div class="card-price" style="font-size: 1.8rem;">Custom Quote</div>
                 <p style="color: var(--text-muted); font-size: 0.9rem;">Expert diagnostics for complex issues.</p>
-                <ul class="features">
-                    <li>Sand Filter Media Changes (TR-100/140+)</li>
+                <ul class="features" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+                    <li>Sand Filter Media Changes</li>
                     <li>Diagnostic Service Calls ($125)</li>
                     <li>Filter Grid/Cartridge Restoration</li>
                     <li>Algae Remediation Protocols</li>
                     <li>Commercial Facility Consults</li>
                 </ul>
             </div>
-
         </div>
 
         <h2 class="section-title">Deployed Projects</h2>
-        <p style="text-align: center; color: var(--text-muted); margin-bottom: 20px;">
-            Recent calibrations and restorations in the field.
-        </p>
-        
         <div class="gallery-grid">
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1562778612-e1e0cda9915c?auto=format&fit=crop&q=80" alt="Pool Project 1">
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b0?auto=format&fit=crop&q=80" alt="Pool Project 2">
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1532453288672-3a27e9be9efd?auto=format&fit=crop&q=80" alt="Pool Project 3">
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1517400508447-f8dd518b86db?auto=format&fit=crop&q=80" alt="Pool Project 4">
-            </div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1562778612-e1e0cda9915c?auto=format&fit=crop&q=80" alt="Work 1"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b0?auto=format&fit=crop&q=80" alt="Work 2"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1532453288672-3a27e9be9efd?auto=format&fit=crop&q=80" alt="Work 3"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1517400508447-f8dd518b86db?auto=format&fit=crop&q=80" alt="Work 4"></div>
         </div>
 
         <div class="service-area">
             <h3>Operational Territory</h3>
-            <p>Proudly deploying precision pool care across <strong>Southeastern Texas</strong>.</p>
-            <p style="font-size: 0.9rem; opacity: 0.7;">Alvin • Pearland • Friendswood • Manvel • League City</p>
+            <p style="margin-bottom: 20px;">Proudly deploying precision pool care across <strong>Southeastern Texas</strong>.</p>
+            <div class="location-list">
+                <span class="location-pill">Clear Lake</span>
+                <span class="location-pill">Webster</span>
+                <span class="location-pill">Nassau Bay</span>
+                <span class="location-pill">Friendswood</span>
+                <span class="location-pill">Pearland</span>
+                <span class="location-pill">Alvin</span>
+                <span class="location-pill">Manvel</span>
+            </div>
         </div>
 
         <div class="cta-container">
@@ -408,7 +409,6 @@
                 <span style="opacity: 0.8; margin-right: 15px;">&copy; 2026 Calibrated Pools</span>
                 <span style="opacity: 0.6; font-size: 0.8rem;">CPO #C-161853</span>
             </div>
-            
             <a href="#" class="portal-link">Technician Portal Login</a>
         </footer>
 
