@@ -4,214 +4,440 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Calibrated Ops | CEO</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚙️</text></svg>">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* --- CORE STYLES --- */
-        :root { --bg:#0a192f; --card:#112240; --primary:#00e5ff; --danger:#ff5252; --success:#00e676; --warn:#ffab00; --text:#e6f1ff; --sub:#8892b0; }
-        body { background-color:var(--bg); color:var(--text); font-family:'Montserrat',sans-serif; margin:0; padding-bottom:100px; -webkit-font-smoothing:antialiased; }
+        /* --- CALIBRATED THEME ENGINE --- */
+        :root {
+            --bg: #0f172a;
+            --glass: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --primary: #00d2ff;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warn: #f59e0b;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --radius: 16px;
+        }
 
-        /* HEADER & NAV */
-        header { background:rgba(17,34,64,0.95); padding:15px 20px; border-bottom:2px solid var(--primary); position:sticky; top:0; z-index:100; display:flex; justify-content:space-between; align-items:center; }
-        h1 { margin:0; font-size:1.1rem; font-weight:700; font-family:'Roboto Mono',monospace; }
-        .home-link { text-decoration:none; color:var(--primary); font-size:1.5rem; }
-        .nav-bar { position:fixed; bottom:0; width:100%; background:#020c1b; display:flex; justify-content:space-around; padding:10px 0; border-top:1px solid rgba(255,255,255,0.1); z-index:100; }
-        .nav-item { color:var(--sub); text-align:center; font-size:0.65rem; cursor:pointer; flex:1; }
-        .nav-item.active { color:var(--primary); }
-        .nav-icon { font-size:1.4rem; display:block; margin-bottom:4px; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
-        /* LAYOUT & INPUTS */
-        .section { display:none; padding:20px; max-width:600px; margin:0 auto; }
-        .section.active { display:block; }
-        .input-group { margin-bottom:12px; background:var(--card); padding:12px 15px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; border:1px solid rgba(255,255,255,0.05); }
-        .label-box { display:flex; flex-direction:column; }
-        label { font-size:0.9rem; font-weight:600; color:#ccd6f6; }
-        .sub-text { font-size:0.65rem; color:var(--sub); font-family:'Roboto Mono',monospace; }
-        input, select { background:transparent; border:none; color:var(--primary); font-family:'Roboto Mono',monospace; font-size:1.1rem; text-align:right; outline:none; width:120px; }
+        body {
+            background-color: var(--bg);
+            background-image: radial-gradient(circle at 50% 0%, rgba(0, 210, 255, 0.15), transparent 70%);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding-bottom: 110px; /* Space for nav */
+            overflow-x: hidden;
+        }
 
-        /* COMPONENTS */
-        .action-btn { width:100%; padding:16px; margin-top:15px; background:var(--primary); color:#0a192f; border:none; border-radius:8px; font-size:1rem; font-weight:700; font-family:'Roboto Mono',monospace; text-transform:uppercase; cursor:pointer; }
-        .copy-btn { background:var(--card); border:1px solid var(--primary); color:var(--primary); margin-top:10px; padding:12px; font-size:0.9rem; }
-        .reset-btn { background:transparent; border:1px solid var(--danger); color:var(--danger); margin-top:20px; }
-        
-        .result-box { margin-top:25px; padding:20px; border-radius:8px; text-align:center; display:none; background:rgba(255,255,255,0.02); }
-        .lsi-score { font-size:3rem; font-weight:700; font-family:'Roboto Mono',monospace; }
-        .dose-card { background:rgba(255,255,255,0.05); border-left:4px solid var(--warn); padding:10px 15px; margin-top:10px; text-align:left; border-radius:4px; }
-        .cost-tag { float:right; color:#00e676; font-size:0.8rem; font-family:'Roboto Mono'; font-weight:700; }
-        
-        /* TOGGLES & CHECKLISTS */
-        .toggle-container { display:flex; background:var(--card); border-radius:8px; margin-bottom:20px; border:1px solid rgba(255,255,255,0.1); }
-        .toggle-btn { flex:1; padding:12px; text-align:center; cursor:pointer; font-size:0.8rem; font-weight:700; color:var(--sub); }
-        .toggle-btn.active { background:rgba(0,229,255,0.1); color:var(--primary); border-radius:6px; }
-        
-        .checklist-item { background:var(--card); margin-bottom:10px; padding:15px; border-radius:8px; display:flex; align-items:center; cursor:pointer; }
-        .checklist-item.checked .check-circle { background:var(--success); border-color:var(--success); color:#000; }
-        .checklist-item.checked .check-circle::after { content:'✓'; font-weight:700; }
-        .check-circle { width:24px; height:24px; border:2px solid var(--sub); border-radius:50%; margin-right:15px; display:flex; align-items:center; justify-content:center; }
+        /* --- HEADER --- */
+        header {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--glass-border);
+        }
 
-        /* STORM MODE */
-        .storm-active { border: 1px solid var(--warn) !important; box-shadow: 0 0 10px rgba(255,171,0,0.2); }
-        .storm-fields { display:none; background:rgba(255,171,0,0.05); padding:10px; border-radius:8px; margin-bottom:15px; border:1px solid var(--warn); }
+        h1 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(to right, #fff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .close-app { text-decoration: none; color: var(--text-muted); font-size: 1.2rem; }
+
+        /* --- LAYOUT --- */
+        .section { display: none; padding: 20px; max-width: 600px; margin: 0 auto; animation: fadeIn 0.3s ease; }
+        .section.active { display: block; }
         
-        /* SETTINGS MODAL */
-        #price-modal { display:none; position:fixed; top:50px; left:0; width:100%; height:100%; background:rgba(10,25,47,0.95); z-index:200; padding:20px; overflow-y:auto; }
-        .close-modal { float:right; font-size:1.5rem; color:var(--text); cursor:pointer; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- CARDS & INPUTS --- */
+        .glass-panel {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+        }
+
+        .input-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 5px;
+        }
+
+        .input-row:last-child { border-bottom: none; margin-bottom: 0; }
+
+        label { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
+        
+        input[type="number"], input[type="text"] {
+            background: transparent;
+            border: none;
+            color: var(--primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            text-align: right;
+            width: 100px;
+            outline: none;
+        }
+        
+        input::placeholder { color: rgba(255,255,255,0.2); }
+
+        /* --- BUTTONS --- */
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: transform 0.1s;
+            margin-top: 15px;
+        }
+        
+        .btn:active { transform: scale(0.98); }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), #0099cc);
+            color: #0f172a;
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            margin-top: 10px;
+        }
+
+        /* --- RESULTS & TAGS --- */
+        .result-display {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid var(--glass-border);
+            display: none;
+        }
+
+        .lsi-number { font-size: 3.5rem; font-family: 'JetBrains Mono', monospace; font-weight: 700; line-height: 1; }
+        .status-badge { display: inline-block; padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; margin-top: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .dose-item {
+            background: rgba(255,255,255,0.03);
+            border-left: 3px solid var(--warn);
+            padding: 12px;
+            margin-top: 10px;
+            text-align: left;
+            border-radius: 0 8px 8px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .cost-pill { background: rgba(16, 185, 129, 0.2); color: var(--success); padding: 2px 8px; border-radius: 4px; font-family: 'JetBrains Mono'; font-size: 0.8rem; }
+
+        /* --- STORM MODE --- */
+        .storm-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            padding: 15px;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        .storm-toggle.active { background: rgba(245, 158, 11, 0.2); box-shadow: 0 0 20px rgba(245, 158, 11, 0.2); }
+        .storm-inputs { display: none; margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(245, 158, 11, 0.3); }
+
+        /* --- BOTTOM NAV --- */
+        .nav-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 400px;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            display: flex;
+            justify-content: space-around;
+            padding: 15px 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            z-index: 200;
+        }
+
+        .nav-item {
+            color: var(--text-muted);
+            text-align: center;
+            font-size: 0.65rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            opacity: 0.6;
+        }
+        
+        .nav-item.active { color: var(--primary); opacity: 1; transform: translateY(-2px); }
+        .nav-icon { display: block; font-size: 1.2rem; margin-bottom: 2px; }
+
+        /* --- TOOLS SECTION --- */
+        .tool-header { color: var(--primary); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; opacity: 0.8; }
+        
+        /* Accordion for Guide */
+        .accordion { background: var(--glass); border: 1px solid var(--glass-border); margin-bottom: 10px; border-radius: 8px; overflow: hidden; }
+        .acc-header { padding: 15px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; }
+        .acc-body { display: none; padding: 0 15px 15px 15px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; border-top: 1px solid var(--glass-border); padding-top: 15px;}
+        .acc-header.active { background: rgba(255,255,255,0.05); color: var(--primary); }
+
+        /* Checklist */
+        .check-item {
+            display: flex; align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid var(--glass-border);
+            cursor: pointer;
+        }
+        .check-dot { width: 20px; height: 20px; border: 2px solid var(--text-muted); border-radius: 50%; margin-right: 15px; transition: all 0.2s; }
+        .check-item.checked .check-dot { background: var(--success); border-color: var(--success); box-shadow: 0 0 10px var(--success); }
+        .check-item.checked { color: var(--text); }
+        .check-item:last-child { border-bottom: none; }
+
+        /* Settings Modal */
+        #settings-modal { display:none; position:fixed; inset:0; background:rgba(15,23,42,0.95); z-index:300; padding:30px; }
+
     </style>
 </head>
 <body>
 
     <header>
         <h1>CALIBRATED OPS</h1>
-        <a href="index.html" class="home-link">✕</a>
+        <a href="#" onclick="document.getElementById('settings-modal').style.display='block'" class="close-app">⚙️</a>
     </header>
 
     <div id="tab-chem" class="section active">
-        <div class="input-group" id="storm-group" onclick="toggleStorm()">
-            <div class="label-box"><label>⚡ STORM MODE</label><span class="sub-text">Heavy Rain Recovery</span></div>
-            <div id="storm-status" style="color:var(--sub); font-weight:700;">OFF</div>
-        </div>
-
-        <div id="storm-fields" class="storm-fields">
-            <div class="input-group" style="background:transparent; border:none; margin:0;">
-                <label style="color:var(--warn)">Phosphates (ppb)</label><input type="number" id="phos" placeholder="0" style="color:var(--warn)">
-            </div>
-            <div class="input-group" style="background:transparent; border:none; margin:0;">
-                <label style="color:var(--warn)">Nitrates (ppm)</label><input type="number" id="nits" placeholder="0" style="color:var(--warn)">
-            </div>
-        </div>
-
-        <div class="input-group" style="border-color: var(--primary);">
-            <div class="label-box"><label style="color:var(--primary)">Pool Volume</label></div>
-            <input type="number" id="vol" value="15000" step="1000">
-        </div>
-
-        <div style="text-align:right; margin-bottom:10px;">
-            <span onclick="document.getElementById('price-modal').style.display='block'" style="font-size:0.8rem; color:var(--sub); cursor:pointer; text-decoration:underline;">⚙️ Set Prices</span>
-        </div>
-
-        <div class="input-group"><div class="label-box"><label>Free Chlorine</label></div><input type="number" id="fc" placeholder="3.0"></div>
-        <div class="input-group"><div class="label-box"><label>pH</label></div><input type="number" id="ph" placeholder="7.5"></div>
-        <div class="input-group"><div class="label-box"><label>Water Temp</label></div><input type="number" id="temp" placeholder="80" value="80"></div>
-        <div class="input-group"><div class="label-box"><label>Alkalinity</label></div><input type="number" id="ta" placeholder="100"></div>
-        <div class="input-group"><div class="label-box"><label>Calcium</label></div><input type="number" id="ch" placeholder="300"></div>
-        <div class="input-group"><div class="label-box"><label>CYA</label></div><input type="number" id="cya" placeholder="50"></div>
-        <div class="input-group"><div class="label-box"><label>TDS / Salt</label></div><input type="number" id="tds" placeholder="1000"></div>
-
-        <button class="action-btn" onclick="calcLSI()">CALCULATE COSTS</button>
-        <button class="action-btn copy-btn" onclick="copyReadings()">📄 COPY RESULTS</button>
-
-        <div id="result" class="result-box">
-            <div id="lsi-val" class="lsi-score">0.00</div>
-            <div id="lsi-msg" style="font-weight:700; letter-spacing:2px;">BALANCED</div>
-            <div id="total-cost" style="color:#00e676; margin-top:5px; font-family:'Roboto Mono'">Est Cost: $0.00</div>
-            <div id="dosing-plan" style="margin-top:20px;"></div>
-            <button class="action-btn copy-btn" onclick="copyDosing()">💊 COPY PLAN</button>
-        </div>
-    </div>
-
-    <div id="tab-safety" class="section">
-        <div class="toggle-container">
-            <div class="toggle-btn active" onclick="setSafety('comm', this)">COMMERCIAL (TAC 265)</div>
-            <div class="toggle-btn" onclick="setSafety('res', this)">RESIDENTIAL</div>
-        </div>
-
-        <div id="comm-list"></div>
-        <div id="res-list" style="display:none;"></div>
         
-        <button class="action-btn copy-btn" onclick="copySafety()">🛡️ COPY AUDIT REPORT</button>
-        <button class="action-btn reset-btn" onclick="resetChecks()">RESET CHECKS</button>
+        <div class="storm-toggle" id="storm-btn" onclick="toggleStorm()">
+            <div>
+                <div style="font-weight:700; color:var(--warn)">⚡ STORM RECOVERY</div>
+                <div style="font-size:0.75rem; color:var(--text-muted)">Activate for Nitrates/Phos logic</div>
+            </div>
+            <div id="storm-status" style="font-size:1.5rem; opacity:0.5;">OFF</div>
+        </div>
+
+        <div class="glass-panel">
+            <div id="storm-inputs" class="storm-inputs">
+                <div class="input-row"><label style="color:var(--warn)">Phosphates (ppb)</label><input type="number" id="phos" placeholder="0" style="color:var(--warn)"></div>
+                <div class="input-row"><label style="color:var(--warn)">Nitrates (ppm)</label><input type="number" id="nits" placeholder="0" style="color:var(--warn)"></div>
+            </div>
+
+            <div class="input-row">
+                <label>Pool Volume (gal)</label>
+                <input type="number" id="vol" value="15000">
+            </div>
+
+            <div class="input-row"><label>Free Chlorine</label><input type="number" id="fc" placeholder="3.0"></div>
+            <div class="input-row"><label>pH Level</label><input type="number" id="ph" placeholder="7.5"></div>
+            <div class="input-row"><label>Water Temp (°F)</label><input type="number" id="temp" value="80"></div>
+            <div class="input-row"><label>Alkalinity</label><input type="number" id="ta" placeholder="100"></div>
+            <div class="input-row"><label>Calcium Hardness</label><input type="number" id="ch" placeholder="300"></div>
+            <div class="input-row"><label>CYA (Stabilizer)</label><input type="number" id="cya" placeholder="50"></div>
+            <div class="input-row"><label>TDS / Salt</label><input type="number" id="tds" placeholder="1000"></div>
+        </div>
+
+        <button class="btn btn-primary" onclick="calcLSI()">RUN DIAGNOSTIC</button>
+
+        <div id="result-box" class="result-display">
+            <div style="font-size:0.8rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:2px;">LSI Calibrated Score</div>
+            <div class="lsi-number" id="lsi-val">0.00</div>
+            <div id="lsi-badge" class="status-badge" style="background:#333; color:#fff;">WAITING</div>
+            
+            <div id="cost-display" style="margin-top:15px; color:var(--success); font-family:'JetBrains Mono'; font-weight:700;">Est Material Cost: $0.00</div>
+            
+            <div id="dosing-plan" style="margin-top:20px;"></div>
+            
+            <div style="display:flex; gap:10px; margin-top:20px;">
+                <button class="btn btn-outline" style="margin:0" onclick="copyDosing()">📄 COPY PLAN</button>
+                <button class="btn btn-outline" style="margin:0; border-color:var(--text-muted); color:var(--text-muted);" onclick="clearInputs()">RESET</button>
+            </div>
+        </div>
     </div>
 
     <div id="tab-tools" class="section">
         
-        <h3 style="color:var(--primary); margin-bottom:10px;">HEATER DOCTOR</h3>
-        <div class="input-group">
-            <label>Pentair Code:</label>
-            <input type="text" id="heat-code" placeholder="HLS" style="text-transform:uppercase;">
+        <div class="tool-header">VOLUME ESTIMATOR</div>
+        <div class="glass-panel">
+            <div class="input-row"><label>Length (ft)</label><input type="number" id="v-len"></div>
+            <div class="input-row"><label>Width (ft)</label><input type="number" id="v-wid"></div>
+            <div class="input-row"><label>Avg Depth (ft)</label><input type="number" id="v-dep" placeholder="4.5"></div>
+            <div id="vol-res" style="text-align:right; font-family:'JetBrains Mono'; color:var(--primary); margin-top:10px;">0 Gallons</div>
+            <button class="btn btn-outline" onclick="calcVol()">APPLY TO CALCULATOR</button>
         </div>
-        <button class="action-btn" onclick="checkHeater()" style="margin-top:0; padding:10px; font-size:0.9rem;">DIAGNOSE</button>
-        <div id="heat-res" style="margin:10px 0; color:var(--warn); font-family:'Roboto Mono';"></div>
-        
-        <hr style="border-color:rgba(255,255,255,0.1); margin:25px 0;">
 
-        <h3 style="color:var(--primary); margin-bottom:10px;">EQUIP LOGGER</h3>
-        <div class="input-group"><label>Pump</label><input type="text" id="eq-pump" placeholder="Pentair VS"></div>
-        <div class="input-group"><label>Filter</label><input type="text" id="eq-filt" placeholder="C&C 420"></div>
-        <div class="input-group"><label>Heater</label><input type="text" id="eq-heat" placeholder="MasterTemp 400"></div>
-        <button class="action-btn copy-btn" onclick="copyEquip()">💾 COPY PROFILE</button>
+        <div class="tool-header">HEATER DIAGNOSTICS</div>
+        <div class="glass-panel" style="text-align:center;">
+            <input type="text" id="heat-code" placeholder="ENTER ERROR CODE" style="width:100%; text-align:center; font-size:1.5rem; text-transform:uppercase; margin-bottom:10px;">
+            <button class="btn btn-primary" onclick="checkHeater()" style="padding:10px;">SCAN CODE</button>
+            <div id="heat-res" style="margin-top:15px; color:var(--warn); font-family:'JetBrains Mono'; min-height:40px;">System Ready...</div>
+        </div>
 
-        <hr style="border-color:rgba(255,255,255,0.1); margin:25px 0;">
-
-        <h3 style="color:var(--primary); margin-bottom:10px;">BREAKPOINT</h3>
-        <div class="input-group"><label>Total Cl</label><input type="number" id="bp-tc"></div>
-        <div class="input-group"><label>Free Cl</label><input type="number" id="bp-fc"></div>
-        <button class="action-btn" style="background:var(--warn); color:#000;" onclick="calcBreakpoint()">CALC SHOCK</button>
-        <div id="bp-res" style="margin-top:10px; color:#fff; font-family:'Roboto Mono'"></div>
+        <div class="tool-header">BREAKPOINT CHLORINATION</div>
+        <div class="glass-panel">
+            <div class="input-row"><label>Total Chlorine</label><input type="number" id="bp-tc"></div>
+            <div class="input-row"><label>Free Chlorine</label><input type="number" id="bp-fc"></div>
+            <div id="bp-res" style="margin-top:15px; text-align:right; color:var(--text); font-size:0.9rem;">Wait for input...</div>
+            <button class="btn btn-outline" style="border-color:var(--warn); color:var(--warn);" onclick="calcBreakpoint()">CALC SHOCK LOAD</button>
+        </div>
     </div>
 
     <div id="tab-guide" class="section">
-        <h3 style="color:var(--primary); border-bottom:1px solid #333; padding-bottom:10px;">ALGAE ID</h3>
-        <div class="guide-card" style="background:var(--card); border-left:4px solid #00e676; padding:15px; margin-bottom:10px;"><span style="font-weight:700;">GREEN</span><div class="sub-text">Free floating. Clouds water. Brush, Shock, Clean Filter.</div></div>
-        <div class="guide-card" style="background:var(--card); border-left:4px solid #ffeb3b; padding:15px; margin-bottom:10px;"><span style="font-weight:700;">MUSTARD</span><div class="sub-text">Dust in shade. Resistant. Needs Sodium Bromide.</div></div>
-        <div class="guide-card" style="background:var(--card); border-left:4px solid #000; padding:15px; margin-bottom:10px;"><span style="font-weight:700;">BLACK</span><div class="sub-text">Roots. Steel brush + Trichlor head rub.</div></div>
+        <div class="tool-header">FIELD PROTOCOLS</div>
+
+        <div class="accordion">
+            <div class="acc-header" onclick="toggleAcc(this)">🟢 Green Algae Protocol <span>+</span></div>
+            <div class="acc-body">
+                1. <strong>Test & Record:</strong> Full chem panel.<br>
+                2. <strong>Adjust pH:</strong> Lower to 7.2 to make chlorine aggressive.<br>
+                3. <strong>Brush:</strong> Vigorously brush walls/floor to suspend algae.<br>
+                4. <strong>Shock:</strong> 30ppm shock (approx 4lbs/10k gal).<br>
+                5. <strong>Circulate:</strong> Run pump 24hrs. Clean filter when pressure rises 10psi.
+            </div>
+        </div>
+
+        <div class="accordion">
+            <div class="acc-header" onclick="toggleAcc(this)">🟡 Mustard Algae Protocol <span>+</span></div>
+            <div class="acc-body">
+                *Resistant to Chlorine alone.*<br>
+                1. <strong>Brush:</strong> Focus on shady areas/steps.<br>
+                2. <strong>Add Sodium Bromide:</strong> Creates Bromine bank.<br>
+                3. <strong>Shock:</strong> High dose liquid chlorine.<br>
+                4. <strong>Wash Gear:</strong> Put nets/brushes in pool during shock to disinfect.
+            </div>
+        </div>
+
+        <div class="accordion">
+            <div class="acc-header" onclick="toggleAcc(this)">⚫ Black Algae Protocol <span>+</span></div>
+            <div class="acc-body">
+                *Rooted in plaster.*<br>
+                1. <strong>Stainless Brush:</strong> Break the protective "cap" off the algae heads.<br>
+                2. <strong>Direct Combat:</strong> Rub Trichlor puck directly on the spots (if plaster).<br>
+                3. <strong>High Chlorine:</strong> Maintain 5-10ppm for 3 days.<br>
+                4. <strong>Algaecide:</strong> Use Copper or Silver-based algaecide (Warning: watch for staining).
+            </div>
+        </div>
+
+        <div class="tool-header" style="margin-top:30px;">LSI TARGETS</div>
+        <div class="glass-panel" style="padding:15px; font-size:0.85rem; line-height:1.8;">
+            <div style="display:flex; justify-content:space-between;"><span>pH</span><span style="color:var(--primary)">7.4 - 7.6</span></div>
+            <div style="display:flex; justify-content:space-between;"><span>Alk</span><span style="color:var(--primary)">80 - 120</span></div>
+            <div style="display:flex; justify-content:space-between;"><span>Calc</span><span style="color:var(--primary)">200 - 400</span></div>
+            <div style="display:flex; justify-content:space-between;"><span>CYA</span><span style="color:var(--primary)">30 - 50</span></div>
+        </div>
     </div>
 
-    <div id="price-modal">
-        <span class="close-modal" onclick="document.getElementById('price-modal').style.display='none'">✕</span>
-        <h2 style="color:var(--primary);">CHEM COSTS ($)</h2>
-        <div class="input-group"><label>Acid / gal</label><input type="number" id="cost-acid" value="8.00"></div>
-        <div class="input-group"><label>Bicarb / lb</label><input type="number" id="cost-bicarb" value="2.00"></div>
-        <div class="input-group"><label>Shock / lb</label><input type="number" id="cost-shock" value="5.00"></div>
-        <div class="input-group"><label>Calc / lb</label><input type="number" id="cost-calc" value="3.00"></div>
-        <div class="input-group"><label>CYA / lb</label><input type="number" id="cost-cya" value="4.00"></div>
-        <button class="action-btn" onclick="document.getElementById('price-modal').style.display='none'">SAVE PRICES</button>
+    <div id="tab-safe" class="section">
+        <div style="display:flex; gap:10px; margin-bottom:20px;">
+            <button class="btn btn-primary" onclick="loadSafety('comm')" style="margin:0; font-size:0.8rem;">COMMERCIAL (TAC)</button>
+            <button class="btn btn-outline" onclick="loadSafety('res')" style="margin:0; font-size:0.8rem; border-color:var(--glass-border); color:var(--text-muted);">RESIDENTIAL</button>
+        </div>
+
+        <div class="glass-panel" id="checklist-container">
+            </div>
+        <button class="btn btn-outline" onclick="copySafety()">COPY AUDIT REPORT</button>
+    </div>
+
+    <div id="settings-modal">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <h2 style="margin:0; font-family:'Playfair Display', serif;">Unit Pricing</h2>
+            <span onclick="document.getElementById('settings-modal').style.display='none'" style="font-size:1.5rem; cursor:pointer;">✕</span>
+        </div>
+        <div class="input-row"><label>Acid ($/gal)</label><input type="number" id="cost-acid" value="8.00"></div>
+        <div class="input-row"><label>Bicarb ($/lb)</label><input type="number" id="cost-bicarb" value="2.00"></div>
+        <div class="input-row"><label>Shock ($/lb)</label><input type="number" id="cost-shock" value="5.00"></div>
+        <div class="input-row"><label>Calc ($/lb)</label><input type="number" id="cost-calc" value="3.00"></div>
+        <div class="input-row"><label>CYA ($/lb)</label><input type="number" id="cost-cya" value="4.00"></div>
+        <button class="btn btn-primary" onclick="document.getElementById('settings-modal').style.display='none'">SAVE & CLOSE</button>
     </div>
 
     <div class="nav-bar">
-        <div class="nav-item active" onclick="nav('tab-chem', this)"><span class="nav-icon">⚗️</span>CHEM</div>
-        <div class="nav-item" onclick="nav('tab-safety', this)"><span class="nav-icon">🛡️</span>SAFE</div>
-        <div class="nav-item" onclick="nav('tab-tools', this)"><span class="nav-icon">🧰</span>TOOLS</div>
-        <div class="nav-item" onclick="nav('tab-guide', this)"><span class="nav-icon">📖</span>GUIDE</div>
+        <div class="nav-item active" onclick="nav('tab-chem', this)">
+            <span class="nav-icon">⚗️</span>CHEM
+        </div>
+        <div class="nav-item" onclick="nav('tab-tools', this)">
+            <span class="nav-icon">🧰</span>TOOLS
+        </div>
+        <div class="nav-item" onclick="nav('tab-guide', this)">
+            <span class="nav-icon">📖</span>GUIDE
+        </div>
+        <div class="nav-item" onclick="nav('tab-safe', this)">
+            <span class="nav-icon">🛡️</span>SAFE
+        </div>
     </div>
 
     <script>
-        // --- CORE NAV ---
+        // --- NAVIGATION LOGIC ---
         function nav(id, el) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             document.getElementById(id).classList.add('active');
-            if(el) el.classList.add('active');
+            el.classList.add('active');
         }
 
-        // --- SAFETY TOGGLES ---
-        let currentSafety = 'comm';
-        function setSafety(type, el) {
-            document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
-            el.classList.add('active');
-            document.getElementById('comm-list').style.display = (type === 'comm') ? 'block' : 'none';
-            document.getElementById('res-list').style.display = (type === 'res') ? 'block' : 'none';
-            currentSafety = type;
+        function toggleAcc(header) {
+            header.classList.toggle('active');
+            let body = header.nextElementSibling;
+            body.style.display = (body.style.display === 'block') ? 'none' : 'block';
+            header.querySelector('span').innerText = (body.style.display === 'block') ? '-' : '+';
         }
 
         // --- STORM MODE ---
         let stormMode = false;
         function toggleStorm() {
             stormMode = !stormMode;
-            let grp = document.getElementById('storm-group');
-            let stat = document.getElementById('storm-status');
-            let fields = document.getElementById('storm-fields');
+            const btn = document.getElementById('storm-btn');
+            const inputs = document.getElementById('storm-inputs');
+            const status = document.getElementById('storm-status');
+            
             if(stormMode) {
-                grp.classList.add('storm-active');
-                stat.innerText = "ON"; stat.style.color = "var(--warn)";
-                fields.style.display = "block";
+                btn.classList.add('active');
+                inputs.style.display = 'block';
+                status.innerText = 'ON';
+                status.style.color = 'var(--warn)';
+                status.style.opacity = '1';
             } else {
-                grp.classList.remove('storm-active');
-                stat.innerText = "OFF"; stat.style.color = "var(--sub)";
-                fields.style.display = "none";
+                btn.classList.remove('active');
+                inputs.style.display = 'none';
+                status.innerText = 'OFF';
+                status.style.color = 'var(--text-muted)';
+                status.style.opacity = '0.5';
             }
         }
 
-        // --- CHEM LOGIC & COST ---
+        // --- LSI CALCULATOR ---
         let doseLog = "";
         function calcLSI() {
             let vol = parseFloat(document.getElementById('vol').value)||15000;
@@ -223,9 +449,9 @@
             let tds = parseFloat(document.getElementById('tds').value)||0;
             let totalCost = 0;
 
-            if(!ph || !temp || !ch || !ta) { alert("Missing Readings!"); return; }
+            if(!ph || !temp || !ch || !ta) { alert("Missing Data Inputs"); return; }
 
-            // LSI
+            // LSI Logic
             let tf = (temp*0.01)-0.1;
             let cf = Math.log10(ch)-0.4;
             let adjAlk = ta-(cya*0.3); if(adjAlk<1) adjAlk=1;
@@ -233,81 +459,112 @@
             let tdsF = (tds>1000)?12.2:12.1;
             let lsi = ph+tf+cf+af-tdsF;
 
-            // Render LSI
-            let rBox=document.getElementById('result');
-            let dPlan=document.getElementById('dosing-plan');
-            rBox.style.display="block";
-            document.getElementById('lsi-val').innerText=lsi.toFixed(2);
-            dPlan.innerHTML=""; doseLog="";
+            // Display LSI
+            document.getElementById('result-box').style.display='block';
+            let lsiDisplay = document.getElementById('lsi-val');
+            let badge = document.getElementById('lsi-badge');
+            
+            lsiDisplay.innerText = lsi.toFixed(2);
+            
+            if(lsi >= -0.3 && lsi <= 0.3) {
+                lsiDisplay.style.color = "var(--success)";
+                badge.innerText = "BALANCED"; badge.style.background = "var(--success)"; badge.style.color="#000";
+            } else if (lsi < -0.3) {
+                lsiDisplay.style.color = "var(--danger)";
+                badge.innerText = "CORROSIVE"; badge.style.background = "var(--danger)"; badge.style.color="#fff";
+            } else {
+                lsiDisplay.style.color = "var(--warn)";
+                badge.innerText = "SCALE FORMING"; badge.style.background = "var(--warn)"; badge.style.color="#000";
+            }
 
-            let lsiM=document.getElementById('lsi-msg');
-            if(lsi>=-0.3 && lsi<=0.3) { lsiM.innerText="BALANCED"; lsiM.style.color="#00e676"; }
-            else if(lsi<-0.3) { lsiM.innerText="CORROSIVE"; lsiM.style.color="#ff5252"; }
-            else { lsiM.innerText="SCALE FORMING"; lsiM.style.color="#ffab00"; }
-
-            // Dosing & Cost
+            // Dosing & Pricing
+            let dPlan = document.getElementById('dosing-plan');
+            dPlan.innerHTML = ""; doseLog = "";
+            
             let vF = vol/10000;
             let pAcid = parseFloat(document.getElementById('cost-acid').value);
             let pBicarb = parseFloat(document.getElementById('cost-bicarb').value);
             let pCalc = parseFloat(document.getElementById('cost-calc').value);
-            let pShock = parseFloat(document.getElementById('cost-shock').value);
 
-            function addDose(title, qty, unit, price) {
-                let cost = qty * price;
+            function addDose(name, amount, unit, pricePerUnit) {
+                let cost = amount * pricePerUnit;
                 totalCost += cost;
-                doseLog += `• ${title}: Add ${qty.toFixed(1)} ${unit}\n`;
-                let d=document.createElement('div'); d.className='dose-card';
-                d.innerHTML=`<span class="cost-tag">$${cost.toFixed(2)}</span><span class="dose-title">${title}</span><span style="font-size:0.9rem">Add ${qty.toFixed(1)} ${unit}</span>`;
-                dPlan.appendChild(d);
+                doseLog += `• ${name}: ${amount.toFixed(1)} ${unit}\n`;
+                dPlan.innerHTML += `
+                <div class="dose-item">
+                    <div>
+                        <div style="font-weight:700; color:var(--primary)">${name}</div>
+                        <div style="font-size:0.8rem; color:var(--text-muted)">Add ${amount.toFixed(1)} ${unit}</div>
+                    </div>
+                    <div class="cost-pill">$${cost.toFixed(2)}</div>
+                </div>`;
             }
 
-            if(ta<80) addDose("Low Alk", (100-ta)/10*1.5*vF, "lbs Bicarb", pBicarb);
-            if(ch<250) addDose("Low Calc", (300-ch)/10*1.25*vF, "lbs Calc", pCalc);
-            if(ph>7.8) addDose("High pH", (ph-7.5)/0.2*1.0*vF, "qts Acid", pAcid/4); // Acid price is per gal
+            if(ta < 80) addDose("Bicarbonate", (100-ta)/10*1.5*vF, "lbs", pBicarb);
+            if(ch < 250) addDose("Calcium", (300-ch)/10*1.25*vF, "lbs", pCalc);
+            if(ph > 7.8) addDose("Muriatic Acid", (ph-7.5)/0.2*1.0*vF, "qts", pAcid/4);
             
             // Storm Logic
             if(stormMode) {
                 let phos = parseFloat(document.getElementById('phos').value)||0;
                 let nits = parseFloat(document.getElementById('nits').value)||0;
                 if(phos > 500) {
-                    let d=document.createElement('div'); d.className='dose-card';
-                    d.innerHTML=`<span class="dose-title" style="color:var(--warn)">STORM: PHOSPHATES</span><span>Level ${phos}ppb. Add Remover.</span>`;
-                    dPlan.appendChild(d); doseLog += `• STORM: High Phosphates (${phos}). Added Remover.\n`;
+                    dPlan.innerHTML += `<div class="dose-item" style="border-color:var(--danger)"><div><div style="color:var(--danger); font-weight:700;">HIGH PHOSPHATES</div><div style="font-size:0.8rem;">${phos}ppb - Add Remover</div></div></div>`;
+                    doseLog += `• ALERT: Phosphates ${phos}ppb\n`;
                 }
                 if(nits > 20) {
-                     let d=document.createElement('div'); d.className='dose-card';
-                    d.innerHTML=`<span class="dose-title" style="color:var(--warn)">STORM: NITRATES</span><span>Level ${nits}ppm. Plan drain/refill.</span>`;
-                    dPlan.appendChild(d); doseLog += `• STORM: High Nitrates (${nits}). Advised Drain.\n`;
+                     dPlan.innerHTML += `<div class="dose-item" style="border-color:var(--danger)"><div><div style="color:var(--danger); font-weight:700;">HIGH NITRATES</div><div style="font-size:0.8rem;">${nits}ppm - Partial Drain Req</div></div></div>`;
+                     doseLog += `• ALERT: Nitrates ${nits}ppm\n`;
                 }
             }
 
-            document.getElementById('total-cost').innerText = `Est Chem Cost: $${totalCost.toFixed(2)}`;
+            if(doseLog === "") dPlan.innerHTML = `<div style="text-align:center; color:var(--text-muted); margin-top:10px;">Water chemistry is optimal. No action required.</div>`;
+
+            document.getElementById('cost-display').innerText = `Est Material Cost: $${totalCost.toFixed(2)}`;
+        }
+
+        function copyDosing() {
+            let t = `SERVICE LOG ${new Date().toLocaleDateString()}\nLSI: ${document.getElementById('lsi-val').innerText}\n\nTREATMENT:\n${doseLog || "Balanced."}\n- Calibrated Pools`;
+            navigator.clipboard.writeText(t).then(()=>alert("Protocol Copied to Clipboard"));
+        }
+
+        function clearInputs() {
+            document.querySelectorAll('#tab-chem input').forEach(i => { if(i.id !=='vol' && i.id.indexOf('cost')===-1) i.value = ''; });
+            document.getElementById('result-box').style.display='none';
+        }
+
+        // --- VOLUME CALCULATOR ---
+        function calcVol() {
+            let l = parseFloat(document.getElementById('v-len').value)||0;
+            let w = parseFloat(document.getElementById('v-wid').value)||0;
+            let d = parseFloat(document.getElementById('v-dep').value)||0;
+            let gallons = l * w * d * 7.5;
+            document.getElementById('vol-res').innerText = Math.round(gallons).toLocaleString() + " Gallons";
+            // Update main input
+            document.getElementById('vol').value = Math.round(gallons);
         }
 
         // --- HEATER DOCTOR ---
         function checkHeater() {
             let c = document.getElementById('heat-code').value.toUpperCase();
-            let msg = "Unknown Code. Check Manual.";
+            let r = document.getElementById('heat-res');
             const codes = {
-                "HLS": "High Limit Switch. Temp > 135°F. Check Flow/Bypass.",
-                "AFS": "Air Flow Switch. Check Blower/Venting.",
-                "AGS": "Auto Gas Shutoff. Gas valve issue.",
-                "SFS": "Stack Flue Sensor. Exhaust too hot > 480°F.",
-                "E01": "Thermistor Failure (Water Temp Sensor).",
-                "E05": "Control Board / Stack Flue Loop Open.",
-                "E06": "Board Failure."
+                "HLS": "High Limit Switch: Water temp exceeded 135°F. Check flow restrictions or bypass valve.",
+                "AFS": "Air Flow Switch: Blower intake blocked or fan failure.",
+                "AGS": "Auto Gas Shutoff: System failed to ignite gas.",
+                "SFS": "Stack Flue Sensor: Exhaust temp > 480°F. Sooted coil or low flow.",
+                "E01": "Thermistor Fault: Water temp sensor shorted/open.",
+                "E05": "Stack Flue Open: Sensor disconnected or bad board.",
+                "E06": "Board Failure: Replace Control Board."
             };
-            if(codes[c]) msg = codes[c];
-            document.getElementById('heat-res').innerText = msg;
-        }
-
-        // --- TOOLS: COPY EQUIP ---
-        function copyEquip() {
-            let p = document.getElementById('eq-pump').value;
-            let f = document.getElementById('eq-filt').value;
-            let h = document.getElementById('eq-heat').value;
-            let t = `EQUIPMENT PROFILE\nPump: ${p}\nFilter: ${f}\nHeater: ${h}`;
-            navigator.clipboard.writeText(t).then(()=>alert("Profile Copied!"));
+            
+            if(codes[c]) {
+                r.innerHTML = `<span style="color:var(--primary)">CODE FOUND:</span><br>${codes[c]}`;
+                r.style.color = "var(--text)";
+            } else {
+                r.innerText = "Code not in database. Consult Manual.";
+                r.style.color = "var(--danger)";
+            }
         }
 
         // --- BREAKPOINT ---
@@ -315,47 +572,52 @@
             let tc = parseFloat(document.getElementById('bp-tc').value);
             let fc = parseFloat(document.getElementById('bp-fc').value);
             let vol = parseFloat(document.getElementById('vol').value);
-            if(!tc || !fc) return;
-            let cc = tc - fc;
-            let need = (cc * 10) - fc;
-            let lbs = (need * 1.3 * (vol/10000)) / 16;
-            document.getElementById('bp-res').innerText = `Combined Cl: ${cc.toFixed(1)}\nTarget: ${(cc*10).toFixed(1)} ppm\nAdd ${lbs.toFixed(1)} lbs Shock`;
-        }
-        
-        // --- COPIES ---
-        function copyReadings() {
-            let t = `READINGS ${new Date().toLocaleDateString()}\nFC:${document.getElementById('fc').value} pH:${document.getElementById('ph').value} Alk:${document.getElementById('ta').value} Cy:${document.getElementById('cya').value}\n- Calibrated Pools`;
-            navigator.clipboard.writeText(t).then(()=>alert("Copied!"));
-        }
-        function copyDosing() {
-            let t = `TREATMENT\n${doseLog || "Balanced."}\n- Calibrated Pools`;
-            navigator.clipboard.writeText(t).then(()=>alert("Copied!"));
-        }
-        function copySafety() {
-            let listId = currentSafety==='comm'?'comm-list':'res-list';
-            let p=[], f=[];
-            document.getElementById(listId).querySelectorAll('.checklist-item').forEach(i=>{
-                if(i.classList.contains('checked')) p.push(i.innerText); else f.push(i.innerText);
-            });
-            let t = `${currentSafety.toUpperCase()} AUDIT\n✅ PASS:\n${p.join('\n')}\n⚠️ ATTN:\n${f.join('\n')}\n- Calibrated Pools`;
-            navigator.clipboard.writeText(t).then(()=>alert("Copied!"));
+            
+            if(tc && fc && vol) {
+                let cc = tc - fc;
+                let target = cc * 10; // Breakpoint is 10x Combined Chlorine
+                let need = target - fc;
+                let lbs = (need * 1.3 * (vol/10000)) / 16; // Rough Calc for Cal-Hypo
+                document.getElementById('bp-res').innerHTML = `
+                Combined Cl: <strong style="color:var(--warn)">${cc.toFixed(1)}</strong><br>
+                Breakpoint Target: <strong>${target.toFixed(1)} ppm</strong><br>
+                Add approx <strong style="color:var(--primary)">${lbs.toFixed(1)} lbs</strong> Shock`;
+            }
         }
 
-        // --- INIT LISTS ---
-        const commItems = ["Gate: Self-Closing/Latching", "Gate: Opens OUTWARD", "Fence: No gaps > 4in", "Shepherd's Hook (12ft)", "Ring Buoy w/ Rope", "Phone: Dial Tone", "Phone: Address Posted", "Sign: 'No Lifeguard'", "Sign: 'No Diving'", "Depth Markers (Deck/Tile)", "Main Drain Visible"];
-        const resItems = ["Gate Latches Securely", "Fence Integrity", "Main Drain Visible", "Skimmer Baskets Intact", "Equip Area Clear"];
-        function initLists() {
-            const mk = (t,p) => {
-                let d=document.createElement('div'); d.className='checklist-item';
-                d.onclick=function(){this.classList.toggle('checked');};
-                d.innerHTML=`<div class="check-circle"></div><span>${t}</span>`;
-                document.getElementById(p).appendChild(d);
-            };
-            commItems.forEach(i=>mk(i,'comm-list'));
-            resItems.forEach(i=>mk(i,'res-list'));
+        // --- SAFETY LISTS ---
+        const commList = ["Gate: Self-Closing/Latching", "Gate: Opens OUTWARD", "Fence: No gaps > 4in", "Shepherd's Hook (12ft)", "Ring Buoy w/ Rope", "Phone: Dial Tone", "Phone: Address Posted", "Sign: 'No Lifeguard'", "Sign: 'No Diving'", "Depth Markers Visible", "Main Drain Secure"];
+        const resList = ["Gate Latches Securely", "Fence Integrity", "Main Drain Visible", "Skimmer Baskets Intact", "Equipment Area Clear", "Electrical Bonding Check"];
+        let currentSafeMode = 'comm';
+
+        function loadSafety(mode) {
+            currentSafeMode = mode;
+            let c = document.getElementById('checklist-container');
+            c.innerHTML = "";
+            let items = (mode === 'comm') ? commList : resList;
+            items.forEach(item => {
+                c.innerHTML += `
+                <div class="check-item" onclick="this.classList.toggle('checked')">
+                    <div class="check-dot"></div>
+                    <div>${item}</div>
+                </div>`;
+            });
         }
-        initLists();
-        function resetChecks(){document.querySelectorAll('.checklist-item').forEach(e=>e.classList.remove('checked'));}
+        
+        function copySafety() {
+            let passed = [];
+            let failed = [];
+            document.querySelectorAll('.check-item').forEach(el => {
+                let text = el.querySelector('div:last-child').innerText;
+                if(el.classList.contains('checked')) passed.push(text);
+                else failed.push(text);
+            });
+            let t = `SAFETY AUDIT (${currentSafeMode.toUpperCase()})\n\n✅ PASSED:\n${passed.join('\n')}\n\n⚠️ ATTENTION NEEDED:\n${failed.join('\n')}\n\n- Calibrated Pools`;
+            navigator.clipboard.writeText(t).then(()=>alert("Audit Report Copied"));
+        }
+
+        // Init
+        loadSafety('comm');
 
     </script>
 </body>
