@@ -18,6 +18,7 @@
             padding: 0;
             color: var(--text-dark);
             line-height: 1.6;
+            background-color: white;
         }
 
         /* --- HERO HEADER --- */
@@ -42,7 +43,7 @@
             margin-top: 10px;
         }
 
-        /* --- DIVISION 1: PRECISION POOL CARE --- */
+        /* --- SECTIONS --- */
         .section-title {
             text-align: center;
             margin: 60px 0 30px;
@@ -66,13 +67,7 @@
             border-left: 5px solid var(--primary-blue);
             padding: 25px;
             background: white;
-            transition: transform 0.2s;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
         }
 
         .card-header {
@@ -81,6 +76,7 @@
             margin-bottom: 10px;
             display: flex;
             align-items: center;
+            color: #111;
         }
 
         .icon {
@@ -88,7 +84,25 @@
             font-size: 1.5rem;
         }
 
-        /* --- DIVISION 2: INDUSTRIAL FREEZE DEFENSE --- */
+        /* --- FIXED LIST STYLING --- */
+        ul {
+            display: block;
+            list-style-type: disc !important; /* Force Bullets */
+            list-style-position: inside !important; /* Keep bullets inside the box */
+            padding-left: 10px !important;
+            margin-top: 15px;
+            background-color: #f9f9f9; /* Light grey box for list */
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #444;
+            font-weight: 500;
+        }
+
+        /* --- DIVISION 2 STYLING --- */
         .winter-bg {
             background-color: var(--industrial-grey);
             padding: 40px 0;
@@ -107,7 +121,7 @@
             border-radius: 3px;
         }
 
-        /* --- CALL TO ACTION --- */
+        /* --- CTA --- */
         .cta-section {
             text-align: center;
             padding: 60px 20px;
@@ -126,22 +140,7 @@
             border-radius: 5px;
             display: inline-block;
             margin-top: 20px;
-            transition: background 0.3s;
         }
-
-        .cta-btn:hover {
-            background-color: var(--primary-blue);
-        }
-
-        ul {
-            padding-left: 20px;
-            margin-top: 10px;
-        }
-        
-        li {
-            margin-bottom: 5px;
-        }
-
     </style>
 </head>
 <body>
@@ -156,17 +155,17 @@
     <div class="service-grid">
         <div class="service-card">
             <div class="card-header"><span class="icon">🧪</span> CPO Chemical Management</div>
-            <p>We don't guess. We calibrate. Full LSI water balancing compliant with Texas Administrative Code §265.</p>
+            <p>Full LSI water balancing compliant with Texas Code §265.</p>
             <ul>
-                <li>Precision dosing</li>
+                <li>Precision dosing strategies</li>
                 <li>Cyanuric Acid management</li>
                 <li>Safe-swim certification</li>
             </ul>
-        </div>
+            </div>
 
         <div class="service-card">
             <div class="card-header"><span class="icon">⚙️</span> Equipment Diagnostics</div>
-            <p>Authorized repair for pumps, heaters, and filters. We diagnose the root cause, not just the symptom.</p>
+            <p>Authorized repair for pumps, heaters, and filters.</p>
             <ul>
                 <li>Variable Speed Pump programming</li>
                 <li>Filter grid cleaning</li>
@@ -176,45 +175,47 @@
         
         <div class="service-card">
             <div class="card-header"><span class="icon">♻️</span> Rescue Operations</div>
-            <p>Specialized "Green-to-Clean" protocols for neglected pools. We turn swamps into sterile water in 48 hours.</p>
+            <p>Specialized "Green-to-Clean" protocols.</p>
+            <ul>
+                <li>Swamp to Sterile in 48 hours</li>
+                <li>Phosphate removal</li>
+                <li>Algae spore elimination</li>
+            </ul>
         </div>
     </div>
 
     <div class="winter-bg">
         <div class="section-title">Division 2: Freeze Defense Systems</div>
-        <p style="text-align:center; max-width: 800px; margin: 0 auto 40px;">
-            Standard foam tape fails. We fabricate custom <strong>PVC Hard Shell</strong> insulation systems that protect your equipment from UV damage, rodents, and deep freezes.
-        </p>
 
         <div class="service-grid">
             <div class="service-card">
                 <div class="winter-tag">Best Seller</div>
                 <div class="card-header"><span class="icon">🛡️</span> Pump Armor</div>
-                <p>Acoustic and thermal jacket for pool pumps. Reduces motor noise by 40% and prevents housing cracks.</p>
+                <p>Acoustic and thermal jacket for pool pumps.</p>
                 <ul>
                     <li>1" K-Flex Rubber Insulation</li>
                     <li>UV-Proof PVC Exterior Shell</li>
-                    <li>Removable for maintenance</li>
+                    <li>Reduces noise by 40%</li>
                 </ul>
             </div>
 
             <div class="service-card">
                 <div class="winter-tag">New Service</div>
                 <div class="card-header"><span class="icon">🔥</span> Tankless V-Armor</div>
-                <p>Custom-built thermal enclosures for exterior tankless water heaters (Rinnai/Navien).</p>
+                <p>Custom-built thermal enclosures for Rinnai/Navien units.</p>
                 <ul>
-                    <li>Hides ugly PEX piping</li>
+                    <li>Hides ugly exposed PEX</li>
                     <li>Integrated heat-tape channel</li>
-                    <li>Matches home siding aesthetics</li>
+                    <li>Matches home siding</li>
                 </ul>
             </div>
 
             <div class="service-card">
                 <div class="card-header"><span class="icon">❄️</span> Backflow Zero</div>
-                <p>Replace that rotting green bag with a permanent hard-shell thermal boot. </p>
+                <p>Hard-shell thermal boot for backflow preventers.</p>
                 <ul>
-                    <li>Weed-eater proof</li>
-                    <li>Inspection-ready access ports</li>
+                    <li>Weed-eater proof design</li>
+                    <li>Inspection-ready access</li>
                     <li>10-year UV rating</li>
                 </ul>
             </div>
@@ -223,7 +224,6 @@
 
     <div class="cta-section">
         <h2>Protect Your Investment</h2>
-        <p>Don't wait for the next freeze. Get calibrated today.</p>
         <a href="#" class="cta-btn">Request an Audit</a>
     </div>
 
