@@ -3,29 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Calibrated Ops | Portal</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Calibrated Ops | Master</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@500;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
             /* Scientific Palette */
-            --bg-deep: #0B1120; /* Deep Navy */
-            --bg-surface: #151e32; /* Lighter Navy */
-            --primary: #38bdf8; /* Cyan/Blue */
-            --primary-dim: rgba(56, 189, 248, 0.1);
-            --accent: #818cf8; /* Indigo */
+            --bg-deep: #0B1120;
+            --bg-surface: #151e32;
+            --primary: #38bdf8;
+            --primary-dim: rgba(56, 189, 248, 0.15);
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --success: #34d399;
             --warning: #fbbf24;
             --danger: #f87171;
             
-            /* UI Elements */
+            /* UI Config */
             --glass: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(255, 255, 255, 0.08);
-            --radius: 20px;
-            --shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+            --radius: 16px;
+            --shadow: 0 10px 30px -10px rgba(0,0,0,0.6);
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -33,8 +34,8 @@
         body {
             background-color: var(--bg-deep);
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.08), transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(129, 140, 248, 0.08), transparent 40%);
+                radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.08), transparent 40%),
+                radial-gradient(circle at 100% 100%, rgba(129, 140, 248, 0.08), transparent 40%);
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
             margin: 0;
@@ -44,10 +45,10 @@
 
         /* --- HEADER --- */
         header {
-            background: rgba(11, 17, 32, 0.8);
+            background: rgba(11, 17, 32, 0.9);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            padding: 15px 24px;
+            padding: 15px 20px;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -59,57 +60,67 @@
 
         .brand-box h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin: 0;
             letter-spacing: 0.5px;
             color: var(--text-main);
         }
         .brand-box span {
             font-family: 'Inter', sans-serif;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             text-transform: uppercase;
             letter-spacing: 2px;
             color: var(--primary);
             font-weight: 600;
         }
 
+        .header-btn {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
         /* --- LAYOUT --- */
-        .section { display: none; padding: 20px; max-width: 600px; margin: 0 auto; animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .section { display: none; padding: 20px; max-width: 600px; margin: 0 auto; animation: fadeUp 0.3s ease-out; }
         .section.active { display: block; }
         @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- CARDS & UI --- */
+        /* --- CARDS --- */
         .card {
             background: var(--bg-surface);
             border: 1px solid var(--glass-border);
             border-radius: var(--radius);
-            padding: 24px;
-            margin-bottom: 20px;
+            padding: 20px;
+            margin-bottom: 16px;
             box-shadow: var(--shadow);
             position: relative;
-            overflow: hidden;
         }
 
         .card-header {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            font-weight: 600;
-            margin-bottom: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
             display: flex; justify-content: space-between; align-items: center;
         }
 
         /* --- INPUTS --- */
         .input-group {
             display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             padding-bottom: 8px;
             border-bottom: 1px solid rgba(255,255,255,0.04);
         }
         .input-group:last-child { border-bottom: none; margin-bottom: 0; }
 
-        label { font-size: 0.95rem; color: var(--text-muted); }
+        label { font-size: 0.9rem; color: var(--text-muted); }
         
         input {
             background: transparent;
@@ -119,8 +130,9 @@
             font-size: 1.1rem;
             font-weight: 500;
             text-align: right;
-            width: 140px;
+            width: 120px;
             outline: none;
+            padding: 0;
         }
         input:focus { color: var(--primary); }
         input::placeholder { color: rgba(255,255,255,0.2); }
@@ -128,112 +140,116 @@
         /* --- BUTTONS --- */
         .btn {
             width: 100%;
-            padding: 18px;
-            border-radius: 16px;
+            padding: 16px;
+            border-radius: 12px;
             border: none;
             font-family: 'Inter', sans-serif;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             letter-spacing: 0.5px;
             cursor: pointer;
             transition: 0.2s;
-            display: flex; justify-content: center; align-items: center; gap: 10px;
+            display: flex; justify-content: center; align-items: center; gap: 8px;
             margin-top: 15px;
         }
         .btn:active { transform: scale(0.98); }
 
-        .btn-primary {
-            background: var(--text-main);
-            color: var(--bg-deep);
-        }
-        
-        .btn-ghost {
-            background: rgba(255,255,255,0.05);
-            color: var(--text-main);
-            border: 1px solid var(--glass-border);
-        }
+        .btn-primary { background: var(--text-main); color: var(--bg-deep); }
+        .btn-ghost { background: rgba(255,255,255,0.05); color: var(--text-main); border: 1px solid var(--glass-border); }
+        .btn-danger { background: rgba(248, 113, 113, 0.15); color: var(--danger); border: 1px solid rgba(248, 113, 113, 0.3); }
 
-        /* --- PROFIT CALCULATOR (JOB OPS) --- */
+        /* --- OPS TAB (PROFIT) --- */
         .timer-display {
             font-family: 'Space Grotesk', monospace;
-            font-size: 3.5rem;
+            font-size: 3.2rem;
             font-weight: 700;
             text-align: center;
-            margin: 10px 0 20px 0;
+            margin: 10px 0;
             font-variant-numeric: tabular-nums;
             letter-spacing: -1px;
         }
 
-        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
         .stat-box {
             background: rgba(0,0,0,0.2);
-            padding: 15px;
+            padding: 12px;
             border-radius: 12px;
             text-align: center;
         }
-        .stat-label { font-size: 0.7rem; color: var(--text-muted); uppercase; letter-spacing: 1px; margin-bottom: 5px; }
-        .stat-val { font-family: 'Space Grotesk', monospace; font-size: 1.2rem; font-weight: 600; }
+        .stat-label { font-size: 0.65rem; color: var(--text-muted); letter-spacing: 1px; margin-bottom: 4px; }
+        .stat-val { font-family: 'Space Grotesk', monospace; font-size: 1.1rem; font-weight: 600; }
         
         .hourly-badge {
             margin-top: 15px;
             padding: 8px;
             border-radius: 50px;
             text-align: center;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
             background: rgba(255,255,255,0.05);
             color: var(--text-muted);
             transition: 0.3s;
         }
 
-        /* --- CHEM RESULTS --- */
+        /* --- LAB TAB (LSI) --- */
         .lsi-ring {
-            width: 120px; height: 120px;
+            width: 100px; height: 100px;
             border-radius: 50%;
             border: 4px solid var(--glass-border);
-            margin: 20px auto;
+            margin: 15px auto;
             display: flex; flex-direction: column;
             justify-content: center; align-items: center;
-            position: relative;
         }
-        .lsi-val { font-size: 2.2rem; font-weight: 700; font-family: 'Space Grotesk'; line-height: 1; }
-        .lsi-sub { font-size: 0.7rem; color: var(--text-muted); letter-spacing: 2px; margin-top: 5px; }
+        .lsi-val { font-size: 1.8rem; font-weight: 700; font-family: 'Space Grotesk'; line-height: 1; }
         
+        /* --- HISTORY TAB --- */
+        .history-item {
+            background: rgba(255,255,255,0.02);
+            padding: 15px;
+            border-bottom: 1px solid var(--glass-border);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .history-item:first-child { border-top-left-radius: 12px; border-top-right-radius: 12px; }
+        .history-item:last-child { border-bottom: none; border-bottom-left-radius: 12px; border-bottom-right-radius: 12px; }
+
+        /* --- MODAL --- */
+        .modal { display:none; position:fixed; inset:0; background:rgba(11,17,32,0.95); z-index:300; padding:30px; overflow-y:auto; }
+        .modal.active { display:block; animation: fadeIn 0.2s; }
+
         /* --- NAV BAR --- */
         .nav-bar {
             position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(21, 30, 50, 0.9);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 8px;
+            bottom: 25px; left: 50%; transform: translateX(-50%);
+            background: rgba(21, 30, 50, 0.95);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            padding: 6px;
             border-radius: 50px;
             border: 1px solid rgba(255,255,255,0.1);
             display: flex;
             box-shadow: 0 20px 40px rgba(0,0,0,0.6);
             z-index: 200;
         }
-
         .nav-item {
-            padding: 12px 24px;
+            padding: 10px 20px;
             border-radius: 40px;
             color: var(--text-muted);
             cursor: pointer;
             transition: 0.3s;
             display: flex; align-items: center; gap: 8px;
         }
-        
         .nav-item span { font-size: 1.2rem; }
-        .nav-item p { margin: 0; font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; display: none; }
-        
+        .nav-item p { margin: 0; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.5px; display: none; }
         .nav-item.active { background: var(--text-main); color: var(--bg-deep); }
         .nav-item.active p { display: block; }
 
-        /* Animation for timer */
-        @keyframes pulse-green { 0% {box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.4);} 70% {box-shadow: 0 0 0 10px rgba(52, 211, 153, 0);} 100% {box-shadow: 0 0 0 0 rgba(52, 211, 153, 0);} }
-        .active-timer { animation: pulse-green 2s infinite; border-color: var(--success); }
+        .storm-toggle {
+            display: flex; align-items: center; justify-content: space-between;
+            background: rgba(251, 191, 36, 0.1); border: 1px solid rgba(251, 191, 36, 0.2);
+            padding: 12px; border-radius: 12px; margin-bottom: 15px; cursor: pointer;
+        }
+        .storm-toggle.active { background: rgba(251, 191, 36, 0.2); border-color: var(--warning); }
+        
+        .active-timer { border-color: var(--success); box-shadow: 0 0 20px rgba(52, 211, 153, 0.1); }
 
     </style>
 </head>
@@ -244,9 +260,7 @@
             <h1>Calibrated Pools</h1>
             <span>Clarity With Science</span>
         </div>
-        <div style="font-size: 0.8rem; color: var(--text-muted); border: 1px solid var(--glass-border); padding: 5px 10px; border-radius: 8px;">
-            CPO #C-161853
-        </div>
+        <div class="header-btn" onclick="openSettings()">⚙️</div>
     </header>
 
     <div id="tab-ops" class="section active">
@@ -275,6 +289,10 @@
                 <label>Materials ($)</label>
                 <input type="number" id="job-cost" placeholder="0.00" oninput="calcProfit()">
             </div>
+            
+            <button id="import-chem-btn" class="btn btn-ghost" style="margin-top:5px; padding:10px; font-size:0.75rem; display:none;" onclick="importChemCost()">
+                📥 Import Calculated Chem Cost ($<span id="pending-chem-cost">0.00</span>)
+            </button>
 
             <div class="stat-grid">
                 <div class="stat-box">
@@ -290,32 +308,48 @@
             <div class="hourly-badge" id="hourly-rate-display">
                 REAL-TIME RATE: $0.00 / HR
             </div>
+
+            <button class="btn btn-primary" onclick="saveJob()" style="margin-top:20px;">SAVE TO HISTORY</button>
         </div>
     </div>
 
     <div id="tab-chem" class="section">
+        
+        <div class="storm-toggle" id="storm-btn" onclick="toggleStorm()">
+            <div style="font-size:0.8rem; font-weight:700; color:var(--warning)">⚡ STORM MODE</div>
+            <div id="storm-status" style="font-size:0.7rem; opacity:0.7;">OFF</div>
+        </div>
+
         <div class="card">
-            <div class="card-header">LSI Diagnostics</div>
+            <div class="card-header">Water Analysis</div>
             
+            <div id="storm-inputs" style="display:none; margin-bottom:15px; border-bottom:1px solid var(--glass-border); padding-bottom:10px;">
+                <div class="input-group"><label style="color:var(--warning)">Phosphates (ppb)</label><input type="number" id="phos"></div>
+                <div class="input-group"><label style="color:var(--warning)">Nitrates (ppm)</label><input type="number" id="nits"></div>
+            </div>
+
+            <div class="input-group"><label>Pool Volume (gal)</label><input type="number" id="vol" onchange="saveSettings()"></div>
             <div class="input-group"><label>Water Temp (°F)</label><input type="number" id="temp" placeholder="80"></div>
             <div class="input-group"><label>pH Level</label><input type="number" id="ph" placeholder="7.5"></div>
             <div class="input-group"><label>Alkalinity</label><input type="number" id="ta" placeholder="100"></div>
             <div class="input-group"><label>Calcium</label><input type="number" id="ch" placeholder="300"></div>
-            <div class="input-group"><label>CYA (Stab)</label><input type="number" id="cya" placeholder="50"></div>
+            <div class="input-group"><label>CYA</label><input type="number" id="cya" placeholder="50"></div>
             <div class="input-group"><label>TDS / Salt</label><input type="number" id="tds" placeholder="1000"></div>
             
-            <button class="btn btn-primary" onclick="calcLSI()">CALCULATE LSI</button>
+            <button class="btn btn-primary" onclick="calcLSI()">RUN DIAGNOSTICS</button>
         </div>
 
         <div id="chem-result" style="display:none; animation: fadeUp 0.3s ease;">
-            <div class="lsi-ring" id="lsi-ring">
-                <div class="lsi-val" id="lsi-val">0.00</div>
-                <div class="lsi-sub">LSI SCORE</div>
-            </div>
-            
             <div class="card" style="text-align:center;">
-                <div id="lsi-msg" style="font-size: 0.9rem; margin-bottom: 10px;">Balanced</div>
+                <div class="lsi-ring" id="lsi-ring">
+                    <div class="lsi-val" id="lsi-val">0.00</div>
+                    <div style="font-size:0.6rem; color:var(--text-muted);">LSI SCORE</div>
+                </div>
+                <div id="lsi-msg" style="font-weight:700; font-size:0.9rem;">Balanced</div>
+                
                 <div id="dose-plan" style="text-align:left; font-size: 0.85rem; color:var(--text-muted); line-height: 1.6; border-top: 1px solid var(--glass-border); padding-top: 15px; margin-top: 15px;"></div>
+                
+                <div id="chem-cost-preview" style="margin-top:15px; font-weight:700; color:var(--success);">Est. Chem Cost: $0.00</div>
             </div>
         </div>
     </div>
@@ -328,235 +362,354 @@
                 <input type="text" id="heat-code" placeholder="E01">
             </div>
             <button class="btn btn-ghost" onclick="checkHeater()">SCAN CODE</button>
-            <div id="heat-res" style="margin-top:15px; font-size:0.9rem; color:var(--primary);"></div>
+            <div id="heat-res" style="margin-top:15px; font-size:0.9rem; color:var(--primary); line-height:1.4;"></div>
         </div>
 
         <div class="card">
-            <div class="card-header">Field Protocols</div>
-            <div style="font-size:0.85rem; color:var(--text-muted); line-height:1.8;">
-                <div onclick="alert('Green Protocol:\n1. pH to 7.2\n2. Brush Walls\n3. Shock 30ppm\n4. Filter 24hrs')" style="padding:10px; border-bottom:1px solid var(--glass-border); cursor:pointer; display:flex; justify-content:space-between;">
-                    <span>🟢 Green Algae</span> <span>→</span>
-                </div>
-                <div onclick="alert('Mustard Protocol:\n1. Sodium Bromide\n2. High Chlorine Shock\n3. Wash equipment')" style="padding:10px; border-bottom:1px solid var(--glass-border); cursor:pointer; display:flex; justify-content:space-between;">
-                    <span>🟡 Mustard Algae</span> <span>→</span>
-                </div>
-                <div onclick="alert('Fecal (Solid):\n1. Scoop\n2. FC to 2.0\n3. Wait 25m\n\nFecal (Loose):\n1. Close Pool\n2. FC to 20ppm\n3. Wait 13hrs')" style="padding:10px; cursor:pointer; display:flex; justify-content:space-between;">
-                    <span>💩 Fecal Incident</span> <span>→</span>
-                </div>
+            <div class="card-header">Volume Estimator</div>
+            <div class="input-group"><label>Length (ft)</label><input type="number" id="v-len"></div>
+            <div class="input-group"><label>Width (ft)</label><input type="number" id="v-wid"></div>
+            <div class="input-group"><label>Avg Depth (ft)</label><input type="number" id="v-dep"></div>
+            <div style="margin-top:10px; text-align:right; font-weight:700; color:var(--primary)" id="vol-est-res">0 Gallons</div>
+            <button class="btn btn-ghost" style="margin-top:10px; padding:8px;" onclick="applyVolume()">Apply to Calculator</button>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Safety Audit</div>
+            <div style="display:flex; gap:10px; margin-bottom:15px;">
+                <button class="btn btn-ghost" style="margin:0; padding:10px; font-size:0.75rem;" onclick="loadSafety('comm')">Commercial</button>
+                <button class="btn btn-ghost" style="margin:0; padding:10px; font-size:0.75rem;" onclick="loadSafety('res')">Residential</button>
+            </div>
+            <div id="safety-list" style="font-size:0.9rem; color:var(--text-muted);"></div>
+        </div>
+    </div>
+
+    <div id="tab-hist" class="section">
+        <div class="card">
+            <div class="card-header">
+                <span>Recent Jobs</span>
+                <span onclick="clearHistory()" style="cursor:pointer; color:var(--danger)">CLEAR</span>
+            </div>
+            <div id="history-list">
+                <div style="text-align:center; padding:20px; color:var(--text-muted)">No jobs saved yet.</div>
             </div>
         </div>
     </div>
 
+    <div id="settings-modal" class="modal">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <h2 style="margin:0; font-family:'Playfair Display', serif;">Settings</h2>
+            <span onclick="closeSettings()" style="font-size:1.5rem; cursor:pointer;">✕</span>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">Chemical Costs (Unit Price)</div>
+            <div class="input-group"><label>Acid ($/gal)</label><input type="number" id="cost-acid"></div>
+            <div class="input-group"><label>Bicarb ($/lb)</label><input type="number" id="cost-bicarb"></div>
+            <div class="input-group"><label>Calcium ($/lb)</label><input type="number" id="cost-calc"></div>
+            <div class="input-group"><label>Shock ($/lb)</label><input type="number" id="cost-shock"></div>
+            <div class="input-group"><label>CYA ($/lb)</label><input type="number" id="cost-cya"></div>
+            <div class="input-group"><label>Salt ($/lb)</label><input type="number" id="cost-salt"></div>
+        </div>
+
+        <button class="btn btn-primary" onclick="saveSettings(); closeSettings()">SAVE & CLOSE</button>
+    </div>
+
     <div class="nav-bar">
-        <div class="nav-item active" onclick="nav('tab-ops', this)">
-            <span>⏱</span> <p>OPS</p>
-        </div>
-        <div class="nav-item" onclick="nav('tab-chem', this)">
-            <span>⚗️</span> <p>LAB</p>
-        </div>
-        <div class="nav-item" onclick="nav('tab-tools', this)">
-            <span>🛡</span> <p>GUIDE</p>
-        </div>
+        <div class="nav-item active" onclick="nav('tab-ops', this)"><span>⏱</span><p>OPS</p></div>
+        <div class="nav-item" onclick="nav('tab-chem', this)"><span>⚗️</span><p>LAB</p></div>
+        <div class="nav-item" onclick="nav('tab-tools', this)"><span>🛠</span><p>TOOLS</p></div>
+        <div class="nav-item" onclick="nav('tab-hist', this)"><span>📜</span><p>LOGS</p></div>
     </div>
 
     <script>
+        // --- GLOBAL STATE ---
+        let calculatedChemCost = 0;
+        let startTime = null;
+        let timerInterval = null;
+        let isRunning = false;
+        
+        // --- INIT ---
+        window.onload = function() {
+            loadSettings();
+            loadHistory();
+        }
+
         // --- NAVIGATION ---
         function nav(tabId, el) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
-            
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             el.classList.add('active');
         }
 
-        // --- PROFIT & TIMER ENGINE ---
-        let startTime = null;
-        let timerInterval = null;
-        let isRunning = false;
+        function openSettings() { document.getElementById('settings-modal').classList.add('active'); }
+        function closeSettings() { document.getElementById('settings-modal').classList.remove('active'); }
 
+        // --- DATA PERSISTENCE ---
+        function loadSettings() {
+            const s = JSON.parse(localStorage.getItem('cp_settings')) || {
+                vol: 15000,
+                costs: { acid: 8, bicarb: 2, calc: 3, shock: 5, cya: 4, salt: 0.5 }
+            };
+            document.getElementById('vol').value = s.vol;
+            document.getElementById('cost-acid').value = s.costs.acid;
+            document.getElementById('cost-bicarb').value = s.costs.bicarb;
+            document.getElementById('cost-calc').value = s.costs.calc;
+            document.getElementById('cost-shock').value = s.costs.shock;
+            document.getElementById('cost-cya').value = s.costs.cya;
+            document.getElementById('cost-salt').value = s.costs.salt;
+        }
+
+        function saveSettings() {
+            const s = {
+                vol: document.getElementById('vol').value,
+                costs: {
+                    acid: document.getElementById('cost-acid').value,
+                    bicarb: document.getElementById('cost-bicarb').value,
+                    calc: document.getElementById('cost-calc').value,
+                    shock: document.getElementById('cost-shock').value,
+                    cya: document.getElementById('cost-cya').value,
+                    salt: document.getElementById('cost-salt').value
+                }
+            };
+            localStorage.setItem('cp_settings', JSON.stringify(s));
+        }
+
+        // --- PROFIT ENGINE ---
         function toggleTimer() {
             const btn = document.getElementById('btn-start');
             const card = document.getElementById('timer-card');
             const status = document.getElementById('timer-status');
 
             if (!isRunning) {
-                // START
-                startTime = Date.now() - (startTime ? startTime : 0); // Logic to resume or start fresh
-                // Actually, let's keep it simple: Start implies running. 
-                // To support pause, we need stored elapsed time. 
-                // For simplicity: We track start timestamp.
+                startTime = Date.now() - (startTime ? startTime : 0); // Simple resume logic
+                if(!startTime) startTime = Date.now();
                 
-                if(!startTime) startTime = Date.now(); 
-                else startTime = Date.now() - elapsedSaved;
-
                 timerInterval = setInterval(updateTimer, 1000);
                 isRunning = true;
-                
-                btn.innerText = "CLOCK OUT";
-                btn.style.background = "var(--danger)";
-                btn.style.color = "#fff";
+                btn.innerText = "CLOCK OUT"; btn.style.background = "var(--danger)";
                 card.classList.add('active-timer');
-                status.innerText = "RUNNING";
-                status.style.color = "var(--success)";
+                status.innerText = "RUNNING"; status.style.color = "var(--success)";
             } else {
-                // STOP
                 clearInterval(timerInterval);
-                elapsedSaved = Date.now() - startTime;
                 isRunning = false;
-                
-                btn.innerText = "RESUME JOB";
-                btn.style.background = "var(--text-main)";
-                btn.style.color = "var(--bg-deep)";
+                btn.innerText = "RESUME"; btn.style.background = "var(--text-main)";
                 card.classList.remove('active-timer');
-                status.innerText = "PAUSED";
-                status.style.color = "var(--warning)";
+                status.innerText = "PAUSED"; status.style.color = "var(--warning)";
             }
         }
-
-        let elapsedSaved = 0;
 
         function resetTimer() {
             clearInterval(timerInterval);
             isRunning = false;
             startTime = null;
-            elapsedSaved = 0;
             document.getElementById('stopwatch').innerText = "00:00:00";
-            
-            const btn = document.getElementById('btn-start');
-            btn.innerText = "START JOB";
-            btn.style.background = "var(--text-main)";
-            btn.style.color = "var(--bg-deep)";
+            document.getElementById('btn-start').innerText = "START JOB";
+            document.getElementById('btn-start').style.background = "var(--text-main)";
             document.getElementById('timer-card').classList.remove('active-timer');
             document.getElementById('timer-status').innerText = "IDLE";
-            document.getElementById('timer-status').style.color = "var(--text-muted)";
-            
-            calcProfit(); // Reset calcs
+            calcProfit();
         }
 
         function updateTimer() {
-            const now = Date.now();
-            const diff = now - startTime;
-            
-            const hrs = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const secs = Math.floor((diff % (1000 * 60)) / 1000);
-            
+            const diff = Date.now() - startTime;
+            const h = Math.floor(diff / 3600000);
+            const m = Math.floor((diff % 3600000) / 60000);
+            const s = Math.floor((diff % 60000) / 1000);
             document.getElementById('stopwatch').innerText = 
-                (hrs < 10 ? "0" + hrs : hrs) + ":" + 
-                (mins < 10 ? "0" + mins : mins) + ":" + 
-                (secs < 10 ? "0" + secs : secs);
-            
-            calcProfit(diff); // Update profit metrics in real time
+                `${h<10?'0'+h:h}:${m<10?'0'+m:m}:${s<10?'0'+s:s}`;
+            calcProfit(diff);
         }
 
         function calcProfit(elapsedMs = 0) {
-            // If called from input change, we need current elapsed time if running
             if (isRunning && elapsedMs === 0) elapsedMs = Date.now() - startTime;
-            if (!isRunning && elapsedSaved > 0) elapsedMs = elapsedSaved;
-
             const price = parseFloat(document.getElementById('job-price').value) || 0;
             const cost = parseFloat(document.getElementById('job-cost').value) || 0;
             
-            // Profit
             const profit = price - cost;
             document.getElementById('val-profit').innerText = "$" + profit.toFixed(2);
             
-            // Margin
-            let margin = 0;
-            if (price > 0) margin = (profit / price) * 100;
-            document.getElementById('val-margin').innerText = margin.toFixed(1) + "%";
-            
-            // Color Coding Margin
+            let margin = (price > 0) ? (profit / price) * 100 : 0;
             const mEl = document.getElementById('val-margin');
-            if(margin >= 50) mEl.style.color = "var(--success)";
-            else if(margin >= 30) mEl.style.color = "var(--warning)";
-            else mEl.style.color = "var(--danger)";
+            mEl.innerText = margin.toFixed(1) + "%";
+            mEl.style.color = margin >= 50 ? "var(--success)" : (margin >= 30 ? "var(--warning)" : "var(--danger)");
 
-            // Hourly Rate
-            const hours = elapsedMs / (1000 * 60 * 60);
-            let hourly = 0;
+            // Hourly
+            const hours = elapsedMs / 3600000;
             const badge = document.getElementById('hourly-rate-display');
-            
-            if (hours > 0.01) { // Avoid infinity at 0 seconds
-                hourly = profit / hours;
-                badge.innerText = `REAL-TIME RATE: $${hourly.toFixed(2)} / HR`;
-                
-                if(hourly >= 100) { badge.style.background = "var(--success)"; badge.style.color = "#000"; }
-                else if(hourly >= 50) { badge.style.background = "var(--warning)"; badge.style.color = "#000"; }
-                else { badge.style.background = "var(--danger)"; badge.style.color = "#fff"; }
-            } else {
-                badge.innerText = "REAL-TIME RATE: $0.00 / HR";
-                badge.style.background = "rgba(255,255,255,0.05)";
-                badge.style.color = "var(--text-muted)";
+            if (hours > 0.01) {
+                const rate = profit / hours;
+                badge.innerText = `REAL-TIME RATE: $${rate.toFixed(2)} / HR`;
+                badge.style.background = rate >= 80 ? "rgba(52, 211, 153, 0.2)" : (rate >= 40 ? "rgba(251, 191, 36, 0.2)" : "rgba(248, 113, 113, 0.2)");
+                badge.style.color = rate >= 80 ? "var(--success)" : (rate >= 40 ? "var(--warning)" : "var(--danger)");
             }
         }
 
-        // --- LSI CALCULATOR ---
+        function importChemCost() {
+            document.getElementById('job-cost').value = calculatedChemCost.toFixed(2);
+            calcProfit();
+            alert("Chemical costs added to job!");
+        }
+
+        // --- LAB (CHEMISTRY) ---
+        let stormMode = false;
+        function toggleStorm() {
+            stormMode = !stormMode;
+            const btn = document.getElementById('storm-btn');
+            const inputs = document.getElementById('storm-inputs');
+            if(stormMode) {
+                btn.classList.add('active'); inputs.style.display='block';
+                document.getElementById('storm-status').innerText = "ACTIVE";
+            } else {
+                btn.classList.remove('active'); inputs.style.display='none';
+                document.getElementById('storm-status').innerText = "OFF";
+            }
+        }
+
         function calcLSI() {
+            let vol = parseFloat(document.getElementById('vol').value)||15000;
             let ph = parseFloat(document.getElementById('ph').value);
             let temp = parseFloat(document.getElementById('temp').value);
             let ch = parseFloat(document.getElementById('ch').value);
             let ta = parseFloat(document.getElementById('ta').value);
-            let cya = parseFloat(document.getElementById('cya').value) || 0;
-            let tds = parseFloat(document.getElementById('tds').value) || 0;
+            let cya = parseFloat(document.getElementById('cya').value)||0;
+            let tds = parseFloat(document.getElementById('tds').value)||0;
 
-            if (!ph || !temp || !ch || !ta) { alert("Please enter pH, Temp, Alk, and Calcium"); return; }
+            if(!ph || !temp || !ch || !ta) { alert("Missing pH, Temp, Alk, or Calc"); return; }
 
-            // LSI Logic
-            let tdsFactor = (tds < 1000) ? 12.1 : 12.2;
-            let tempFactor = (0.79 * Math.log(temp)) - 2.65;
-            let caFactor = (0.43 * Math.log(ch)) - 0.23;
-            let alkAdj = ta - (cya / 3);
-            if (alkAdj < 1) alkAdj = 1;
-            let alkFactor = (0.43 * Math.log(alkAdj)) - 0.23;
-
-            let lsi = ph + tempFactor + caFactor + alkFactor - tdsFactor;
-
+            // LSI
+            let lsi = ph + (0.79*Math.log(temp)-2.65) + (0.43*Math.log(ch)-0.23) + (0.43*Math.log(Math.max(1, ta-(cya/3)))-0.23) - ((tds<1000)?12.1:12.2);
+            
             document.getElementById('chem-result').style.display = 'block';
             document.getElementById('lsi-val').innerText = lsi.toFixed(2);
             
             let ring = document.getElementById('lsi-ring');
             let msg = document.getElementById('lsi-msg');
+            if(lsi >= -0.3 && lsi <= 0.3) { ring.style.borderColor="var(--success)"; msg.innerText="Balanced"; msg.style.color="var(--success)"; }
+            else if(lsi < -0.3) { ring.style.borderColor="var(--danger)"; msg.innerText="Corrosive"; msg.style.color="var(--danger)"; }
+            else { ring.style.borderColor="var(--warning)"; msg.innerText="Scale Forming"; msg.style.color="var(--warning)"; }
 
-            if (lsi >= -0.3 && lsi <= 0.3) {
-                ring.style.borderColor = "var(--success)";
-                msg.innerText = "PERFECTLY BALANCED";
-                msg.style.color = "var(--success)";
-            } else if (lsi < -0.3) {
-                ring.style.borderColor = "var(--danger)";
-                msg.innerText = "CORROSIVE / ETCHING";
-                msg.style.color = "var(--danger)";
-            } else {
-                ring.style.borderColor = "var(--warning)";
-                msg.innerText = "SCALE FORMING";
-                msg.style.color = "var(--warning)";
+            // Cost Logic
+            calculatedChemCost = 0;
+            let plan = "";
+            let vF = vol/10000;
+            const costs = {
+                acid: parseFloat(document.getElementById('cost-acid').value)||8,
+                bicarb: parseFloat(document.getElementById('cost-bicarb').value)||2,
+                calc: parseFloat(document.getElementById('cost-calc').value)||3,
+                shock: parseFloat(document.getElementById('cost-shock').value)||5
+            };
+
+            if(ph > 7.6) {
+                let dose = ((ph-7.5)/0.2)*vF; 
+                let c = dose*(costs.acid/4); // qt cost
+                calculatedChemCost += c;
+                plan += `• Acid: ${dose.toFixed(1)} qts ($${c.toFixed(2)})<br>`;
             }
+            if(ta < 90) {
+                let dose = ((100-ta)/10)*1.5*vF;
+                let c = dose*costs.bicarb;
+                calculatedChemCost += c;
+                plan += `• Bicarb: ${dose.toFixed(1)} lbs ($${c.toFixed(2)})<br>`;
+            }
+            if(ch < 250) {
+                let dose = ((300-ch)/10)*1.25*vF;
+                let c = dose*costs.calc;
+                calculatedChemCost += c;
+                plan += `• Calcium: ${dose.toFixed(1)} lbs ($${c.toFixed(2)})<br>`;
+            }
+
+            if(stormMode) {
+                let phos = parseFloat(document.getElementById('phos').value)||0;
+                if(phos > 500) plan += `<span style="color:var(--danger)">• ALERT: Phosphates ${phos}ppb</span><br>`;
+            }
+
+            document.getElementById('dose-plan').innerHTML = plan || "Chemistry optimized.";
+            document.getElementById('chem-cost-preview').innerText = `Est Chem Cost: $${calculatedChemCost.toFixed(2)}`;
             
-            // Dosing Advice
-            let advice = "";
-            if(ph > 7.6) advice += "• Add Acid to lower pH.<br>";
-            if(ph < 7.2) advice += "• Aerate or add Soda Ash.<br>";
-            if(ta < 80) advice += "• Add Bicarb to raise Alkalinity.<br>";
-            if(ch < 250) advice += "• Add Calcium Chloride.<br>";
-            
-            document.getElementById('dose-plan').innerHTML = advice || "Chemistry looks good. No immediate action.";
+            // Update OPS tab integration
+            if(calculatedChemCost > 0) {
+                document.getElementById('import-chem-btn').style.display='block';
+                document.getElementById('pending-chem-cost').innerText = calculatedChemCost.toFixed(2);
+            }
         }
-        
-        // --- HEATER CHECKER ---
+
+        // --- TOOLS ---
         function checkHeater() {
             const c = document.getElementById('heat-code').value.toUpperCase();
-            const res = document.getElementById('heat-res');
             const codes = {
-                "HLS": "High Limit Switch (Temp > 135°F)",
-                "AFS": "Air Flow Switch (Check Blower)",
-                "AGS": "Auto Gas Shutoff (Ignition Fail)",
-                "SFS": "Stack Flue Sensor (Soot/Low Flow)",
-                "E01": "Thermistor Failure",
-                "E05": "Stack Flue Open",
-                "E06": "Board Failure"
+                "HLS": "High Limit Switch (>135°F)", "AFS": "Air Flow Switch (Fan/Vac)", 
+                "AGS": "Auto Gas Shutoff", "SFS": "Stack Flue Sensor (Soot)", 
+                "E01": "Thermistor", "E05": "Stack Flue Open", "E06": "Board Fail",
+                "LO": "Low Limit", "VS": "Vacuum Sw", "PRS": "Pressure Sw", "CE": "Comm Error"
             };
-            if(codes[c]) res.innerText = codes[c];
-            else res.innerText = "Unknown Code";
+            document.getElementById('heat-res').innerText = codes[c] || "Unknown Code";
+        }
+
+        function applyVolume() {
+            let l = document.getElementById('v-len').value;
+            let w = document.getElementById('v-wid').value;
+            let d = document.getElementById('v-dep').value;
+            let v = l*w*d*7.5;
+            document.getElementById('vol-est-res').innerText = Math.round(v).toLocaleString() + " Gal";
+            document.getElementById('vol').value = Math.round(v);
+            saveSettings();
+        }
+
+        function loadSafety(mode) {
+            const list = document.getElementById('safety-list');
+            list.innerHTML = "";
+            const items = mode === 'comm' 
+                ? ["Gate Self-Closing", "Gate Opens Out", "No Gaps > 4in", "Shepherd Hook", "Ring Buoy", "Emerg Phone", "No Dive Sign", "Depth Markers"]
+                : ["Gate Latches", "Fence Integrity", "Drain Covers", "Skimmer Baskets", "Bonding Wire", "GFCI Breakers"];
+            
+            items.forEach(i => {
+                list.innerHTML += `<div style="padding:10px; border-bottom:1px solid var(--glass-border); display:flex; align-items:center;">
+                <input type="checkbox" style="width:20px; margin-right:10px;"> ${i}</div>`;
+            });
+        }
+
+        // --- HISTORY ---
+        function saveJob() {
+            const profit = document.getElementById('val-profit').innerText;
+            const margin = document.getElementById('val-margin').innerText;
+            const date = new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            
+            const job = { date, profit, margin };
+            const hist = JSON.parse(localStorage.getItem('cp_history')) || [];
+            hist.unshift(job); // Add to top
+            if(hist.length > 20) hist.pop(); // Keep last 20
+            localStorage.setItem('cp_history', JSON.stringify(hist));
+            
+            alert("Job Saved!");
+            loadHistory();
+        }
+
+        function loadHistory() {
+            const hist = JSON.parse(localStorage.getItem('cp_history')) || [];
+            const container = document.getElementById('history-list');
+            
+            if(hist.length === 0) {
+                container.innerHTML = '<div style="text-align:center; padding:20px; color:var(--text-muted)">No jobs saved yet.</div>';
+                return;
+            }
+            
+            container.innerHTML = "";
+            hist.forEach(j => {
+                container.innerHTML += `
+                <div class="history-item">
+                    <div style="font-size:0.8rem; color:var(--text-muted)">${j.date}</div>
+                    <div style="font-family:'Space Grotesk'; font-weight:700;">${j.profit} <span style="font-size:0.8rem; font-weight:400; color:var(--text-muted)">(${j.margin})</span></div>
+                </div>`;
+            });
+        }
+
+        function clearHistory() {
+            if(confirm("Delete all job logs?")) {
+                localStorage.removeItem('cp_history');
+                loadHistory();
+            }
         }
 
     </script>
