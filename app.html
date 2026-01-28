@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Calibrated Ops | Unified</title>
+    <title>Calibrated Ops | Ultimate</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     
@@ -43,7 +44,7 @@
             background-color: var(--bg-deep);
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
-            margin: 0; padding-bottom: 110px;
+            margin: 0; padding-bottom: 120px;
             min-height: 100vh;
             transition: background-color 0.3s ease;
         }
@@ -67,7 +68,7 @@
         /* The Mode Switcher */
         .mode-switch {
             background: rgba(0,0,0,0.3);
-            border-radius: 12px; pdding: 4px;
+            border-radius: 12px; padding: 4px;
             display: flex; position: relative;
             border: 1px solid var(--border);
             overflow: hidden;
@@ -80,14 +81,12 @@
         }
         .mode-option.active { color: #fff; }
         
-        /* Sliding pill background */
         .switch-bg {
             position: absolute; top: 4px; bottom: 4px; left: 4px; width: calc(50% - 8px);
             background: var(--primary); border-radius: 8px;
             transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
             z-index: 1;
         }
-        /* Slide right for Thermal */
         body.theme-thermal .switch-bg { transform: translateX(100%); width: calc(50%); left: 0; margin-left:4px; }
 
         /* --- SECTIONS --- */
@@ -113,6 +112,8 @@
         }
 
         .input-group { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .input-group-sm { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 0.85rem; }
+        
         label { font-size: 0.9rem; color: var(--text-muted); }
         input {
             background: transparent; border: none; color: var(--text-main);
@@ -132,6 +133,10 @@
         .btn-primary { background: var(--text-main); color: var(--bg-deep); }
         .btn-ghost { background: var(--glass); color: var(--text-main); border: 1px solid var(--border); }
         .btn-action { background: var(--primary); color: var(--bg-deep); font-weight: 700; }
+        
+        .toggle-row { display:flex; background:rgba(0,0,0,0.3); border-radius:8px; padding:2px; margin-bottom:15px; }
+        .toggle-btn { flex:1; padding:8px; text-align:center; font-size:0.75rem; cursor:pointer; color:var(--text-muted); border-radius:6px; font-weight:600; }
+        .toggle-btn.active { background:var(--primary); color:var(--bg-deep); }
 
         /* --- STATS & TIMERS --- */
         .timer-display {
@@ -173,8 +178,9 @@
         .nav-item.active p { display: block; }
 
         /* --- MODAL --- */
-        .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:500; padding:30px; overflow-y:auto; }
+        .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:500; padding:30px; overflow-y:auto; }
         .modal.active { display:block; animation: fadeIn 0.2s; }
+        .modal h2 { font-family: 'Playfair Display'; margin-top:0; color:var(--primary); }
 
     </style>
 </head>
@@ -249,28 +255,55 @@
         </div>
 
         <div id="pool-tab-tools" class="tab-section">
+            
+            <div class="card">
+                <div class="card-header">Volume Estimator</div>
+                <div class="input-group"><label>Length (ft)</label><input type="number" id="v-len"></div>
+                <div class="input-group"><label>Width (ft)</label><input type="number" id="v-wid"></div>
+                <div class="input-group"><label>Avg Depth (ft)</label><input type="number" id="v-dep"></div>
+                <div style="text-align:right; color:var(--primary); font-weight:700; margin-top:10px;" id="vol-res">0 Gal</div>
+                <button class="btn btn-ghost" style="padding:10px; margin-top:10px; font-size:0.8rem;" onclick="applyVol()">APPLY TO LAB</button>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Compliance Audit</div>
+                
+                <div class="toggle-row">
+                    <div class="toggle-btn active" id="btn-res" onclick="toggleAudit('res')">RESIDENTIAL</div>
+                    <div class="toggle-btn" id="btn-comm" onclick="toggleAudit('comm')">COMMERCIAL</div>
+                </div>
+
+                <div id="audit-res" class="audit-list">
+                    <label style="display:block; margin-bottom:8px;"><input type="checkbox"> Gate Self-Closing/Latching</label>
+                    <label style="display:block; margin-bottom:8px;"><input type="checkbox"> Fence Integrity (>48")</label>
+                    <label style="display:block; margin-bottom:8px;"><input type="checkbox"> VGB Compliant Drain Covers</label>
+                    <label style="display:block; margin-bottom:8px;"><input type="checkbox"> Skimmer Baskets Intact</label>
+                    <label style="display:block; margin-bottom:8px;"><input type="checkbox"> Bonding Wire Attached</label>
+                </div>
+
+                <div id="audit-comm" class="audit-list" style="display:none;">
+                    <label style="display:block; margin-bottom:8px; color:var(--warning)"><input type="checkbox"> <strong>Flow Meters Functional</strong></label>
+                    <label style="display:block; margin-bottom:8px; color:var(--warning)"><input type="checkbox"> <strong>ADA Lift (if required)</strong></label>
+                    <label style="display:block; margin-bottom:8px;"><input type="checkbox"> Gate Opens OUTWARD</label>
+                    <label style="display:block; margin-bottom:8px;"><input type="checkbox"> Pump Curve Posted</label>
+                    <label style="display:block; margin-bottom:8px;"><input type="checkbox"> Emergency Phone Functional</label>
+                    <label style="display:block; margin-bottom:8px;"><input type="checkbox"> Depth Markers / No Diving</label>
+                    <label style="display:block; margin-bottom:8px;"><input type="checkbox"> 1" Stripe on Steps</label>
+                </div>
+            </div>
+            
             <div class="card">
                 <div class="card-header">Heater Diagnostics</div>
                 <div class="input-group"><label>Error Code</label><input type="text" id="heat-code"></div>
                 <button class="btn btn-ghost" onclick="checkHeater()">SCAN CODE</button>
                 <div id="heat-res" style="margin-top:10px; color:var(--primary);"></div>
             </div>
-            <div class="card">
-                <div class="card-header">Safety Audit</div>
-                <div style="font-size:0.8rem; color:var(--text-muted); line-height:1.6;">
-                    <label style="display:block;"><input type="checkbox"> Gate Latches/Self-Closes</label>
-                    <label style="display:block;"><input type="checkbox"> Fence Integrity</label>
-                    <label style="display:block;"><input type="checkbox"> Main Drain Visible</label>
-                    <label style="display:block;"><input type="checkbox"> Skimmers Intact</label>
-                    <label style="display:block;"><input type="checkbox"> Bonding Wire Attached</label>
-                </div>
-            </div>
         </div>
         
         <div id="pool-tab-hist" class="tab-section">
             <div class="card">
                 <div class="card-header"><span>Job Log</span><span onclick="clearHist()" style="color:var(--danger)">CLEAR</span></div>
-                <div id="history-list" style="font-size:0.8rem; color:var(--text-muted);">No logs.</div>
+                <div id="pool-history-list" style="font-size:0.8rem; color:var(--text-muted);">No logs.</div>
             </div>
         </div>
     </div>
@@ -300,9 +333,25 @@
 
         <div id="therm-tab-quote" class="tab-section">
             <div class="card">
-                <div class="card-header">Material Estimator</div>
-                <div class="input-group"><label>3/4" Pipe (ft)</label><input type="number" id="est-p1"></div>
-                <div class="input-group"><label>1" Pipe (ft)</label><input type="number" id="est-p2"></div>
+                <div class="card-header">Pipe Insulation</div>
+                <div class="input-group-sm"><label>1.0" Pipe (ft)</label><input type="number" id="p-10"></div>
+                <div class="input-group-sm"><label>1.0" Elbows</label><input type="number" id="e-10"></div>
+                <div style="border-top:1px solid var(--border); margin:5px 0;"></div>
+                <div class="input-group-sm"><label>1.5" Pipe (ft)</label><input type="number" id="p-15"></div>
+                <div class="input-group-sm"><label>1.5" Elbows</label><input type="number" id="e-15"></div>
+                <div style="border-top:1px solid var(--border); margin:5px 0;"></div>
+                <div class="input-group-sm"><label>2.0" Pipe (ft)</label><input type="number" id="p-20"></div>
+                <div class="input-group-sm"><label>2.0" Elbows</label><input type="number" id="e-20"></div>
+                <div style="border-top:1px solid var(--border); margin:5px 0;"></div>
+                <div class="input-group-sm"><label>2.5" Pipe (ft)</label><input type="number" id="p-25"></div>
+                <div class="input-group-sm"><label>2.5" Elbows</label><input type="number" id="e-25"></div>
+                <div style="border-top:1px solid var(--border); margin:5px 0;"></div>
+                <div class="input-group-sm"><label>3.0" Pipe (ft)</label><input type="number" id="p-30"></div>
+                <div class="input-group-sm"><label>3.0" Elbows</label><input type="number" id="e-30"></div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">Components</div>
                 <div class="input-group"><label>Backflows</label><input type="number" id="est-bf"></div>
                 <div class="input-group"><label>Tape/Glue</label><input type="number" id="est-sup"></div>
                 
@@ -319,15 +368,29 @@
 
         <div id="therm-tab-guide" class="tab-section">
             <div class="card">
-                <div class="card-header">Protocols</div>
+                <div class="card-header">Fabrication Tips</div>
+                
+                <div style="margin-bottom:20px;">
+                    <div style="color:var(--primary); font-weight:700; margin-bottom:5px;">3-Piece Mitered Elbow</div>
+                    <div style="font-size:0.85rem; color:var(--text-muted); line-height:1.6;">
+                        1. <strong>Formula:</strong> Cut foam at 22.5° angles to create a smooth 90° turn.<br>
+                        2. <strong>Segment 1 (Middle):</strong> Should be wedge-shaped. Wider on outer radius.<br>
+                        3. <strong>Glue:</strong> Apply adhesive to both faces, let tack dry (finger touch), then press.<br>
+                        4. <strong>Seal:</strong> Tape the seams externally for UV protection.
+                    </div>
+                </div>
+
                 <div style="margin-bottom:15px;">
                     <div style="color:var(--primary); font-weight:700; margin-bottom:5px;">Backflow (PVB)</div>
                     <div style="font-size:0.85rem; color:var(--text-muted); line-height:1.5;">1. Measure risers + 10%.<br>2. Wrap bonnet first.<br>3. UV Tape all seams.</div>
                 </div>
-                <div>
-                    <div style="color:var(--primary); font-weight:700; margin-bottom:5px;">Spigots</div>
-                    <div style="font-size:0.85rem; color:var(--text-muted); line-height:1.5;">1. Remove hose.<br>2. Install hard shell.<br>3. Tighten drawstring to brick.</div>
-                </div>
+            </div>
+        </div>
+
+        <div id="therm-tab-hist" class="tab-section">
+            <div class="card">
+                <div class="card-header"><span>Job Log</span><span onclick="clearHist()" style="color:var(--danger)">CLEAR</span></div>
+                <div id="therm-history-list" style="font-size:0.8rem; color:var(--text-muted);">No logs.</div>
             </div>
         </div>
     </div>
@@ -337,21 +400,34 @@
 
     <div id="settings-modal" class="modal">
         <div style="display:flex; justify-content:space-between; margin-bottom:20px;">
-            <h2 style="margin:0; color:var(--primary);">Unit Costs</h2>
-            <span onclick="closeSettings()" style="font-size:1.5rem; cursor:pointer;">✕</span>
+            <h2 style="margin:0;">Settings</h2>
+            <span onclick="closeSettings()" style="font-size:1.5rem; cursor:pointer; color:var(--text-muted)">✕</span>
         </div>
+        
         <div class="card">
-            <div class="card-header">Pool Chems</div>
+            <div class="card-header">Pool Chemicals (Unit Cost)</div>
             <div class="input-group"><label>Acid ($/qt)</label><input type="number" id="s-acid"></div>
             <div class="input-group"><label>Bicarb ($/lb)</label><input type="number" id="s-bicarb"></div>
-            <div class="input-group"><label>Shock ($/lb)</label><input type="number" id="s-shock"></div>
+            <div class="input-group"><label>Calcium ($/lb)</label><input type="number" id="s-calc"></div>
+            <div class="input-group"><label>Stabilizer ($/lb)</label><input type="number" id="s-cya"></div>
+            <div class="input-group"><label>Salt ($/lb)</label><input type="number" id="s-salt"></div>
+            <div class="input-group"><label>Shock ($/gal or lb)</label><input type="number" id="s-shock"></div>
+            <div class="input-group"><label>Phos Remove ($/oz)</label><input type="number" id="s-phos"></div>
+            <div class="input-group"><label>Algaecide ($/oz)</label><input type="number" id="s-alg"></div>
         </div>
+        
         <div class="card">
-            <div class="card-header">Insulation</div>
-            <div class="input-group"><label>Pipe ($/ft)</label><input type="number" id="s-pipe"></div>
-            <div class="input-group"><label>Backflow ($)</label><input type="number" id="s-bf"></div>
+            <div class="card-header">Insulation Materials</div>
+            <div class="input-group"><label>1.0" Pipe ($/ft)</label><input type="number" id="s-p10"></div>
+            <div class="input-group"><label>1.5" Pipe ($/ft)</label><input type="number" id="s-p15"></div>
+            <div class="input-group"><label>2.0" Pipe ($/ft)</label><input type="number" id="s-p20"></div>
+            <div class="input-group"><label>2.5" Pipe ($/ft)</label><input type="number" id="s-p25"></div>
+            <div class="input-group"><label>3.0" Pipe ($/ft)</label><input type="number" id="s-p30"></div>
+            <div class="input-group"><label>Elbow Cost (Avg)</label><input type="number" id="s-elbow"></div>
+            <div class="input-group"><label>Backflow Kit ($)</label><input type="number" id="s-bf"></div>
         </div>
-        <button class="btn btn-primary" onclick="saveSettings()">SAVE ALL</button>
+        
+        <button class="btn btn-primary" onclick="saveSettings()">SAVE & CLOSE</button>
     </div>
 
     <script>
@@ -397,24 +473,21 @@
                     <div class="nav-item" onclick="nav('pool-tab-tools', this)"><span>🛠</span><p>TOOLS</p></div>
                     <div class="nav-item" onclick="nav('pool-tab-hist', this)"><span>📜</span><p>LOGS</p></div>
                 `;
-                // Reset active tab view
                 nav('pool-tab-ops', container.children[0]); 
             } else {
                 container.innerHTML = `
                     <div class="nav-item active" onclick="nav('therm-tab-ops', this)"><span>⏱</span><p>OPS</p></div>
                     <div class="nav-item" onclick="nav('therm-tab-quote', this)"><span>📏</span><p>QUOTE</p></div>
                     <div class="nav-item" onclick="nav('therm-tab-guide', this)"><span>📖</span><p>GUIDE</p></div>
+                    <div class="nav-item" onclick="nav('therm-tab-hist', this)"><span>📜</span><p>LOGS</p></div>
                 `;
                 nav('therm-tab-ops', container.children[0]);
             }
         }
 
         function nav(tabId, el) {
-            // Hide all tabs in current mode
             document.getElementById(`app-${currentMode}`).querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
-            // Show target tab
             document.getElementById(tabId).classList.add('active');
-            // Update nav styling
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             el.classList.add('active');
         }
@@ -425,13 +498,11 @@
             const btn = document.getElementById(`${type}-btn-start`);
             
             if(!t.int) {
-                // Start
                 t.start = Date.now() - (t.start ? t.start : 0);
                 if(!t.start) t.start = Date.now();
                 t.int = setInterval(() => updateTimerUI(type), 1000);
                 btn.innerText = "CLOCK OUT"; btn.style.background = "var(--danger)";
             } else {
-                // Pause
                 clearInterval(t.int);
                 t.int = null;
                 btn.innerText = "RESUME"; btn.style.background = "var(--text-main)";
@@ -443,8 +514,7 @@
             const h = Math.floor(diff/3600000);
             const m = Math.floor((diff%3600000)/60000);
             const s = Math.floor((diff%60000)/1000);
-            document.getElementById(`${type}-timer`).innerText = 
-                `${h<10?'0'+h:h}:${m<10?'0'+m:m}:${s<10?'0'+s:s}`;
+            document.getElementById(`${type}-timer`).innerText = `${h<10?'0'+h:h}:${m<10?'0'+m:m}:${s<10?'0'+s:s}`;
             
             if(type === 'pool') calcPoolProfit(diff);
             else calcThermProfit(diff);
@@ -500,6 +570,14 @@
                 let d = ((100-ta)/10)*1.5*vF; let c = d*costs.bicarb;
                 calculatedChemCost+=c; plan+=`• Bicarb: ${d.toFixed(1)}lbs ($${c.toFixed(2)})<br>`;
             }
+            if(ch < 250) {
+                let d = ((300-ch)/10)*1.25*vF; let c = d*costs.calc;
+                calculatedChemCost+=c; plan+=`• Calcium: ${d.toFixed(1)}lbs ($${c.toFixed(2)})<br>`;
+            }
+            if(cya < 30) {
+                let d = ((30-cya)/10)*0.8*vF; let c = d*costs.cya;
+                calculatedChemCost+=c; plan+=`• Stabilizer: ${d.toFixed(1)}lbs ($${c.toFixed(2)})<br>`;
+            }
 
             document.getElementById('dose-plan').innerHTML = plan || "Balanced.";
             document.getElementById('chem-cost-preview').innerText = `Est Cost: $${calculatedChemCost.toFixed(2)}`;
@@ -511,21 +589,48 @@
         }
 
         function importChem() {
-            document.getElementById('pool-cost').value = calculatedChemCost.toFixed(2);
+            let curr = parseFloat(document.getElementById('pool-cost').value)||0;
+            document.getElementById('pool-cost').value = (curr + calculatedChemCost).toFixed(2);
             calcPoolProfit();
-            nav('pool-tab-ops', document.querySelector('.nav-item.active'));
+            nav('pool-tab-ops', document.querySelector('#nav-container .nav-item'));
+        }
+        
+        function applyVol() {
+            let l = document.getElementById('v-len').value;
+            let w = document.getElementById('v-wid').value;
+            let d = document.getElementById('v-dep').value;
+            let v = l*w*d*7.5;
+            document.getElementById('vol-res').innerText = Math.round(v).toLocaleString() + " Gal";
+            document.getElementById('vol').value = Math.round(v);
+        }
+        
+        function toggleAudit(type) {
+            document.getElementById('audit-res').style.display = type === 'res' ? 'block' : 'none';
+            document.getElementById('audit-comm').style.display = type === 'comm' ? 'block' : 'none';
+            document.getElementById('btn-res').classList.toggle('active', type === 'res');
+            document.getElementById('btn-comm').classList.toggle('active', type === 'comm');
         }
 
         // --- THERMAL LOGIC ---
         function calcEstimate() {
-            const p1 = parseFloat(document.getElementById('est-p1').value)||0;
-            const p2 = parseFloat(document.getElementById('est-p2').value)||0;
-            const bf = parseFloat(document.getElementById('est-bf').value)||0;
-            const sup = parseFloat(document.getElementById('est-sup').value)||0;
+            const qty = {
+                p10: parseFloat(document.getElementById('p-10').value)||0, e10: parseFloat(document.getElementById('e-10').value)||0,
+                p15: parseFloat(document.getElementById('p-15').value)||0, e15: parseFloat(document.getElementById('e-15').value)||0,
+                p20: parseFloat(document.getElementById('p-20').value)||0, e20: parseFloat(document.getElementById('e-20').value)||0,
+                p25: parseFloat(document.getElementById('p-25').value)||0, e25: parseFloat(document.getElementById('e-25').value)||0,
+                p30: parseFloat(document.getElementById('p-30').value)||0, e30: parseFloat(document.getElementById('e-30').value)||0,
+                bf: parseFloat(document.getElementById('est-bf').value)||0, sup: parseFloat(document.getElementById('est-sup').value)||0
+            };
             const c = getCosts();
 
-            // Simple Estimate: Pipe Avg Cost + BF Cost + Supply Cost
-            let total = (p1 * c.pipe) + (p2 * (c.pipe*1.5)) + (bf * c.bf) + (sup * 10);
+            let total = 
+                (qty.p10 * c.p10) + (qty.e10 * c.elbow) +
+                (qty.p15 * c.p15) + (qty.e15 * c.elbow) +
+                (qty.p20 * c.p20) + (qty.e20 * c.elbow) +
+                (qty.p25 * c.p25) + (qty.e25 * c.elbow) +
+                (qty.p30 * c.p30) + (qty.e30 * c.elbow) +
+                (qty.bf * c.bf) + (qty.sup * 10);
+                
             document.getElementById('est-total').innerText = "$" + total.toFixed(2);
             return total;
         }
@@ -535,7 +640,6 @@
             let curr = parseFloat(document.getElementById('therm-cost').value)||0;
             document.getElementById('therm-cost').value = (curr + total).toFixed(2);
             calcThermProfit();
-            alert("Added to Job Cost");
             nav('therm-tab-ops', document.querySelector('#nav-container .nav-item'));
         }
 
@@ -560,31 +664,44 @@
             const s = {
                 acid: document.getElementById('s-acid').value,
                 bicarb: document.getElementById('s-bicarb').value,
+                calc: document.getElementById('s-calc').value,
+                cya: document.getElementById('s-cya').value,
+                salt: document.getElementById('s-salt').value,
                 shock: document.getElementById('s-shock').value,
-                pipe: document.getElementById('s-pipe').value,
+                phos: document.getElementById('s-phos').value,
+                alg: document.getElementById('s-alg').value,
+                
+                p10: document.getElementById('s-p10').value,
+                p15: document.getElementById('s-p15').value,
+                p20: document.getElementById('s-p20').value,
+                p25: document.getElementById('s-p25').value,
+                p30: document.getElementById('s-p30').value,
+                elbow: document.getElementById('s-elbow').value,
                 bf: document.getElementById('s-bf').value
             };
-            localStorage.setItem('calibrated_settings', JSON.stringify(s));
+            localStorage.setItem('calibrated_settings_v2', JSON.stringify(s));
             closeSettings();
         }
 
         function loadSettings() {
-            const s = JSON.parse(localStorage.getItem('calibrated_settings')) || {acid:8, bicarb:2, shock:5, pipe:1.5, bf:20};
-            document.getElementById('s-acid').value = s.acid;
-            document.getElementById('s-bicarb').value = s.bicarb;
-            document.getElementById('s-shock').value = s.shock;
-            document.getElementById('s-pipe').value = s.pipe;
-            document.getElementById('s-bf').value = s.bf;
+            const d = {
+                acid:8, bicarb:2, calc:3, cya:4, salt:0.5, shock:5, phos:2, alg:1.5,
+                p10:0.8, p15:1.2, p20:1.8, p25:2.5, p30:3.2, elbow:3, bf:45
+            };
+            const s = JSON.parse(localStorage.getItem('calibrated_settings_v2')) || d;
+            
+            for(let key in s) {
+                if(document.getElementById('s-'+key)) document.getElementById('s-'+key).value = s[key];
+            }
         }
 
         function getCosts() {
-            return {
-                acid: parseFloat(document.getElementById('s-acid').value)||8,
-                bicarb: parseFloat(document.getElementById('s-bicarb').value)||2,
-                shock: parseFloat(document.getElementById('s-shock').value)||5,
-                pipe: parseFloat(document.getElementById('s-pipe').value)||1.5,
-                bf: parseFloat(document.getElementById('s-bf').value)||20
-            };
+            // Returns object of all costs from inputs
+            let c = {};
+            document.querySelectorAll('#settings-modal input').forEach(i => {
+                c[i.id.replace('s-','')] = parseFloat(i.value)||0;
+            });
+            return c;
         }
 
         function saveJob(type) {
@@ -594,16 +711,27 @@
             hist.unshift({date: new Date().toLocaleDateString(), type, profit, margin});
             localStorage.setItem('cp_hist', JSON.stringify(hist));
             loadHistory();
-            alert("Saved.");
+            alert("Job Logged.");
         }
 
         function loadHistory() {
             const hist = JSON.parse(localStorage.getItem('cp_hist')) || [];
-            const list = document.getElementById('history-list');
-            list.innerHTML = hist.map(h => `<div style="border-bottom:1px solid var(--border); padding:10px; display:flex; justify-content:space-between;">
-                <div><span style="color:var(--text-muted)">${h.date}</span> <strong style="color:var(--primary)">${h.type}</strong></div>
-                <div>${h.profit} (${h.margin})</div>
-            </div>`).join('') || "No logs.";
+            
+            const poolList = document.getElementById('pool-history-list');
+            const thermList = document.getElementById('therm-history-list');
+            
+            const pLogs = hist.filter(h => h.type === 'Pool');
+            const tLogs = hist.filter(h => h.type === 'Thermal');
+            
+            poolList.innerHTML = pLogs.map(h => renderLog(h)).join('') || "No logs.";
+            thermList.innerHTML = tLogs.map(h => renderLog(h)).join('') || "No logs.";
+        }
+        
+        function renderLog(h) {
+            return `<div style="border-bottom:1px solid var(--border); padding:10px; display:flex; justify-content:space-between;">
+                <div><span style="color:var(--text-muted)">${h.date}</span></div>
+                <div>${h.profit} <span style="font-size:0.75rem; color:var(--text-muted)">(${h.margin})</span></div>
+            </div>`;
         }
         
         function clearHist() { localStorage.removeItem('cp_hist'); loadHistory(); }
