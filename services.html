@@ -3,248 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services - Calibrated Pools</title>
-    <style>
-        :root {
-            --primary-blue: #005f9e;
-            --accent-cyan: #00aaff;
-            --industrial-grey: #e0e0e0;
-            --text-dark: #222;
-            --alert-red: #d90429;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            color: var(--text-dark);
-            line-height: 1.6;
-            background-color: white;
-        }
-
-        /* --- HERO HEADER --- */
-        .header {
-            background: linear-gradient(135deg, #004080, #005f9e);
-            color: white;
-            padding: 80px 20px;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-size: 3rem;
-            margin: 0;
-            text-transform: uppercase;
-            font-weight: 900;
-            letter-spacing: 2px;
-        }
-
-        .header p {
-            font-size: 1.3rem;
-            opacity: 0.9;
-            margin-top: 15px;
-            font-weight: bold;
-        }
-
-        /* --- SHARED LAYOUT --- */
-        .section-container {
-            padding: 60px 20px;
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* --- DIVISION 1: POOLS (CLEAN LOOK) --- */
-        .div-one-title {
-            text-align: center;
-            margin-bottom: 40px;
-            font-size: 2rem;
-            text-transform: uppercase;
-            font-weight: 800;
-            color: var(--primary-blue);
-        }
-
-        .service-card {
-            border: 1px solid #ddd;
-            border-left: 5px solid var(--primary-blue);
-            padding: 25px;
-            background: white;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-
-        .card-header {
-            font-size: 1.4rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            color: #111;
-        }
-
-        /* --- DIVISION 2: INDUSTRIAL (TOUGH LOOK) --- */
-        .industrial-section {
-            background-color: var(--industrial-grey);
-            border-top: 8px solid var(--primary-blue);
-            border-bottom: 8px solid var(--primary-blue);
-        }
-
-        .industrial-card {
-            background: white;
-            padding: 25px;
-            border: 2px solid #444; /* Hard border */
-            box-shadow: 6px 6px 0px var(--primary-blue); /* 3D Effect */
-        }
-
-        .industrial-header {
-            font-size: 1.5rem;
-            font-weight: 900;
-            margin-bottom: 10px;
-            color: #333;
-            text-transform: uppercase;
-        }
-
-        .new-badge {
-            background: var(--alert-red);
-            color: white;
-            padding: 2px 8px;
-            font-size: 0.7rem;
-            vertical-align: middle;
-            border-radius: 3px;
-            margin-left: 10px;
-        }
-
-        /* --- LIST STYLING (FIXED) --- */
-        ul {
-            list-style-type: square;
-            padding-left: 20px;
-            margin-top: 15px;
-        }
-        li {
-            margin-bottom: 8px;
-            color: #444;
-            font-weight: 500;
-        }
-
-        /* --- BUTTONS --- */
-        .cta-container {
-            text-align: center;
-            padding: 80px 20px;
-            background: #222;
-            color: white;
-        }
-
-        .cta-btn {
-            background-color: var(--accent-cyan);
-            color: white;
-            padding: 18px 45px;
-            text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            border-radius: 4px;
-            display: inline-block;
-            margin-top: 20px;
-            transition: background 0.2s;
-        }
-        
-        .cta-btn:hover {
-            background-color: white;
-            color: var(--primary-blue);
-        }
-
-    </style>
+    <title>Services | Calibrated Pools</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&family=Roboto+Mono:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="header">
-        <h1>Calibrated Pools</h1>
-        <p>CHEMISTRY | REPAIR | INDUSTRIAL DEFENSE</p>
-    </div>
+    <nav>
+        <div class="logo-container">
+            <div class="water-drop"><div class="crosshair"></div></div>
+            <div>
+                <div class="logo-text">CALIBRATED <span class="silver-text">POOLS</span></div>
+            </div>
+        </div>
+    </nav>
 
-    <div class="section-container">
-        <div class="div-one-title">Division 1: Precision Operations</div>
+    <section class="hero" style="min-height: 60vh;">
+        <div class="glass-panel">
+            <div class="location-tag">OPERATIONAL DIVISIONS</div>
+            <h1>PRECISION & DEFENSE</h1>
+            <div class="accent-line"></div>
+            <p class="subtitle">Chemistry | Repair | Industrial Insulation</p>
+        </div>
+    </section>
+
+    <section class="services-section">
+        <div class="location-tag">DIVISION 1</div>
+        <h2>PRECISION OPERATIONS</h2>
         
-        <div class="grid-container">
+        <div class="service-grid">
             <div class="service-card">
-                <div class="card-header">🧪 CPO Chemical Management</div>
-                <p>We don't guess. We calibrate. Full LSI water balancing compliant with Texas Code §265.</p>
-                <ul>
-                    <li>Precision dosing strategies</li>
-                    <li>Cyanuric Acid management</li>
-                    <li>Safe-swim certification</li>
-                </ul>
+                <h3>CPO Chemical Management</h3>
+                <p>We don't guess. We calibrate. Full LSI water balancing compliant with Texas Administrative Code §265.</p>
+                <br>
+                <div class="credentials-box" style="margin: 0; padding: 10px 0; font-size: 0.8rem;">
+                    > PRECISION DOSING<br>
+                    > CYANURIC MANAGEMENT<br>
+                    > SAFE-SWIM CERTIFIED
+                </div>
             </div>
 
             <div class="service-card">
-                <div class="card-header">⚙️ Equipment Diagnostics</div>
-                <p>Authorized repair for pumps, heaters, and filters. We diagnose the root cause.</p>
-                <ul>
-                    <li>Variable Speed Pump programming</li>
-                    <li>Filter grid cleaning</li>
-                    <li>Seal & O-ring replacement</li>
-                </ul>
+                <h3>Equipment Diagnostics</h3>
+                <p>Authorized repair for pumps, heaters, and filters. We diagnose the root cause, not just the symptom.</p>
+                <br>
+                <div class="credentials-box" style="margin: 0; padding: 10px 0; font-size: 0.8rem;">
+                    > VS PUMP PROGRAMMING<br>
+                    > FILTER GRID CLEANING<br>
+                    > SEAL & O-RING REPLACEMENT
+                </div>
             </div>
-            
+
             <div class="service-card">
-                <div class="card-header">♻️ Rescue Operations</div>
-                <p>Specialized "Green-to-Clean" protocols for neglected pools.</p>
-                <ul>
-                    <li>Swamp to Sterile in 48 hours</li>
-                    <li>Phosphate removal</li>
-                    <li>Algae spore elimination</li>
-                </ul>
+                <h3>Rescue Operations</h3>
+                <p>Specialized "Green-to-Clean" protocols. We turn swamps into sterile water in 48 hours.</p>
+                <br>
+                <div class="credentials-box" style="margin: 0; padding: 10px 0; font-size: 0.8rem;">
+                    > PHOSPHATE REMOVAL<br>
+                    > ALGAE SPORE ELIMINATION<br>
+                    > 48-HOUR TURNAROUND
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="section-container industrial-section">
-        <div class="div-one-title" style="color:#333;">Division 2: Industrial Defense</div>
-        <p style="text-align:center; max-width: 800px; margin: 0 auto 40px; font-weight:bold;">
-            PRECISION INSULATION FOR TEXAS WINTERS
-        </p>
+    <section class="services-section" style="background: rgba(0, 5, 10, 0.95); border-top: 1px solid #00e5ff;">
+        <div class="location-tag" style="color: #e91e63;">DIVISION 2</div>
+        <h2>INDUSTRIAL FREEZE DEFENSE</h2>
+        <p class="instruction-text">CUSTOM FABRICATED THERMAL ARMOR FOR TEXAS WINTERS.</p>
 
-        <div class="grid-container">
-            <div class="industrial-card">
-                <div class="industrial-header">🔥 Tankless V-Armor <span class="new-badge">NEW</span></div>
-                <p>Most tankless heaters freeze at the inlet. We build custom <strong>PVC & K-Flex Enclosures</strong>.</p>
-                <ul>
-                    <li>Hides ugly exposed PEX</li>
-                    <li>Integrated heat-tape channel</li>
-                    <li>Matches home siding aesthetics</li>
-                </ul>
+        <div class="service-grid">
+            <div class="service-card" style="border-color: rgba(233, 30, 99, 0.3);">
+                <h3>Tankless V-Armor <span style="font-size: 0.6rem; background:#e91e63; color:white; padding: 2px 6px; border-radius: 2px; vertical-align: middle; margin-left: 10px;">NEW</span></h3>
+                <p>Most tankless heaters freeze at the inlet. We build custom <strong>PVC & K-Flex Enclosures</strong> that hide ugly pipes and guarantee hot water.</p>
+                <br>
+                <div class="credentials-box" style="margin: 0; padding: 10px 0; font-size: 0.8rem; color: #e91e63;">
+                    > INTEGRATED HEAT TAPE<br>
+                    > MATCHES HOME SIDING<br>
+                    > UV-PROOF PVC SHELL
+                </div>
             </div>
 
-            <div class="industrial-card">
-                <div class="industrial-header">🛡️ Pump Armor</div>
-                <p>Acoustic and thermal jacket for pool pumps.</p>
-                <ul>
-                    <li>Reduces motor noise by 40%</li>
-                    <li>Prevents housing cracks</li>
-                    <li>Removable for maintenance</li>
-                </ul>
+            <div class="service-card">
+                <h3>Pump Sound/Freeze Armor</h3>
+                <p>Acoustic thermal jackets for pool pumps. Reduces motor noise by 40% while preventing the housing from cracking.</p>
+                <br>
+                <div class="credentials-box" style="margin: 0; padding: 10px 0; font-size: 0.8rem;">
+                    > 1" K-FLEX RUBBER<br>
+                    > NOISE REDUCTION<br>
+                    > REMOVABLE FOR SERVICE
+                </div>
             </div>
 
-            <div class="industrial-card">
-                <div class="industrial-header">❄️ Backflow Zero</div>
-                <p>Replace the rotting "green bag" with a permanent hard shell.</p>
-                <ul>
-                    <li>Weed-eater proof design</li>
-                    <li>Inspection-ready access ports</li>
-                    <li>10-year UV rating</li>
-                </ul>
+            <div class="service-card">
+                <h3>Backflow Zero</h3>
+                <p>Replace that rotting green bag with a permanent hard-shell thermal boot. Weed-eater proof and inspection ready.</p>
+                <br>
+                <div class="credentials-box" style="margin: 0; padding: 10px 0; font-size: 0.8rem;">
+                    > HARD SHELL PROTECTION<br>
+                    > 10-YEAR UV RATING<br>
+                    > INSPECTION PORTS
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="cta-container">
-        <h2>Protect Your Investment</h2>
-        <p>Don't wait for the next freeze.</p>
-        <a href="mailto:your-email@example.com" class="cta-btn">Request an Audit</a>
-    </div>
+        <div style="margin-top: 60px;">
+            <a href="mailto:your-email@example.com" class="btn primary-btn">REQUEST AN AUDIT</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="logo-text" style="font-size: 1.2rem;">CALIBRATED POOLS</div>
+        <p class="small-text">HOUSTON, TEXAS | © 2026</p>
+    </footer>
 
 </body>
 </html>
