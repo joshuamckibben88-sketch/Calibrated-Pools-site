@@ -1,231 +1,139 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services - Calibrated Pools</title>
-    <style>
-        :root {
-            --primary-blue: #005f9e;
-            --accent-cyan: #00aaff;
-            --industrial-grey: #f4f4f4;
-            --text-dark: #222;
-        }
+<style>
+    /* Section Styling - Industrial Look */
+    .insulation-section {
+        background-color: #e0e0e0; /* Concrete Grey */
+        padding: 60px 20px;
+        font-family: 'Arial Black', 'Arial', sans-serif;
+        text-align: center;
+        border-top: 10px solid #005f9e; /* Brand Blue */
+        border-bottom: 10px solid #005f9e;
+    }
 
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            color: var(--text-dark);
-            line-height: 1.6;
-            background-color: white;
-        }
+    .defense-header {
+        font-size: 2.5rem;
+        color: #333;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+    }
 
-        /* --- HERO HEADER --- */
-        .header {
-            background: linear-gradient(135deg, #004080, #005f9e);
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
-        }
+    .defense-sub {
+        font-size: 1.2rem;
+        color: #005f9e;
+        margin-bottom: 40px;
+        font-weight: bold;
+        font-family: 'Arial', sans-serif;
+    }
 
-        .header h1 {
-            font-size: 3rem;
-            margin: 0;
-            text-transform: uppercase;
-            font-weight: 900;
-            letter-spacing: 2px;
-        }
+    /* Grid Layout */
+    .defense-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
 
-        .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-top: 10px;
-        }
+    /* Service Cards */
+    .defense-card {
+        background: white;
+        width: 280px;
+        padding: 20px;
+        border: 2px solid #333; /* Hard border for tough look */
+        text-align: left;
+        box-shadow: 5px 5px 0px #005f9e; /* Offset shadow for 3D effect */
+    }
 
-        /* --- SECTIONS --- */
-        .section-title {
-            text-align: center;
-            margin: 60px 0 30px;
-            font-size: 2rem;
-            text-transform: uppercase;
-            font-weight: 800;
-            color: var(--primary-blue);
-        }
+    .defense-icon {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        display: block;
+    }
 
-        .service-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto 60px;
-            padding: 0 20px;
-        }
+    .defense-title {
+        font-size: 1.3rem;
+        color: #333;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+    }
 
-        .service-card {
-            border: 1px solid #ddd;
-            border-left: 5px solid var(--primary-blue);
-            padding: 25px;
-            background: white;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
+    .defense-text {
+        font-family: 'Arial', sans-serif;
+        font-size: 0.95rem;
+        color: #555;
+        line-height: 1.5;
+        font-weight: normal;
+    }
 
-        .card-header {
-            font-size: 1.4rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            color: #111;
-        }
+    /* Highlighting the 'New' Service */
+    .new-badge {
+        background: #d90429; /* Alert Red */
+        color: white;
+        padding: 2px 8px;
+        font-size: 0.7rem;
+        vertical-align: middle;
+        border-radius: 3px;
+        margin-left: 5px;
+    }
 
-        .icon {
-            margin-right: 10px;
-            font-size: 1.5rem;
-        }
+    .cta-button-winter {
+        display: inline-block;
+        margin-top: 40px;
+        background-color: #333;
+        color: white;
+        padding: 15px 50px;
+        text-decoration: none;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: background 0.3s;
+    }
 
-        /* --- FIXED LIST STYLING --- */
-        ul {
-            display: block;
-            list-style-type: disc !important; /* Force Bullets */
-            list-style-position: inside !important; /* Keep bullets inside the box */
-            padding-left: 10px !important;
-            margin-top: 15px;
-            background-color: #f9f9f9; /* Light grey box for list */
-            padding: 15px;
-            border-radius: 5px;
-        }
+    .cta-button-winter:hover {
+        background-color: #005f9e;
+    }
+</style>
 
-        li {
-            margin-bottom: 8px;
-            color: #444;
-            font-weight: 500;
-        }
+<div class="insulation-section">
+    <div class="defense-header">Division 2: Industrial Defense</div>
+    <div class="defense-sub">PRECISION INSULATION FOR TEXAS WINTERS</div>
 
-        /* --- DIVISION 2 STYLING --- */
-        .winter-bg {
-            background-color: var(--industrial-grey);
-            padding: 40px 0;
-            border-top: 4px solid var(--accent-cyan);
-        }
-
-        .winter-tag {
-            background: var(--accent-cyan);
-            color: white;
-            padding: 5px 10px;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 10px;
-            border-radius: 3px;
-        }
-
-        /* --- CTA --- */
-        .cta-section {
-            text-align: center;
-            padding: 60px 20px;
-            background: #222;
-            color: white;
-        }
-
-        .cta-btn {
-            background-color: var(--accent-cyan);
-            color: white;
-            padding: 15px 40px;
-            text-decoration: none;
-            font-size: 1.2rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            border-radius: 5px;
-            display: inline-block;
-            margin-top: 20px;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="header">
-        <h1>Calibrated Pools</h1>
-        <p>CHEMISTRY | REPAIR | INDUSTRIAL DEFENSE</p>
-    </div>
-
-    <div class="section-title">Division 1: Precision Operations</div>
-    
-    <div class="service-grid">
-        <div class="service-card">
-            <div class="card-header"><span class="icon">🧪</span> CPO Chemical Management</div>
-            <p>Full LSI water balancing compliant with Texas Code §265.</p>
-            <ul>
-                <li>Precision dosing strategies</li>
-                <li>Cyanuric Acid management</li>
-                <li>Safe-swim certification</li>
-            </ul>
-            </div>
-
-        <div class="service-card">
-            <div class="card-header"><span class="icon">⚙️</span> Equipment Diagnostics</div>
-            <p>Authorized repair for pumps, heaters, and filters.</p>
-            <ul>
-                <li>Variable Speed Pump programming</li>
-                <li>Filter grid cleaning</li>
-                <li>Seal & O-ring replacement</li>
-            </ul>
-        </div>
+    <div class="defense-grid">
         
-        <div class="service-card">
-            <div class="card-header"><span class="icon">♻️</span> Rescue Operations</div>
-            <p>Specialized "Green-to-Clean" protocols.</p>
-            <ul>
-                <li>Swamp to Sterile in 48 hours</li>
-                <li>Phosphate removal</li>
-                <li>Algae spore elimination</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="winter-bg">
-        <div class="section-title">Division 2: Freeze Defense Systems</div>
-
-        <div class="service-grid">
-            <div class="service-card">
-                <div class="winter-tag">Best Seller</div>
-                <div class="card-header"><span class="icon">🛡️</span> Pump Armor</div>
-                <p>Acoustic and thermal jacket for pool pumps.</p>
-                <ul>
-                    <li>1" K-Flex Rubber Insulation</li>
-                    <li>UV-Proof PVC Exterior Shell</li>
-                    <li>Reduces noise by 40%</li>
-                </ul>
-            </div>
-
-            <div class="service-card">
-                <div class="winter-tag">New Service</div>
-                <div class="card-header"><span class="icon">🔥</span> Tankless V-Armor</div>
-                <p>Custom-built thermal enclosures for Rinnai/Navien units.</p>
-                <ul>
-                    <li>Hides ugly exposed PEX</li>
-                    <li>Integrated heat-tape channel</li>
-                    <li>Matches home siding</li>
-                </ul>
-            </div>
-
-            <div class="service-card">
-                <div class="card-header"><span class="icon">❄️</span> Backflow Zero</div>
-                <p>Hard-shell thermal boot for backflow preventers.</p>
-                <ul>
-                    <li>Weed-eater proof design</li>
-                    <li>Inspection-ready access</li>
-                    <li>10-year UV rating</li>
-                </ul>
+        <div class="defense-card">
+            <span class="defense-icon">🔥</span>
+            <div class="defense-title">Tankless V-Armor <span class="new-badge">NEW</span></div>
+            <div class="defense-text">
+                Most tankless heaters freeze at the inlet. We build custom <strong>PVC & K-Flex Enclosures</strong> that hide ugly pipes and guarantee hot water at 10°F.
             </div>
         </div>
+
+        <div class="defense-card">
+            <span class="defense-icon">🔇</span>
+            <div class="defense-title">Pump Sound/Freeze Armor</div>
+            <div class="defense-text">
+                Acoustic thermal jackets for pool pumps. Reduces motor noise by <strong>40%</strong> while preventing the pump housing from cracking.
+            </div>
+        </div>
+
+        <div class="defense-card">
+            <span class="defense-icon">🛡️</span>
+            <div class="defense-title">PVC Hard Shell</div>
+            <div class="defense-text">
+                Foam tape rots in the sun. We install <strong>Medical-Grade PVC Cladding</strong> over thermal rubber. UV-proof, waterproof, and weed-eater proof.
+            </div>
+        </div>
+
+        <div class="defense-card">
+            <span class="defense-icon">❄️</span>
+            <div class="defense-title">Backflow Zero</div>
+            <div class="defense-text">
+                The first thing to freeze. We replace the rotting "green bag" with a permanent <strong>Thermal Boot</strong>. Accessible for inspections, invincible to cold.
+            </div>
+        </div>
+
     </div>
 
-    <div class="cta-section">
-        <h2>Protect Your Investment</h2>
-        <a href="#" class="cta-btn">Request an Audit</a>
-    </div>
-
-</body>
-</html>
+    <a href="mailto:your-email@example.com" class="cta-button-winter">Secure Your Equipment</a>
+</div>
